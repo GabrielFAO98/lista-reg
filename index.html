@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Presentes — Rafaela & Gabriel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blush: #C9A848;
+  --blush-light: #FDF3C0;
+  --blush-dark: #8B6000;
+  --cream: #FEFDF0;
+  --cream-dark: #FEF5C3;
+  --ink: #2A2017;
+  --ink-muted: #7A6A4A;
+  --ink-faint: #C4A860;
+  --gold: #D4A017;
+  --white: #FFFEF7;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { width: 100%; }
+body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; width: 100%; }
+
+/* HERO */
+.hero {
+  position: relative; text-align: center;
+  padding: 3rem 1.5rem 2.5rem; background: var(--white); overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: url("img/moldura-amarela-com-flores-amarelas.webp");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+@media (min-width: 900px) {
+  .hero::before {
+    background-image: url("img/moldura-amarela-com-flores-amarelas.png");
+  }
+}
+.hero-ornament {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 12px; letter-spacing: 0.2em; color: var(--blush);
+  text-transform: uppercase; margin-bottom: 1rem; position: relative;
+}
+.hero-names {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(36px, 10vw, 88px); line-height: 1; color: var(--ink); position: relative;
+}
+.hero-names em { font-style: italic; color: var(--blush-dark); }
+.hero-divider {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; margin: 1.2rem auto; max-width: 240px; position: relative;
+}
+.hero-divider::before, .hero-divider::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, transparent, var(--blush-light), transparent);
+}
+.hero-divider-heart { color: var(--blush); font-size: 15px; }
+.hero-sub {
+  font-size: 13px; font-weight: 300; color: var(--ink-muted);
+  max-width: 360px; margin: 0 auto; line-height: 1.8; position: relative;
+}
+
+/* SECTION LABEL */
+.section-label { text-align: center; padding: 1.8rem 1rem 1.2rem; }
+.section-label span {
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--ink-faint); border-bottom: 1px solid var(--blush-light); padding-bottom: 4px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--cream-dark);
+  border: 1px solid var(--cream-dark);
+  margin: 0 1px 3rem;
+}
+@media (min-width: 900px)  { .grid { grid-template-columns: repeat(3, 1fr); max-width: 1100px; margin-left: auto; margin-right: auto; } }
+@media (min-width: 1200px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* CARD */
+.card {
+  background: var(--white); cursor: pointer;
+  display: flex; flex-direction: column; min-width: 0;
+}
+.card:active { background: var(--cream); }
+@media (hover: hover) { .card:hover { background: var(--cream); } }
+
+/* Para trocar imagem: edite o src da <img class="card-img"> de cada item. Use imagens quadradas (1:1). */
+.card-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; background: var(--cream-dark); }
+
+.card-body { padding: 10px 12px 14px; flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(13px, 3vw, 17px); font-weight: 500; color: var(--ink); line-height: 1.2;
+}
+.card-desc { font-size: clamp(10px, 2.2vw, 12px); font-weight: 300; color: var(--ink-muted); line-height: 1.5; flex: 1; }
+.card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 4px; margin-top: 8px; padding-top: 8px;
+  border-top: 1px solid var(--cream-dark); flex-wrap: wrap;
+}
+.card-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(14px, 3.5vw, 18px); font-weight: 500; color: var(--blush-dark); white-space: nowrap;
+}
+.card-btn {
+  font-size: clamp(8px, 1.8vw, 10px); letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 5px 8px; border: 1px solid var(--blush); background: transparent;
+  color: var(--blush-dark); cursor: pointer; font-family: 'Jost', sans-serif;
+  white-space: nowrap; flex-shrink: 0; transition: background 0.15s, color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.card-btn:active, .card-btn:hover { background: var(--blush); color: var(--white); }
+
+/* OVERLAY */
+.overlay {
+  position: fixed; inset: 0; background: rgba(42,32,23,0.6);
+  display: flex; align-items: flex-end; justify-content: center;
+  z-index: 200; animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* MODAL */
+.modal {
+  background: var(--white); width: 100%; max-width: 520px;
+  position: relative; border-radius: 20px 20px 0 0;
+  border: 1px solid var(--cream-dark); border-bottom: none;
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
+  max-height: 88vh; animation: slideUp 0.3s ease;
+}
+@keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+@media (min-width: 600px) {
+  .overlay { align-items: center; }
+  .modal { border-radius: 12px; border: 1px solid var(--cream-dark); max-height: 85vh; }
+}
+
+.modal-handle { width: 36px; height: 4px; background: var(--cream-dark); border-radius: 2px; margin: 10px auto 4px; }
+.modal-close {
+  position: absolute; top: 10px; right: 12px; font-size: 17px; cursor: pointer;
+  background: rgba(250,246,242,0.95); border: none; color: var(--ink-muted);
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; z-index: 10;
+}
+
+/* Image in modal — fully visible, no crop */
+.modal-img {
+  width: 100%; display: block;
+  max-height: 200px; object-fit: contain;
+  background: var(--cream); padding: 16px;
+}
+
+.modal-body { padding: 1rem 1.3rem 1.8rem; text-align: center; }
+.modal-name { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 500; color: var(--ink); margin-bottom: 4px; line-height: 1.2; }
+.modal-price { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: var(--blush-dark); margin-bottom: 14px; }
+
+.qr-section {
+  margin: 12px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.qr-label {
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-faint); margin-bottom: 4px;
+}
+#qrcode {
+  padding: 10px;
+  background: #fff;
+  border: 1px solid var(--cream-dark);
+  display: inline-block;
+  line-height: 0;
+}
+#qrcode canvas, #qrcode img { display: block; }
+
+.modal-sep { height: 1px; background: var(--cream-dark); margin: 0 0 14px; }
+.pix-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 6px; }
+.pix-box {
+  background: var(--cream); border: 1px solid var(--cream-dark);
+  padding: 9px 12px; display: flex; align-items: center;
+  justify-content: space-between; gap: 8px; margin-bottom: 10px;
+}
+.pix-key { font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 500; color: var(--ink); letter-spacing: 0.04em; }
+.copy-btn {
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 6px 10px; border: 1px solid var(--ink-faint); background: transparent;
+  cursor: pointer; color: var(--ink-muted); font-family: 'Jost', sans-serif;
+  white-space: nowrap; flex-shrink: 0; transition: border-color 0.15s, color 0.15s;
+}
+.copy-btn:active, .copy-btn:hover { border-color: var(--gold); color: var(--gold); }
+.copy-btn.copied { border-color: #5a8a5f; color: #5a8a5f; }
+.modal-note { font-size: 12px; font-weight: 300; color: var(--ink-muted); line-height: 1.7; margin-bottom: 14px; text-align: left; }
+.modal-note strong { color: var(--blush-dark); font-weight: 500; }
+.confirm-btn {
+  width: 100%; padding: 14px; background: var(--blush-dark); color: var(--white);
+  border: none; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; font-family: 'Jost', sans-serif; font-weight: 400;
+  transition: background 0.15s; -webkit-tap-highlight-color: transparent;
+}
+.confirm-btn:active, .confirm-btn:hover { background: var(--blush); }
+
+/* THANK YOU */
+.thankyou-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--white); padding: 3rem 1.5rem; }
+.thankyou-inner { text-align: center; max-width: 460px; animation: slideUp 0.4s ease; }
+.thankyou-ornament { font-size: 44px; margin-bottom: 1.4rem; display: block; animation: beat 1.2s ease-in-out infinite; }
+@keyframes beat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+.thankyou-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 8vw, 60px); font-weight: 300; color: var(--ink); line-height: 1.1; margin-bottom: 14px; }
+.thankyou-title em { font-style: italic; color: var(--blush-dark); }
+.thankyou-divider { width: 50px; height: 1px; background: var(--blush-light); margin: 14px auto; }
+.thankyou-text { font-size: 13px; font-weight: 300; color: var(--ink-muted); line-height: 1.9; margin-bottom: 6px; }
+.thankyou-sign { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 19px; color: var(--blush-dark); margin-top: 20px; }
+.back-btn {
+  margin-top: 22px; padding: 10px 22px; border: 1px solid var(--cream-dark);
+  background: transparent; cursor: pointer; font-family: 'Jost', sans-serif;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-faint); display: inline-block; transition: border-color 0.15s, color 0.15s;
+}
+.back-btn:hover { border-color: var(--blush-light); color: var(--ink-muted); }
+.footer { text-align: center; padding: 2rem; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.1em; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-ornament">Lista de presentes</div>
+    <h1 class="hero-names">Rafaela <em>&</em> Gabriel</h1>
+    <div class="hero-divider"><div class="hero-divider-heart">♡</div></div>
+    <p class="hero-sub">Escolha um presente e use o Pix para enviar seu carinho.<br>Cada item é um pedacinho do nosso novo lar.</p>
+  </header>
+
+  <div class="section-label"><span>20 presentes</span></div>
+
+  <!-- GRADE DE PRESENTES -->
+  <div class="grid" id="grid">
+
+    <!-- ITEM: Air fryer -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="img\lixeira-inox-5l-banheiro-.webp"
+           alt="Lixeira Inox 5L Banheiro">
+      <div class="card-body">
+        <div class="card-name">Lixeira Inox 5L Banheiro</div>
+        <div class="card-desc">Lixeira de inox 5 litros com tampa, ideal para banheiro, com design elegante e fácil de limpar.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;60,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Aparelho de jantar -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=600&h=600&fit=crop"
+           alt="Aparelho de jantar">
+      <div class="card-body">
+        <div class="card-name">Aparelho de jantar (6 pessoas)</div>
+        <div class="card-desc">Conjunto completo de louças para receber os amigos com estilo e elegância.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;420,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Aspirador robô -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1589923188900-85dae523342b?w=600&h=600&fit=crop"
+           alt="Aspirador de pó robô">
+      <div class="card-body">
+        <div class="card-name">Aspirador de pó robô</div>
+        <div class="card-desc">Robô aspirador inteligente que facilita a limpeza do lar com programação automática.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;1.200,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Batedeira planetária -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=600&fit=crop"
+           alt="Batedeira planetária">
+      <div class="card-body">
+        <div class="card-name">Batedeira planetária</div>
+        <div class="card-desc">Batedeira profissional para preparar bolos, pães e sobremesas com facilidade.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;560,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Cafeteira espresso -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600&h=600&fit=crop"
+           alt="Cafeteira espresso">
+      <div class="card-body">
+        <div class="card-name">Cafeteira espresso</div>
+        <div class="card-desc">Máquina de café expresso com vaporizador de leite para cafés especiais em casa.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;780,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Churrasqueira elétrica -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=600&h=600&fit=crop"
+           alt="Churrasqueira elétrica">
+      <div class="card-body">
+        <div class="card-name">Churrasqueira elétrica</div>
+        <div class="card-desc">Churrasqueira elétrica compacta, perfeita para apartamento e reuniões em família.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;320,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Conjunto de facas -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1593618998160-e34014e67546?w=600&h=600&fit=crop"
+           alt="Conjunto de facas">
+      <div class="card-body">
+        <div class="card-name">Conjunto de facas</div>
+        <div class="card-desc">Kit profissional de facas em aço inoxidável com suporte de madeira para a cozinha.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;280,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Edredom king -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=600&fit=crop"
+           alt="Edredom king">
+      <div class="card-body">
+        <div class="card-name">Edredom king</div>
+        <div class="card-desc">Edredom casal king size em algodão egípcio, macio, quentinho e de alta durabilidade.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;390,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Espelho decorativo -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&h=600&fit=crop"
+           alt="Espelho decorativo grande">
+      <div class="card-body">
+        <div class="card-name">Espelho decorativo grande</div>
+        <div class="card-desc">Espelho com moldura dourada para sala ou quarto, trazendo amplitude e sofisticação.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;460,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Fritadeira e churrasqueira 2 em 1 -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&h=600&fit=crop"
+           alt="Fritadeira e churrasqueira 2 em 1">
+      <div class="card-body">
+        <div class="card-name">Fritadeira e churrasqueira 2 em 1</div>
+        <div class="card-desc">Eletrodoméstico versátil para fritar, grelhar e assar com mínimo de gordura.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;480,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Jogo de cama king -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1616627577385-286d2a12edb6?w=600&h=600&fit=crop"
+           alt="Jogo de cama king">
+      <div class="card-body">
+        <div class="card-name">Jogo de cama king (4 peças)</div>
+        <div class="card-desc">Jogo de cama em percal 400 fios, com fronhas, lençol e capa de edredom.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;350,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Jogo de panelas -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1584990347449-a2d4c2c044f2?w=600&h=600&fit=crop"
+           alt="Jogo de panelas">
+      <div class="card-body">
+        <div class="card-name">Jogo de panelas 5 peças</div>
+        <div class="card-desc">Conjunto de panelas antiaderente com tampa de vidro, ideal para cozinhar com saúde.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;430,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Jogo de toalhas -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1601985705806-468402a3dbdb?w=600&h=600&fit=crop"
+           alt="Jogo de toalhas de banho">
+      <div class="card-body">
+        <div class="card-name">Jogo de toalhas de banho</div>
+        <div class="card-desc">Conjunto com 4 toalhas de banho e 4 de rosto em algodão felpudo de alta absorção.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;260,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Liquidificador -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=600&h=600&fit=crop"
+           alt="Liquidificador de alta potência">
+      <div class="card-body">
+        <div class="card-name">Liquidificador de alta potência</div>
+        <div class="card-desc">Liquidificador 1000W com jarra de vidro e múltiplas velocidades para smoothies e sopas.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;310,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Micro-ondas -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&h=600&fit=crop"
+           alt="Micro-ondas 30L">
+      <div class="card-body">
+        <div class="card-name">Micro-ondas 30L</div>
+        <div class="card-desc">Micro-ondas com função grill, timer digital e design moderno para a cozinha.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;680,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Organizador de armário -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop"
+           alt="Organizador de armário">
+      <div class="card-body">
+        <div class="card-name">Organizador de armário</div>
+        <div class="card-desc">Kit completo de organizadores modulares para guarda-roupa, armários e prateleiras.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;190,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Perfume difusor -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=600&h=600&fit=crop"
+           alt="Perfume de ambiente difusor">
+      <div class="card-body">
+        <div class="card-name">Perfume de ambiente difusor</div>
+        <div class="card-desc">Difusor de varetas com essência floral sofisticada para perfumar os ambientes do lar.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;140,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Purificador de água -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&h=600&fit=crop"
+           alt="Purificador de água">
+      <div class="card-body">
+        <div class="card-name">Purificador de água</div>
+        <div class="card-desc">Purificador de água com filtro de alto desempenho e design compacto para bancada.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;520,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Smart TV -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1593359677879-a4bb92f4834c?w=600&h=600&fit=crop"
+           alt="Smart TV 50 polegadas">
+      <div class="card-body">
+        <div class="card-name">Smart TV 50"</div>
+        <div class="card-desc">Televisão 4K UHD com sistema smart, streaming integrado e imagem de alta definição.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;2.200,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM: Travesseiro viscoelástico -->
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=600&h=600&fit=crop"
+           alt="Travesseiro de espuma viscoelástica">
+      <div class="card-body">
+        <div class="card-name">Travesseiro de espuma viscoelástica (2 un.)</div>
+        <div class="card-desc">Par de travesseiros com espuma de memória que se adapta ao contorno da cabeça.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;290,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <footer class="footer">Feito com amor · Rafaela & Gabriel</footer>
+
+</div><!-- /app -->
+
+<!-- MODAL -->
+<div id="modal-overlay" class="overlay" style="display:none" onclick="overlayClick(event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <img class="modal-img" id="modal-img" src="" alt="">
+    <div class="modal-body">
+      <div class="modal-name" id="modal-name"></div>
+      <div class="modal-price" id="modal-price"></div>
+      <div class="modal-sep"></div>
+      <div class="qr-section">
+        <div class="qr-label">Aponte a câmera para pagar</div>
+        <div id="qrcode"></div>
+      </div>
+      <div class="modal-sep" style="margin-top:12px"></div>
+      <div class="pix-label">Ou copie a chave Pix — celular</div>
+      <div class="pix-box">
+        <span class="pix-key">16992048856</span>
+        <button class="copy-btn" id="copybtn" onclick="copyPix()">Copiar</button>
+      </div>
+      <p class="modal-note" id="modal-note"></p>
+      <button class="confirm-btn" onclick="confirmPayment()">Já fiz o Pix! 🎉</button>
+    </div>
+  </div>
+</div>
+
+<!-- TELA DE AGRADECIMENTO -->
+<div id="thankyou-screen" style="display:none">
+  <div class="thankyou-page">
+    <div class="thankyou-inner">
+      <span class="thankyou-ornament">💕</span>
+      <h1 class="thankyou-title">Que presente<br><em>lindo!</em></h1>
+      <div class="thankyou-divider"></div>
+      <p class="thankyou-text">Obrigado de coração pelo carinho e pela generosidade.<br>Seu presente vai fazer parte da nossa nova vida juntos<br>e guardaremos essa lembrança para sempre.</p>
+      <p class="thankyou-text">Não vemos a hora de celebrar com você! ✨</p>
+      <div class="thankyou-sign">Rafaela & Gabriel</div><br>
+      <button class="back-btn" onclick="goBack()">← Voltar à lista</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const PIX_KEY = '16992048856';
+
+  function crc16(str) {
+    var crc = 0xFFFF;
+    for (var i = 0; i < str.length; i++) {
+      crc ^= str.charCodeAt(i) << 8;
+      for (var j = 0; j < 8; j++) {
+        if (crc & 0x8000) crc = (crc << 1) ^ 0x1021;
+        else crc <<= 1;
+        crc &= 0xFFFF;
+      }
+    }
+    return crc.toString(16).toUpperCase().padStart(4, '0');
+  }
+
+  function emv(id, val) {
+    return id + String(val.length).padStart(2, '0') + val;
+  }
+
+  function buildPixPayload(key, name, city) {
+    var gui        = emv('00', 'BR.GOV.BCB.PIX');
+    var keyField   = emv('01', key);
+    var merchant   = emv('26', gui + keyField);
+    var txid       = emv('05', 'presentecasamento');
+    var additional = emv('62', txid);
+    var payload    = emv('00', '01')
+                   + emv('01', '12')
+                   + merchant
+                   + emv('52', '0000')
+                   + emv('53', '986')
+                   + emv('58', 'BR')
+                   + emv('59', name.substring(0, 25))
+                   + emv('60', city.substring(0, 15))
+                   + additional
+                   + '6304';
+    return payload + crc16(payload);
+  }
+  function openModal(card) {
+    var name  = card.querySelector('.card-name').textContent;
+    var price = card.querySelector('.card-price').textContent.trim();
+    var img   = card.querySelector('.card-img').src;
+    document.getElementById('modal-name').textContent  = name;
+    document.getElementById('modal-price').textContent = price;
+    document.getElementById('modal-img').src           = img;
+    document.getElementById('modal-img').alt           = name;
+    document.getElementById('modal-note').innerHTML    =
+      'Abra o app do seu banco, acesse o Pix, cole a chave acima e envie <strong>' + price + '</strong> como valor do presente.';
+    var btn = document.getElementById('copybtn');
+    btn.textContent = 'Copiar';
+    btn.classList.remove('copied');
+    document.getElementById('modal-overlay').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    // Generate PIX QR code using EMV payload (BCB standard)
+    var qrDiv = document.getElementById('qrcode');
+    qrDiv.innerHTML = '';
+    var pixPayload = buildPixPayload('+5516992048856', 'Rafaela e Gabriel', 'Brasil');
+    new QRCode(qrDiv, {
+      text: pixPayload,
+      width: 180,
+      height: 180,
+      colorDark: '#2A2017',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  }
+  function closeModal() {
+    document.getElementById('modal-overlay').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  function overlayClick(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  }
+  function copyPix() {
+    navigator.clipboard.writeText(PIX_KEY).then(function() {
+      var btn = document.getElementById('copybtn');
+      btn.textContent = 'Copiado!';
+      btn.classList.add('copied');
+    });
+  }
+  function confirmPayment() {
+    closeModal();
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('thankyou-screen').style.display = 'block';
+    window.scrollTo(0, 0);
+  }
+  function goBack() {
+    document.getElementById('thankyou-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>
