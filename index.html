@@ -35,7 +35,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 }
 @media (min-width: 900px) {
   .hero::before {
-    background-image: url("img/moldura-amarela-com-flores-amarelas.png");
+    background-image: none;
   }
 }
 .hero-ornament {
@@ -221,6 +221,47 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 }
 .back-btn:hover { border-color: var(--blush-light); color: var(--ink-muted); }
 .footer { text-align: center; padding: 2rem; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.1em; }
+
+/* FORM NO MODAL */
+.modal-form { margin: 14px 0 0; text-align: left; }
+.modal-field { margin-bottom: 12px; }
+.modal-field label {
+  display: block; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-faint); margin-bottom: 5px;
+}
+.modal-field input, .modal-field textarea {
+  width: 100%; padding: 9px 11px;
+  border: 1px solid var(--cream-dark); background: var(--cream);
+  font-family: 'Jost', sans-serif; font-size: 14px; color: var(--ink);
+  outline: none; resize: none; transition: border-color 0.15s;
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.modal-field input:focus, .modal-field textarea:focus { border-color: var(--blush); }
+.modal-field textarea { height: 72px; }
+.modal-privacy { font-size: 11px; color: var(--ink-faint); margin-bottom: 14px; }
+
+/* MURAL DE MENSAGENS */
+.messages-section { max-width: 760px; margin: 0 auto 3rem; padding: 0 1.2rem; }
+.messages-empty { text-align: center; font-size: 13px; color: var(--ink-faint); padding: 1.5rem 0; }
+.message-card {
+  border: 1px solid var(--cream-dark); background: var(--white);
+  padding: 14px 16px; margin-bottom: 10px;
+}
+.message-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 8px; margin-bottom: 6px; flex-wrap: wrap;
+}
+.message-name {
+  font-family: 'Cormorant Garamond', serif; font-size: 16px;
+  font-weight: 500; color: var(--ink);
+}
+.message-gift {
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.message-text { font-size: 13px; font-weight: 300; color: var(--ink-muted); line-height: 1.7; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 </head>
@@ -241,7 +282,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   <!-- GRADE DE PRESENTES -->
   <div class="grid" id="grid">
 
-    <!-- ITEM: Air fryer -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="img\lixeira-inox-5l-banheiro-.webp"
@@ -256,29 +296,27 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Aparelho de jantar -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
-           src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=600&h=600&fit=crop"
-           alt="Aparelho de jantar">
+           src="img\cortina.webp"
+           alt="Cortinas Para Sala">
       <div class="card-body">
-        <div class="card-name">Aparelho de jantar (6 pessoas)</div>
-        <div class="card-desc">Conjunto completo de louças para receber os amigos com estilo e elegância.</div>
+        <div class="card-name">Cortinas Para Sala</div>
+        <div class="card-desc">Cortinas modernas e elegantes para dar um toque de sofisticação.</div>
         <div class="card-footer">
-          <span class="card-price">R$&nbsp;420,00</span>
+          <span class="card-price">R$&nbsp;170,00</span>
           <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
         </div>
       </div>
     </div>
 
-    <!-- ITEM: Aspirador robô -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
-           src="https://images.unsplash.com/photo-1589923188900-85dae523342b?w=600&h=600&fit=crop"
-           alt="Aspirador de pó robô">
+           src="img\filtro-everest.webp"
+           alt="Purificador de água">
       <div class="card-body">
-        <div class="card-name">Aspirador de pó robô</div>
-        <div class="card-desc">Robô aspirador inteligente que facilita a limpeza do lar com programação automática.</div>
+        <div class="card-name">Purificador de água</div>
+        <div class="card-desc">Purificador de água gelada com filtro que remove impurezas.</div>
         <div class="card-footer">
           <span class="card-price">R$&nbsp;1.200,00</span>
           <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
@@ -286,22 +324,20 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Batedeira planetária -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
-           src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=600&fit=crop"
-           alt="Batedeira planetária">
+           src="img\microondas.webp"
+           alt="Forno Microondas">
       <div class="card-body">
-        <div class="card-name">Batedeira planetária</div>
-        <div class="card-desc">Batedeira profissional para preparar bolos, pães e sobremesas com facilidade.</div>
+        <div class="card-name">Forno Microondas</div>
+        <div class="card-desc">Microondas com tecnologia de aquecimento rápido e eficiente.</div>
         <div class="card-footer">
-          <span class="card-price">R$&nbsp;560,00</span>
+          <span class="card-price">R$&nbsp;600,00</span>
           <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
         </div>
       </div>
     </div>
 
-    <!-- ITEM: Cafeteira espresso -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600&h=600&fit=crop"
@@ -316,7 +352,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Churrasqueira elétrica -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=600&h=600&fit=crop"
@@ -331,7 +366,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Conjunto de facas -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1593618998160-e34014e67546?w=600&h=600&fit=crop"
@@ -346,7 +380,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Edredom king -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=600&fit=crop"
@@ -361,7 +394,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Espelho decorativo -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&h=600&fit=crop"
@@ -376,7 +408,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Fritadeira e churrasqueira 2 em 1 -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&h=600&fit=crop"
@@ -391,7 +422,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Jogo de cama king -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1616627577385-286d2a12edb6?w=600&h=600&fit=crop"
@@ -406,7 +436,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Jogo de panelas -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1584990347449-a2d4c2c044f2?w=600&h=600&fit=crop"
@@ -421,7 +450,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Jogo de toalhas -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1601985705806-468402a3dbdb?w=600&h=600&fit=crop"
@@ -436,7 +464,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Liquidificador -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=600&h=600&fit=crop"
@@ -451,7 +478,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Micro-ondas -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&h=600&fit=crop"
@@ -466,7 +492,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Organizador de armário -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop"
@@ -481,7 +506,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Perfume difusor -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1608528577891-eb055944f2e7?w=600&h=600&fit=crop"
@@ -496,7 +520,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Purificador de água -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&h=600&fit=crop"
@@ -511,7 +534,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Smart TV -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1593359677879-a4bb92f4834c?w=600&h=600&fit=crop"
@@ -526,7 +548,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <!-- ITEM: Travesseiro viscoelástico -->
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=600&h=600&fit=crop"
@@ -543,6 +564,9 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 
   </div><!-- /grid -->
 
+  <div class="section-label" id="messages-section-label" style="display:none"><span>Mensagens dos convidados</span></div>
+  <div class="messages-section" id="messages-wall"></div>
+
   <footer class="footer">Feito com amor · Rafaela & Gabriel</footer>
 
 </div><!-- /app -->
@@ -558,7 +582,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       <div class="modal-price" id="modal-price"></div>
       <div class="modal-sep"></div>
       <div class="qr-section">
-        <div class="qr-label">Aponte a câmera para pagar</div>
+        <div class="qr-label">Aponte a câmera para presentear</div>
         <div id="qrcode"></div>
       </div>
       <div class="modal-sep" style="margin-top:12px"></div>
@@ -568,6 +592,18 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
         <button class="copy-btn" id="copybtn" onclick="copyPix()">Copiar</button>
       </div>
       <p class="modal-note" id="modal-note"></p>
+      <div class="modal-sep" style="margin-top:14px"></div>
+      <div class="modal-form">
+        <div class="modal-field">
+          <label for="guest-name">Seu nome e sobrenome *</label>
+          <input type="text" id="guest-name" placeholder="Nome Sobrenome" autocomplete="name" oninput="this.style.borderColor=''">
+        </div>
+        <div class="modal-field">
+          <label for="guest-message">Mensagem para os noivos (opcional)</label>
+          <textarea id="guest-message" placeholder="Deixe um recado carinhoso…"></textarea>
+        </div>
+        <p class="modal-privacy">Sua mensagem ficará visível para todos que visitarem esta página.</p>
+      </div>
       <button class="confirm-btn" onclick="confirmPayment()">Já fiz o Pix! 🎉</button>
     </div>
   </div>
@@ -590,6 +626,9 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 
 <script>
   const PIX_KEY = '16992048856';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxqhPkA6xZrY5WVtNpr93KtqJzwpQz8vkxE3GS8Hsq-MhruiSMx31RVGWzjmiAX1zyrsA/exec';
+
+  var currentGift = { nome: '', valor: '' };
 
   function crc16(str) {
     var crc = 0xFFFF;
@@ -626,23 +665,27 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
                    + '6304';
     return payload + crc16(payload);
   }
+
   function openModal(card) {
     var name  = card.querySelector('.card-name').textContent;
     var price = card.querySelector('.card-price').textContent.trim();
     var img   = card.querySelector('.card-img').src;
+    currentGift = { nome: name, valor: price };
     document.getElementById('modal-name').textContent  = name;
     document.getElementById('modal-price').textContent = price;
     document.getElementById('modal-img').src           = img;
     document.getElementById('modal-img').alt           = name;
     document.getElementById('modal-note').innerHTML    =
       'Abra o app do seu banco, acesse o Pix, cole a chave acima e envie <strong>' + price + '</strong> como valor do presente.';
+    document.getElementById('guest-name').value    = '';
+    document.getElementById('guest-message').value = '';
+    document.getElementById('guest-name').style.borderColor = '';
     var btn = document.getElementById('copybtn');
     btn.textContent = 'Copiar';
     btn.classList.remove('copied');
     document.getElementById('modal-overlay').style.display = 'flex';
     document.body.style.overflow = 'hidden';
 
-    // Generate PIX QR code using EMV payload (BCB standard)
     var qrDiv = document.getElementById('qrcode');
     qrDiv.innerHTML = '';
     var pixPayload = buildPixPayload('+5516992048856', 'Rafaela e Gabriel', 'Brasil');
@@ -655,13 +698,16 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       correctLevel: QRCode.CorrectLevel.M
     });
   }
+
   function closeModal() {
     document.getElementById('modal-overlay').style.display = 'none';
     document.body.style.overflow = '';
   }
+
   function overlayClick(e) {
     if (e.target === document.getElementById('modal-overlay')) closeModal();
   }
+
   function copyPix() {
     navigator.clipboard.writeText(PIX_KEY).then(function() {
       var btn = document.getElementById('copybtn');
@@ -669,17 +715,68 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       btn.classList.add('copied');
     });
   }
+
   function confirmPayment() {
+    var guestName = document.getElementById('guest-name').value.trim();
+    if (!guestName) {
+      document.getElementById('guest-name').style.borderColor = 'var(--blush-dark)';
+      document.getElementById('guest-name').focus();
+      return;
+    }
+    var guestMessage = document.getElementById('guest-message').value.trim();
+
+    if (APPS_SCRIPT_URL !== 'COLE_AQUI_A_URL_DO_APPS_SCRIPT') {
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify({ nome: guestName, presente: currentGift.nome, valor: currentGift.valor, mensagem: guestMessage })
+      }).catch(function() {});
+    }
+
     closeModal();
     document.getElementById('app').style.display = 'none';
     document.getElementById('thankyou-screen').style.display = 'block';
     window.scrollTo(0, 0);
   }
+
   function goBack() {
     document.getElementById('thankyou-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     window.scrollTo(0, 0);
+    loadMessages();
   }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function loadMessages() {
+    if (APPS_SCRIPT_URL === 'COLE_AQUI_A_URL_DO_APPS_SCRIPT') return;
+    document.getElementById('messages-section-label').style.display = '';
+    window._handleMessages = function(msgs) {
+      var wall = document.getElementById('messages-wall');
+      var withMsg = (msgs || []).filter(function(m) { return m.mensagem; });
+      if (!withMsg.length) {
+        wall.innerHTML = '<p class="messages-empty">Seja o primeiro a deixar uma mensagem!</p>';
+        return;
+      }
+      wall.innerHTML = withMsg.map(function(m) {
+        return '<div class="message-card">'
+          + '<div class="message-header">'
+          + '<span class="message-name">' + escHtml(m.nome) + '</span>'
+          + '<span class="message-gift">' + escHtml(m.data) + '</span>'
+          + '</div>'
+          + '<p class="message-text">' + escHtml(m.mensagem) + '</p>'
+          + '</div>';
+      }).join('');
+    };
+    var s = document.createElement('script');
+    s.onerror = function() { document.getElementById('messages-wall').innerHTML = ''; };
+    s.src = APPS_SCRIPT_URL + '?callback=_handleMessages';
+    document.head.appendChild(s);
+  }
+
+  loadMessages();
 </script>
 </body>
 </html>
