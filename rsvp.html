@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirmar Presença — Rafaela & Gabriel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blush: #C9A848;
+  --blush-light: #FDF3C0;
+  --blush-dark: #8B6000;
+  --cream: #FEFDF0;
+  --cream-dark: #FEF5C3;
+  --ink: #2A2017;
+  --ink-muted: #7A6A4A;
+  --ink-faint: #C4A860;
+  --gold: #D4A017;
+  --white: #FFFEF7;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { width: 100%; }
+body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; width: 100%; }
+@media (min-width: 900px) {
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image: url("img/fundo-desktop.webp"); background-repeat: repeat;
+    opacity: 0.2;
+  }
+}
+
+/* NAV */
+.site-nav {
+  background: var(--white); border-bottom: 1px solid var(--cream-dark);
+  display: flex; justify-content: center; gap: 2rem;
+  padding: 0.75rem 1.5rem; position: sticky; top: 0; z-index: 100;
+}
+.site-nav a {
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-faint); text-decoration: none;
+  transition: color 0.15s; padding-bottom: 2px;
+}
+.site-nav a:hover { color: var(--ink-muted); }
+.site-nav a.active { color: var(--blush-dark); border-bottom: 1px solid var(--blush); }
+
+/* HERO */
+.hero {
+  position: relative; text-align: center;
+  padding: 3.5rem 1.5rem 3.5rem; background: var(--white); overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: url("img/moldura-amarela-com-flores-amarelas.webp");
+  background-size: 100% 100%; background-repeat: no-repeat;
+}
+@media (min-width: 900px) { .hero::before { background-image: none; } }
+.hero-ornament {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 12px; letter-spacing: 0.2em; color: var(--blush);
+  text-transform: uppercase; margin-bottom: 1rem; position: relative;
+}
+.hero-names {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(36px, 10vw, 88px); line-height: 1; color: var(--ink); position: relative;
+}
+.hero-names em { font-style: italic; color: var(--blush-dark); }
+.hero-divider {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; margin: 1.2rem auto; max-width: 240px; position: relative;
+}
+.hero-divider::before, .hero-divider::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, transparent, var(--blush-light), transparent);
+}
+.hero-divider-heart { color: var(--blush); font-size: 15px; }
+.hero-sub {
+  font-size: 13px; font-weight: 300; color: var(--ink-muted);
+  max-width: 360px; margin: 0 auto; line-height: 1.8; position: relative;
+}
+
+/* FORM WRAP */
+.form-wrap {
+  max-width: 560px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem;
+}
+
+/* SECTION LABEL */
+.section-label { text-align: center; padding: 0 0 1.8rem; }
+.section-label span {
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--ink-muted); border-bottom: 1px solid var(--blush); padding-bottom: 4px;
+}
+
+/* FIELDS */
+.field { margin-bottom: 1.2rem; }
+.field label {
+  display: block; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-faint); margin-bottom: 6px;
+}
+.field input, .field select, .field textarea {
+  width: 100%; padding: 10px 12px;
+  border: 1px solid var(--cream-dark); background: var(--white);
+  font-family: 'Jost', sans-serif; font-size: 14px; color: var(--ink);
+  outline: none; transition: border-color 0.15s;
+  border-radius: 0; -webkit-appearance: none; appearance: none;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--blush); }
+.field input.error, .field select.error { border-color: var(--blush-dark); }
+.field textarea { height: 80px; resize: none; }
+
+/* Contador de pessoas */
+.qty-wrap {
+  display: flex; align-items: center; gap: 0;
+  border: 1px solid var(--cream-dark); background: var(--white);
+  width: fit-content;
+}
+.qty-btn {
+  width: 40px; height: 40px; border: none; background: transparent;
+  font-size: 18px; color: var(--blush-dark); cursor: pointer;
+  font-family: 'Jost', sans-serif; display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s; flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.qty-btn:hover { background: var(--cream); }
+.qty-num {
+  width: 48px; text-align: center; font-size: 18px;
+  font-family: 'Cormorant Garamond', serif; color: var(--ink);
+  border-left: 1px solid var(--cream-dark); border-right: 1px solid var(--cream-dark);
+  line-height: 40px; user-select: none;
+}
+
+/* Nomes dos convidados */
+.guests-block {
+  margin-bottom: 1.2rem; display: flex; flex-direction: column; gap: 8px;
+}
+.guest-field {
+  display: flex; align-items: center; gap: 8px;
+}
+.guest-num {
+  font-size: 10px; letter-spacing: 0.1em; color: var(--ink-faint);
+  width: 20px; flex-shrink: 0; text-align: right;
+}
+.guest-field input {
+  flex: 1; padding: 10px 12px;
+  border: 1px solid var(--cream-dark); background: var(--white);
+  font-family: 'Jost', sans-serif; font-size: 14px; color: var(--ink);
+  outline: none; transition: border-color 0.15s;
+  border-radius: 0; -webkit-appearance: none; appearance: none;
+}
+.guest-field input:focus { border-color: var(--blush); }
+.guest-field input.error { border-color: var(--blush-dark); }
+
+.guests-label {
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-faint); margin-bottom: 8px;
+}
+
+/* Separador */
+.form-sep { height: 1px; background: var(--cream-dark); margin: 1.6rem 0; }
+
+/* Submit */
+.submit-btn {
+  width: 100%; padding: 14px; background: var(--blush-dark); color: var(--white);
+  border: none; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; font-family: 'Jost', sans-serif; font-weight: 400;
+  transition: background 0.15s; -webkit-tap-highlight-color: transparent;
+}
+.submit-btn:hover, .submit-btn:active { background: var(--blush); }
+.submit-btn:disabled { opacity: 0.6; cursor: default; }
+
+/* THANK YOU */
+.thankyou-page { min-height: 60vh; display: flex; align-items: center; justify-content: center; padding: 3rem 1.5rem; }
+.thankyou-inner { text-align: center; max-width: 460px; animation: slideUp 0.4s ease; }
+.thankyou-ornament { font-size: 44px; margin-bottom: 1.4rem; display: block; animation: beat 1.2s ease-in-out infinite; }
+@keyframes beat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.thankyou-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 7vw, 52px); font-weight: 300; color: var(--ink); line-height: 1.1; margin-bottom: 14px; }
+.thankyou-title em { font-style: italic; color: var(--blush-dark); }
+.thankyou-divider { width: 50px; height: 1px; background: var(--blush-light); margin: 14px auto; }
+.thankyou-text { font-size: 13px; font-weight: 300; color: var(--ink-muted); line-height: 1.9; }
+.thankyou-sign { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 19px; color: var(--blush-dark); margin-top: 20px; }
+
+.footer { text-align: center; padding: 2rem; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.1em; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html">Lista de Presentes</a>
+  <a href="info.html">Informações</a>
+  <a href="rsvp.html" class="active">Confirmar Presença</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-ornament">Confirmação de presença</div>
+  <h1 class="hero-names">Rafaela <em>&</em> Gabriel</h1>
+  <div class="hero-divider"><div class="hero-divider-heart">♡</div></div>
+  <p class="hero-sub">Sua presença é o nosso maior presente.<br>Confirme até <strong>31 de junho de 2026</strong>.</p>
+</header>
+
+<div id="form-section">
+  <div class="form-wrap">
+
+    <div class="section-label"><span>Quem vai comparecer?</span></div>
+
+    <div class="field">
+      <label>Quantas pessoas? *</label>
+      <div class="qty-wrap">
+        <button class="qty-btn" onclick="changeQty(-1)" type="button">−</button>
+        <div class="qty-num" id="qty-display">1</div>
+        <button class="qty-btn" onclick="changeQty(1)" type="button">+</button>
+      </div>
+    </div>
+
+    <div id="guests-section">
+      <div class="guests-label">Nome completo de cada pessoa *</div>
+      <div class="guests-block" id="guests-block"></div>
+    </div>
+
+    <div class="form-sep"></div>
+    <div class="section-label"><span>Contato</span></div>
+
+    <div class="field">
+      <label for="resp-phone">WhatsApp (opcional)</label>
+      <input type="tel" id="resp-phone" placeholder="(00) 00000-0000" autocomplete="tel">
+    </div>
+
+    <div class="form-sep"></div>
+    <div class="section-label"><span>Observações</span></div>
+
+    <div class="field">
+      <label for="obs">Recado (opcional)</label>
+      <textarea id="obs" placeholder="Ex: Informações sobre a presença de uma das pessoas, restrições alimentares, recado para os noivos..."></textarea>
+    </div>
+
+    <button class="submit-btn" id="submit-btn" onclick="submitRSVP()">Confirmar presença 🎉</button>
+
+  </div>
+</div>
+
+<div id="thankyou-section" style="display:none">
+  <div class="thankyou-page">
+    <div class="thankyou-inner">
+      <span class="thankyou-ornament">🎊</span>
+      <h1 class="thankyou-title">Presença<br><em>confirmada!</em></h1>
+      <div class="thankyou-divider"></div>
+      <p class="thankyou-text">Que alegria saber que você estará com a gente nesse dia tão especial.<br>Mal podemos esperar para celebrar juntos!</p>
+      <div class="thankyou-sign">Rafaela & Gabriel</div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">Feito com amor · Rafaela & Gabriel</footer>
+
+<script>
+  const APPS_SCRIPT_URL = 'COLE_AQUI_A_URL_DO_APPS_SCRIPT';
+
+  var qty = 1;
+
+  function changeQty(delta) {
+    qty = Math.max(1, Math.min(20, qty + delta));
+    document.getElementById('qty-display').textContent = qty;
+    renderGuestFields();
+  }
+
+  function renderGuestFields() {
+    var block = document.getElementById('guests-block');
+    var current = block.querySelectorAll('input');
+    var values = Array.from(current).map(function(i) { return i.value; });
+    block.innerHTML = '';
+    for (var i = 0; i < qty; i++) {
+      var saved = values[i] || '';
+      var div = document.createElement('div');
+      div.className = 'guest-field';
+      div.innerHTML =
+        '<span class="guest-num">' + (i + 1) + '</span>' +
+        '<input type="text" placeholder="Nome completo" autocomplete="off" value="' + escAttr(saved) + '">';
+      block.appendChild(div);
+    }
+  }
+
+  function escAttr(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  }
+
+  function submitRSVP() {
+    var respPhone = document.getElementById('resp-phone').value.trim();
+    var obs = document.getElementById('obs').value.trim();
+
+    var ok = true;
+
+    var guestInputs = document.querySelectorAll('#guests-block input');
+    var guestNames = [];
+    guestInputs.forEach(function(inp) {
+      var val = inp.value.trim();
+      if (!val) {
+        inp.classList.add('error');
+        if (ok) { inp.focus(); ok = false; }
+      } else {
+        inp.classList.remove('error');
+        guestNames.push(val);
+      }
+    });
+
+    if (!ok) return;
+
+    var btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+
+    var payload = {
+      responsavel: guestNames[0],
+      telefone: respPhone,
+      quantidade: qty,
+      convidados: guestNames,
+      observacoes: obs
+    };
+
+    if (APPS_SCRIPT_URL !== 'COLE_AQUI_A_URL_DO_APPS_SCRIPT') {
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify(payload)
+      }).catch(function() {});
+    }
+
+    document.getElementById('form-section').style.display = 'none';
+    document.getElementById('thankyou-section').style.display = 'block';
+    window.scrollTo(0, 0);
+  }
+
+  renderGuestFields();
+</script>
+</body>
+</html>

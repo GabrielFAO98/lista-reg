@@ -21,11 +21,19 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { width: 100%; }
 body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; width: 100%; }
+@media (min-width: 900px) {
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image: url("img/fundo-desktop.webp"); background-repeat: repeat;
+    opacity: 0.2;
+  }
+  .hero { background: var(--white); }
+}
 
 /* HERO */
 .hero {
   position: relative; text-align: center;
-  padding: 3rem 1.5rem 2.5rem; background: var(--white); overflow: hidden;
+  padding: 3.5rem 1.5rem 3.5rem; background: var(--white); overflow: hidden;
 }
 .hero::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
@@ -66,7 +74,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 .section-label { text-align: center; padding: 1.8rem 1rem 1.2rem; }
 .section-label span {
   font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--ink-faint); border-bottom: 1px solid var(--blush-light); padding-bottom: 4px;
+  color: var(--ink-muted); border-bottom: 1px solid var(--blush); padding-bottom: 4px;
 }
 
 /* GRID */
@@ -222,6 +230,20 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 .back-btn:hover { border-color: var(--blush-light); color: var(--ink-muted); }
 .footer { text-align: center; padding: 2rem; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.1em; }
 
+/* NAV */
+.site-nav {
+  background: var(--white); border-bottom: 1px solid var(--cream-dark);
+  display: flex; justify-content: center; gap: 2rem;
+  padding: 0.75rem 1.5rem; position: sticky; top: 0; z-index: 100;
+}
+.site-nav a {
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-faint); text-decoration: none;
+  transition: color 0.15s; padding-bottom: 2px;
+}
+.site-nav a:hover { color: var(--ink-muted); }
+.site-nav a.active { color: var(--blush-dark); border-bottom: 1px solid var(--blush); }
+
 /* FORM NO MODAL */
 .modal-form { margin: 14px 0 0; text-align: left; }
 .modal-field { margin-bottom: 12px; }
@@ -266,6 +288,12 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 </head>
 <body>
+
+<nav class="site-nav">
+  <a href="index.html" class="active">Lista de Presentes</a>
+  <a href="info.html">Informações</a>
+  <a href="rsvp.html">Confirmar Presença</a>
+</nav>
 
 <div id="app">
 
@@ -326,6 +354,48 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
+           src="img\cesto-de-roupas.webp"
+           alt="Cesto de Roupas">
+      <div class="card-body">
+        <div class="card-name">Cesto de Roupas</div>
+        <div class="card-desc">Cesto de roupas em tecido, ideal para guardar roupas sujas ou para uso decorativo.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;120,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="img\potes-temperos.webp"
+           alt="Potes para Temperos">
+      <div class="card-body">
+        <div class="card-name">Potes para Temperos</div>
+        <div class="card-desc">Conjunto de potes para armazenar temperos e especiarias de forma organizada.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;100,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
+           src="img\aparelho-de-jantar.webp"
+           alt="Aparelho de Jantar">
+      <div class="card-body">
+        <div class="card-name">Aparelho de Jantar</div>
+        <div class="card-desc">Aparelho de jantar em cerâmica, ideal para servir refeições em família.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;380,00</span>
+          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal(this)">
+      <img class="card-img"
            src="img\microondas.webp"
            alt="Forno Microondas">
       <div class="card-body">
@@ -336,45 +406,17 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
           <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
         </div>
       </div>
-    </div>
+    </div>    
 
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
-           src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600&h=600&fit=crop"
-           alt="Cafeteira espresso">
+           src="img\jogo-de-facas.webp"
+           alt="Jogo de Facas">
       <div class="card-body">
-        <div class="card-name">Cafeteira espresso</div>
-        <div class="card-desc">Máquina de café expresso com vaporizador de leite para cafés especiais em casa.</div>
-        <div class="card-footer">
-          <span class="card-price">R$&nbsp;780,00</span>
-          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card" onclick="openModal(this)">
-      <img class="card-img"
-           src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=600&h=600&fit=crop"
-           alt="Churrasqueira elétrica">
-      <div class="card-body">
-        <div class="card-name">Churrasqueira elétrica</div>
-        <div class="card-desc">Churrasqueira elétrica compacta, perfeita para apartamento e reuniões em família.</div>
-        <div class="card-footer">
-          <span class="card-price">R$&nbsp;320,00</span>
-          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card" onclick="openModal(this)">
-      <img class="card-img"
-           src="https://images.unsplash.com/photo-1593618998160-e34014e67546?w=600&h=600&fit=crop"
-           alt="Conjunto de facas">
-      <div class="card-body">
-        <div class="card-name">Conjunto de facas</div>
+        <div class="card-name">Jogo de Facas</div>
         <div class="card-desc">Kit profissional de facas em aço inoxidável com suporte de madeira para a cozinha.</div>
         <div class="card-footer">
-          <span class="card-price">R$&nbsp;280,00</span>
+          <span class="card-price">R$&nbsp;260,00</span>
           <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
         </div>
       </div>
@@ -382,27 +424,13 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
-           src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=600&fit=crop"
-           alt="Edredom king">
-      <div class="card-body">
-        <div class="card-name">Edredom king</div>
-        <div class="card-desc">Edredom casal king size em algodão egípcio, macio, quentinho e de alta durabilidade.</div>
-        <div class="card-footer">
-          <span class="card-price">R$&nbsp;390,00</span>
-          <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card" onclick="openModal(this)">
-      <img class="card-img"
-           src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&h=600&fit=crop"
-           alt="Espelho decorativo grande">
+           src="img\espelho-grande.webp"
+           alt="Espelho grande">
       <div class="card-body">
         <div class="card-name">Espelho decorativo grande</div>
         <div class="card-desc">Espelho com moldura dourada para sala ou quarto, trazendo amplitude e sofisticação.</div>
         <div class="card-footer">
-          <span class="card-price">R$&nbsp;460,00</span>
+          <span class="card-price">R$&nbsp;160,00</span>
           <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
         </div>
       </div>
@@ -410,18 +438,19 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
-           src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&h=600&fit=crop"
-           alt="Fritadeira e churrasqueira 2 em 1">
+           src="img\caixas-organizadoras.webp"
+           alt="Caixas organizadoras">
       <div class="card-body">
-        <div class="card-name">Fritadeira e churrasqueira 2 em 1</div>
-        <div class="card-desc">Eletrodoméstico versátil para fritar, grelhar e assar com mínimo de gordura.</div>
+        <div class="card-name">Caixas organizadoras</div>
+        <div class="card-desc">Conjunto de caixas para organização de itens em casa ou escritório.</div>
         <div class="card-footer">
-          <span class="card-price">R$&nbsp;480,00</span>
+          <span class="card-price">R$&nbsp;120,00</span>
           <button class="card-btn" onclick="event.stopPropagation();openModal(this.closest('.card'))">Presentear</button>
         </div>
       </div>
     </div>
 
+    <!--
     <div class="card" onclick="openModal(this)">
       <img class="card-img"
            src="https://images.unsplash.com/photo-1616627577385-286d2a12edb6?w=600&h=600&fit=crop"
@@ -561,6 +590,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
         </div>
       </div>
     </div>
+    -->
 
   </div><!-- /grid -->
 
