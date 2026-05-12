@@ -32,16 +32,20 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 /* NAV */
 .site-nav {
   background: var(--white); border-bottom: 1px solid var(--cream-dark);
-  display: flex; justify-content: center; gap: 2rem;
-  padding: 0.75rem 1.5rem; position: sticky; top: 0; z-index: 100;
+  position: sticky; top: 0; z-index: 100;
+  display: flex; justify-content: flex-start; align-items: center;
+  gap: 2rem; padding: 0.85rem 2rem;
+  overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
 }
+.site-nav::-webkit-scrollbar { display: none; }
 .site-nav a {
-  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--ink-faint); text-decoration: none;
-  transition: color 0.15s; padding-bottom: 2px;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-muted); text-decoration: none;
+  transition: color 0.15s; white-space: nowrap; flex-shrink: 0;
 }
-.site-nav a:hover { color: var(--ink-muted); }
-.site-nav a.active { color: var(--blush-dark); border-bottom: 1px solid var(--blush); }
+.site-nav a:hover { color: var(--ink); }
+.site-nav a.active { color: var(--blush-dark); border-bottom: 1px solid var(--blush); padding-bottom: 2px; }
+@media (min-width: 600px) { .site-nav { justify-content: center; } }
 
 /* HERO */
 .hero {
@@ -149,7 +153,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   <div class="hero-ornament">Informações do casamento</div>
   <h1 class="hero-names">Rafaela <em>&</em> Gabriel</h1>
   <div class="hero-divider"><div class="hero-divider-heart">♡</div></div>
-  <p class="hero-sub">Tudo que você precisa saber para celebrarmos esse dia especial!</p>
+  <p class="hero-sub">Tudo que você precisa saber para <br>celebrarmos esse dia especial</p>
 </header>
 
 <div class="info-wrap">
