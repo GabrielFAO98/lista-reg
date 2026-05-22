@@ -240,36 +240,85 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 .about-body p + p { margin-top: 1.4rem; }
 
 /* ── PADRINHOS ── */
-.padrinhos-section { background: var(--ink); }
+.padrinhos-section {
+  background: linear-gradient(135deg, #1e1508 0%, #2e2010 50%, #1a1206 100%);
+  padding: 4rem 1.5rem;
+}
 .padrinhos-section .section-label span { color: var(--white); border-bottom-color: rgba(201,168,72,0.4); }
-.padrinhos-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: rgba(201,168,72,0.15);
-  border: 1px solid rgba(201,168,72,0.15);
-  margin-top: 0;
+.padrinhos-sub-label {
+  display: flex; align-items: center; gap: 1rem;
+  margin: 2.5rem 0 1.2rem;
 }
-@media (min-width: 500px) { .padrinhos-grid { grid-template-columns: repeat(4, 1fr); } }
-@media (min-width: 900px) { .padrinhos-grid { grid-template-columns: repeat(7, 1fr); } }
+.padrinhos-sub-label::before, .padrinhos-sub-label::after {
+  content: ''; flex: 1; height: 1px; background: rgba(201,168,72,0.2);
+}
+.padrinhos-sub-label span {
+  font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+  white-space: nowrap;
+}
+.padrinhos-sub-label.masc span { color: rgba(140,180,220,0.7); }
+.padrinhos-sub-label.fem  span { color: rgba(220,140,170,0.7); }
+.padrinhos-sub-label:first-of-type { margin-top: 0; }
+
+.padrinhos-grid-masc {
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+.padrinhos-grid-masc .padrinho-card:last-child {
+  grid-column: 2 / 3;
+}
+@media (min-width: 900px) {
+  .padrinhos-grid-masc { grid-template-columns: repeat(6, 1fr); }
+  .padrinhos-grid-masc .padrinho-card:last-child { grid-column: 3 / 5; }
+}
+
+.padrinhos-grid-fem {
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (min-width: 900px) { .padrinhos-grid-fem { grid-template-columns: repeat(5, 1fr); } }
+
 .padrinho-card {
-  background: rgba(42,32,23,0.6); padding: 1.6rem 1rem;
-  text-align: center; display: flex; flex-direction: column; gap: 6px; align-items: center;
+  border-radius: 14px; padding: 1.6rem 0.8rem 1.4rem;
+  text-align: center; display: flex; flex-direction: column;
+  align-items: center; gap: 8px;
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s, background 0.2s;
 }
+.padrinho-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.35); }
+
+.padrinho-card.masc {
+  background: rgba(180,210,240,0.06); border: 1px solid rgba(140,180,220,0.25);
+}
+.padrinho-card.masc:hover { background: rgba(180,210,240,0.11); }
+
+.padrinho-card.fem {
+  background: rgba(240,180,200,0.06); border: 1px solid rgba(220,140,170,0.25);
+}
+.padrinho-card.fem:hover { background: rgba(240,180,200,0.11); }
+
 .padrinho-avatar {
-  width: 52px; height: 52px; border-radius: 50%;
-  background: rgba(255,254,247,0.08); border: 1px solid rgba(201,168,72,0.3);
+  width: 72px; height: 72px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center; margin-bottom: 4px;
   font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: 18px; color: var(--blush);
+  font-size: 22px; box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  flex-shrink: 0;
+}
+.padrinho-card.masc .padrinho-avatar {
+  background: rgba(140,180,220,0.12); border: 2px solid rgba(140,180,220,0.4);
+  color: #9fc4e8;
+}
+.padrinho-card.fem .padrinho-avatar {
+  background: rgba(220,140,170,0.12); border: 2px solid rgba(220,140,170,0.4);
+  color: #e8a0b8;
 }
 .padrinho-foto {
   object-fit: cover; object-position: center top;
 }
 .padrinho-role {
   font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--blush);
 }
+.padrinho-card.masc .padrinho-role { color: rgba(140,180,220,0.7); }
+.padrinho-card.fem  .padrinho-role { color: rgba(220,140,170,0.7); }
 .padrinho-name {
   font-family: 'Cormorant Garamond', serif; font-size: 15px;
   font-weight: 400; color: var(--white); line-height: 1.3;
@@ -302,6 +351,79 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   transition: transform 0.2s; position: relative;
 }
 .cta-btn:hover .cta-btn-arrow { transform: translateX(4px); }
+
+/* ── DAMINHAS ── */
+.daminhas-section {
+  background: linear-gradient(135deg, #fff0f5 0%, #fef6ff 50%, #f0f8ff 100%);
+  padding: 4rem 1.5rem;
+}
+.daminhas-inner { max-width: 680px; margin: 0 auto; }
+.daminhas-section .section-label span { color: #8a3060; border-bottom-color: #d080a8; }
+.daminhas-subtitle {
+  text-align: center; margin-bottom: 2.5rem;
+  font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: #c882a0;
+}
+.daminhas-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+}
+@media (min-width: 500px) { .daminhas-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.daminha-card {
+  border-radius: 16px; padding: 1.8rem 1rem 1.4rem;
+  text-align: center; display: flex; flex-direction: column;
+  align-items: center; gap: 8px;
+  position: relative; overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s;
+}
+.daminha-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(180,80,130,0.12); }
+.daminha-card:nth-child(1) { background: #fff0f8; border: 1px solid #f9d0e8; }
+.daminha-card:nth-child(2) { background: #f0fff8; border: 1px solid #c8eedd; }
+.daminha-card:nth-child(3) { background: #f5f0ff; border: 1px solid #ddd0f9; }
+.daminha-card:nth-child(4) { background: #fffbf0; border: 1px solid #f9e8c0; }
+
+.daminha-foto-wrap {
+  position: relative; width: 80px; height: 80px; margin-bottom: 4px;
+}
+.daminha-foto-circulo {
+  width: 80px; height: 80px; border-radius: 50%;
+  object-fit: cover; object-position: center top;
+  display: block; border: 3px solid white;
+  box-shadow: 0 4px 14px rgba(180,80,130,0.15);
+}
+.daminha-foto-placeholder {
+  width: 80px; height: 80px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  border: 3px solid white;
+  box-shadow: 0 4px 14px rgba(180,80,130,0.15);
+  font-size: 32px;
+}
+.daminha-card:nth-child(1) .daminha-foto-placeholder { background: #fce0ee; }
+.daminha-card:nth-child(2) .daminha-foto-placeholder { background: #d8f5ec; }
+.daminha-card:nth-child(3) .daminha-foto-placeholder { background: #e8e0fc; }
+.daminha-card:nth-child(4) .daminha-foto-placeholder { background: #fdf0cc; }
+
+.daminha-flor {
+  font-size: 22px; line-height: 1;
+  position: absolute; bottom: -4px; right: -4px;
+  animation: flor-swing 3s ease-in-out infinite;
+  transform-origin: bottom center;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+}
+.daminha-card:nth-child(2) .daminha-flor { animation-delay: 0.4s; }
+.daminha-card:nth-child(3) .daminha-flor { animation-delay: 0.8s; }
+.daminha-card:nth-child(4) .daminha-flor { animation-delay: 1.2s; }
+@keyframes flor-swing {
+  0%, 100% { transform: rotate(-8deg); }
+  50%       { transform: rotate(8deg); }
+}
+.daminha-role {
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: #c882a0;
+}
+.daminha-name {
+  font-family: 'Cormorant Garamond', serif; font-size: 20px;
+  font-weight: 400; color: #3a1a2a; line-height: 1.2;
+}
 
 /* ── FOOTER ── */
 .footer {
@@ -376,7 +498,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 <section class="intro-section">
   <div class="intro-inner">
     <p class="intro-quote" data-anim="up" style="--d:0">"Fazei brilhar sobre nós, Senhor, a luz de vossa face. Pusestes em nossos corações mais alegria, pois a segurança desta união vem de Vós, Senhor."</p>
-    <p class="intro-body" data-anim="up" style="--d:1">Que alegria saber que você está aqui. Preparamos este espaço com todo o carinho para compartilhar com você cada detalhe do nosso grande dia. Você faz parte dessa história — e será uma honra e uma alegria imensa ter você ao nosso lado nessa celebração. Seja muito bem-vindo.</p>
+    <p class="intro-body" data-anim="up" style="--d:1">Que alegria saber que você está aqui. Preparamos este espaço com todo o carinho para compartilhar com você cada detalhe do nosso grande dia. Você faz parte dessa história, e será uma honra e uma alegria imensa ter você ao nosso lado nessa celebração. Seja muito bem-vindo.</p>
     <span class="intro-sign" data-anim="up" style="--d:2">Rafaela & Gabriel</span>
   </div>
 </section>
@@ -426,7 +548,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
     <div class="info-note" data-anim="up">
-      <strong>Atenção:</strong> Para garantir o início pontual da cerimônia, pedimos que todos cheguem <strong>antes das 17h00</strong>.
+      <strong>Atenção:</strong> Para garantir o início pontual da cerimônia, pedimos que todos cheguem <strong>até às 17h00</strong>.
     </div>
     <div class="map-wrap" data-anim="scale">
       <iframe
@@ -455,79 +577,134 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 <section class="padrinhos-section">
   <div class="section-inner">
     <div class="section-label light" data-anim="up"><span>Padrinhos & Madrinhas</span></div>
-    <div class="padrinhos-grid">
-
-      <div class="padrinho-card">
-        <div class="padrinho-avatar">♦</div>
+    <div class="padrinhos-sub-label masc"><span>Padrinhos</span></div>
+    <div class="padrinhos-grid-masc">
+      <div class="padrinho-card masc">
+        <div class="padrinho-avatar">Ed</div>
         <div class="padrinho-role">Padrinho</div>
         <div class="padrinho-name">Eduardo</div>
       </div>
-      <div class="padrinho-card">
-        <div class="padrinho-avatar">♦</div>
+      <div class="padrinho-card masc">
+        <img class="padrinho-avatar padrinho-foto" src="img/ivan.webp" alt="Ivan">
         <div class="padrinho-role">Padrinho</div>
         <div class="padrinho-name">Ivan</div>
       </div>
-      <div class="padrinho-card">
-        <div class="padrinho-avatar">♦</div>
+      <div class="padrinho-card masc">
+        <div class="padrinho-avatar">De</div>
         <div class="padrinho-role">Padrinho</div>
         <div class="padrinho-name">Denis</div>
       </div>
-      <div class="padrinho-card">
-        <div class="padrinho-avatar">♦</div>
+      <div class="padrinho-card masc">
+        <img class="padrinho-avatar padrinho-foto" src="img/igor.webp" alt="Igor">
         <div class="padrinho-role">Padrinho</div>
         <div class="padrinho-name">Igor</div>
       </div>
-      <div class="padrinho-card">
-        <div class="padrinho-avatar">♦</div>
+      <div class="padrinho-card masc">
+        <img class="padrinho-avatar padrinho-foto" src="img/rafael.webp" alt="Rafael">
         <div class="padrinho-role">Padrinho</div>
         <div class="padrinho-name">Rafael</div>
       </div>
-      <div class="padrinho-card">
-        <div class="padrinho-avatar">♦</div>
+      <div class="padrinho-card masc">
+        <img class="padrinho-avatar padrinho-foto" src="img/pedro.webp" alt="Pedro">
         <div class="padrinho-role">Padrinho</div>
         <div class="padrinho-name">Pedro</div>
       </div>
-      <div class="padrinho-card">
-        <div class="padrinho-avatar">♦</div>
-        <div class="padrinho-role">Madrinha</div>
-        <div class="padrinho-name">Maria Laura</div>
+      <div class="padrinho-card masc">
+        <img class="padrinho-avatar padrinho-foto" src="img/ivonei.webp" alt="Ivonei">
+        <div class="padrinho-role">Padrinho</div>
+        <div class="padrinho-name">Ivonei</div>
       </div>
-      <div class="padrinho-card">
-        <div class="padrinho-avatar">♦</div>
-        <div class="padrinho-role">Madrinha</div>
-        <div class="padrinho-name">Marcela</div>
-      </div>
-      <div class="padrinho-card">
-        <div class="padrinho-avatar">♦</div>
-        <div class="padrinho-role">Madrinha</div>
-        <div class="padrinho-name">Maria Eduarda</div>
-      </div>
-      <div class="padrinho-card">
+    </div>
+
+    <div class="padrinhos-sub-label fem"><span>Madrinhas</span></div>
+    <div class="padrinhos-grid-fem">
+      <div class="padrinho-card fem">
         <img class="padrinho-avatar padrinho-foto" src="img/ana laura.webp" alt="Ana Laura">
         <div class="padrinho-role">Madrinha</div>
         <div class="padrinho-name">Ana Laura</div>
       </div>
-      <div class="padrinho-card">
-        <div class="padrinho-avatar">♦</div>
+      <div class="padrinho-card fem">
+        <img class="padrinho-avatar padrinho-foto" src="img/ana eliza.webp" alt="Ana Eliza">
         <div class="padrinho-role">Madrinha</div>
         <div class="padrinho-name">Ana Eliza</div>
       </div>
-      <div class="padrinho-card">
-        <div class="padrinho-avatar">♦</div>
+      <div class="padrinho-card fem">
+        <img class="padrinho-avatar padrinho-foto" src="img/isabela.webp" alt="Isabela">
         <div class="padrinho-role">Madrinha</div>
         <div class="padrinho-name">Isabela</div>
       </div>
-      <div class="padrinho-card">
-        <div class="padrinho-avatar">♦</div>
+      <div class="padrinho-card fem">
+        <img class="padrinho-avatar padrinho-foto" src="img/maria laura.webp" alt="Maria Laura">
+        <div class="padrinho-role">Madrinha</div>
+        <div class="padrinho-name">Maria Laura</div>
+      </div>
+      <div class="padrinho-card fem">
+        <img class="padrinho-avatar padrinho-foto" src="img/marcela.webp" alt="Marcela">
+        <div class="padrinho-role">Madrinha</div>
+        <div class="padrinho-name">Marcela</div>
+      </div>
+      <div class="padrinho-card fem">
+        <img class="padrinho-avatar padrinho-foto" src="img/maria luisa.webp" alt="Maria Luisa">
+        <div class="padrinho-role">Madrinha</div>
+        <div class="padrinho-name">Maria Luisa</div>
+      </div>
+      <div class="padrinho-card fem">
+        <img class="padrinho-avatar padrinho-foto" src="img/clara.webp" alt="Maria Clara">
         <div class="padrinho-role">Madrinha</div>
         <div class="padrinho-name">Maria Clara</div>
       </div>
-      <div class="padrinho-card">
-        <div class="padrinho-avatar">♦</div>
+      <div class="padrinho-card fem">
+        <img class="padrinho-avatar padrinho-foto" src="img/paloma.webp" alt="Paloma">
         <div class="padrinho-role">Madrinha</div>
         <div class="padrinho-name">Paloma</div>
       </div>
+      <div class="padrinho-card fem">
+        <img class="padrinho-avatar padrinho-foto" src="img/silvana.webp" alt="Silvana">
+        <div class="padrinho-role">Madrinha</div>
+        <div class="padrinho-name">Silvana</div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- DAMINHAS -->
+<section class="daminhas-section">
+  <div class="daminhas-inner">
+    <div class="section-label" data-anim="up"><span>Daminhas de Honra</span></div>
+
+    <div class="daminhas-grid">
+      <div class="daminha-card" data-anim="up" style="--d:0">
+        <div class="daminha-foto-wrap">
+          <img class="daminha-foto-circulo" src="img/alice.webp" alt="Alice">
+          <span class="daminha-flor">🌸</span>
+        </div>
+        <div class="daminha-role">Daminha</div>
+        <div class="daminha-name">Alice</div>
+      </div>
+      <div class="daminha-card" data-anim="up" style="--d:1">
+        <div class="daminha-foto-wrap">
+          <img class="daminha-foto-circulo" src="img/mirella.webp" alt="Mirella">
+          <span class="daminha-flor">🌼</span>
+        </div>
+        <div class="daminha-role">Daminha</div>
+        <div class="daminha-name">Mirella</div>
+      </div>
+      <div class="daminha-card" data-anim="up" style="--d:2">
+        <div class="daminha-foto-wrap">
+          <img class="daminha-foto-circulo" src="img/sara.webp" alt="Sara">
+          <span class="daminha-flor">💜</span>
+        </div>
+        <div class="daminha-role">Daminha</div>
+        <div class="daminha-name">Sara</div>
+      </div>
+      <div class="daminha-card" data-anim="up" style="--d:3">
+        <div class="daminha-foto-wrap">
+          <img class="daminha-foto-circulo" src="img/olivia.webp" alt="Olívia">
+          <span class="daminha-flor">🌿</span>
+        </div>
+        <div class="daminha-role">Daminha</div>
+        <div class="daminha-name">Olívia</div>
+      </div>
     </div>
   </div>
 </section>

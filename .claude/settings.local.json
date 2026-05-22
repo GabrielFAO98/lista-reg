@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"c:/Users/Gabriel/lista-reg\" status)",
+      "Bash(git -C \"c:/Users/Gabriel/lista-reg\" diff)",
+      "Bash(git -C \"c:/Users/Gabriel/lista-reg\" log --oneline -3)",
+      "Bash(git -C \"c:/Users/Gabriel/lista-reg\" add index.html img/cortina.webp img/filtro-everest.webp img/microondas.webp)",
+      "Bash(git -C c:/Users/Gabriel/lista-reg commit -m ' *)",
+      "Bash(git -C \"c:/Users/Gabriel/lista-reg\" push)",
+      "Read(//c/Users/Gabriel/.claude/projects/c--Users-Gabriel-lista-reg/memory/**)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(cp \"c:/Users/Gabriel/lista-reg/index.html\" \"c:/Users/Gabriel/lista-reg/presentes.html\")",
+      "Bash(git commit -m 'Remove ornamento '\\\\''Casamento'\\\\'' do hero da homepage *)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\Gabriel\\lista-reg"
+    ]
+  }
+}
