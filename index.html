@@ -264,19 +264,21 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   display: grid; gap: 1rem;
   grid-template-columns: repeat(3, 1fr);
 }
-.padrinhos-grid-masc .padrinho-card:last-child {
-  grid-column: 2 / 3;
-}
-@media (min-width: 900px) {
-  .padrinhos-grid-masc { grid-template-columns: repeat(6, 1fr); }
-  .padrinhos-grid-masc .padrinho-card:last-child { grid-column: 3 / 5; }
-}
+.padrinhos-grid-masc .padrinho-card:last-child { grid-column: 2 / 3; }
 
 .padrinhos-grid-fem {
   display: grid; gap: 1rem;
   grid-template-columns: repeat(3, 1fr);
 }
-@media (min-width: 900px) { .padrinhos-grid-fem { grid-template-columns: repeat(5, 1fr); } }
+
+@media (min-width: 900px) {
+  .padrinhos-section .section-inner { max-width: 1100px; }
+
+  .padrinhos-grid-masc { grid-template-columns: repeat(7, 1fr); }
+  .padrinhos-grid-masc .padrinho-card:last-child { grid-column: auto; }
+
+  .padrinhos-grid-fem { grid-template-columns: repeat(9, 1fr); }
+}
 
 .padrinho-card {
   border-radius: 14px; padding: 1.6rem 0.8rem 1.4rem;
@@ -351,6 +353,62 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   transition: transform 0.2s; position: relative;
 }
 .cta-btn:hover .cta-btn-arrow { transform: translateX(4px); }
+
+/* ── PAIS ── */
+.pais-section {
+  background: linear-gradient(135deg, #1e1508 0%, #2e2010 50%, #1a1206 100%);
+  padding: 4rem 1.5rem;
+}
+.pais-section .section-label span { color: var(--white); border-bottom-color: rgba(201,168,72,0.4); }
+.pais-section .padrinhos-sub-label::before,
+.pais-section .padrinhos-sub-label::after { background: rgba(201,168,72,0.2); }
+.pais-section .padrinhos-sub-label span { color: rgba(201,168,72,0.7); }
+
+.casais-grid {
+  display: grid; grid-template-columns: 1fr; gap: 1rem;
+}
+@media (min-width: 650px) { .casais-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.casal-card {
+  display: flex; align-items: stretch; gap: 0;
+  background: rgba(201,168,72,0.05); border: 1px solid rgba(201,168,72,0.18);
+  border-radius: 14px; overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s;
+}
+.casal-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.3); }
+
+.pai-card {
+  flex: 1; padding: 1.4rem 0.8rem;
+  text-align: center; display: flex; flex-direction: column;
+  align-items: center; gap: 7px;
+}
+.casal-div {
+  width: 1px; background: rgba(201,168,72,0.15);
+  margin: 1rem 0; flex-shrink: 0;
+}
+.casal-e {
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 2px; flex-shrink: 0;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 18px; color: rgba(201,168,72,0.35);
+}
+.pai-avatar {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: rgba(201,168,72,0.1); border: 2px solid rgba(201,168,72,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 20px; color: var(--blush);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2); flex-shrink: 0;
+}
+.pai-foto { object-fit: cover; object-position: center top; }
+.pai-role {
+  font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(201,168,72,0.6); line-height: 1.4;
+}
+.pai-name {
+  font-family: 'Cormorant Garamond', serif; font-size: 16px;
+  font-weight: 400; color: var(--white); line-height: 1.2;
+}
 
 /* ── DAMINHAS ── */
 .daminhas-section {
@@ -468,8 +526,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   <div class="hero-content">
     <h1 class="hero-names">Rafaela <em>&</em> Gabriel</h1>
     <div class="hero-divider"><div class="hero-divider-heart">♡</div></div>
-    <p class="hero-intro">O amor é lindo demais para ser vivido em silêncio.<br>Queremos celebrá-lo ao seu lado.</p>
-    <div class="hero-date">22 · 08 · 2026 &nbsp;·&nbsp; 17h00 &nbsp;·&nbsp; Franca — SP</div>
+    <div class="hero-date">22 · 08 · 2026 &nbsp;·&nbsp; 17h00 &nbsp;</div>
     <div class="countdown">
       <div class="cd-unit">
         <span class="cd-num" id="cd-days">--</span>
@@ -523,7 +580,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     <div class="section-label" data-anim="up"><span>O grande dia</span></div>
     <div class="info-blocks">
       <div class="info-block" data-anim="left" style="--d:0">
-        <div class="info-icon">💍</div>
+        <div class="info-icon">📅</div>
         <div>
           <div class="info-label">Data</div>
           <div class="info-value">22 de agosto de 2026 às 17h00</div>
@@ -664,6 +721,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
         <div class="padrinho-name">Silvana</div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -700,10 +758,77 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       <div class="daminha-card" data-anim="up" style="--d:3">
         <div class="daminha-foto-wrap">
           <img class="daminha-foto-circulo" src="img/olivia.webp" alt="Olívia">
-          <span class="daminha-flor">🌿</span>
+          <span class="daminha-flor">💛</span>
         </div>
         <div class="daminha-role">Daminha</div>
         <div class="daminha-name">Olívia</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIS -->
+<section class="pais-section">
+  <div class="section-inner">
+    <div class="section-label" data-anim="up"><span>Pais</span></div>
+
+    <div class="padrinhos-sub-label" style="margin-top:0"><span>Família da Noiva</span></div>
+    <div class="casais-grid">
+      <div class="casal-card" data-anim="left">
+        <div class="pai-card">
+          <div class="pai-avatar">Cr</div>
+          <div class="pai-role">Mãe da Noiva</div>
+          <div class="pai-name">Cristina</div>
+        </div>
+        <div class="casal-e">&</div>
+        <div class="pai-card">
+          <div class="pai-avatar">Lu</div>
+          <div class="pai-role">Padrasto da Noiva</div>
+          <div class="pai-name">Lucas</div>
+        </div>
+      </div>
+      <div class="casal-card" data-anim="right">
+        <div class="pai-card">
+          <div class="pai-avatar">Je</div>
+          <div class="pai-role">Pai da Noiva</div>
+          <div class="pai-name">Jean</div>
+        </div>
+        <div class="casal-e">&</div>
+        <div class="pai-card">
+          <div class="pai-avatar">Da</div>
+          <div class="pai-role">Madrasta da Noiva</div>
+          <div class="pai-name">Daniele</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="padrinhos-sub-label"><span>Família do Noivo</span></div>
+    <div class="casais-grid">
+      <div class="casal-card" data-anim="left">
+        <div class="pai-card">
+          <div class="pai-avatar">Re</div>
+          <div class="pai-role">Mãe do Noivo</div>
+          <div class="pai-name">Regina</div>
+        </div>
+        <div class="casal-e">&</div>
+        <div class="pai-card">
+          <div class="pai-avatar">Ma</div>
+          <div class="pai-role">Padrasto do Noivo</div>
+          <div class="pai-name">Marcos</div>
+        </div>
+      </div>
+      <div class="casal-card" data-anim="right">
+        <div class="pai-card">
+          <div class="pai-avatar">An</div>
+          <div class="pai-role">Pai do Noivo</div>
+          <div class="pai-name">Antônio</div>
+        </div>
+        <div class="casal-e">&</div>
+        <div class="pai-card">
+          <div class="pai-avatar">De</div>
+          <div class="pai-role">Madrasta do Noivo</div>
+          <div class="pai-name">Denise</div>
+        </div>
       </div>
     </div>
   </div>
