@@ -31,7 +31,8 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 
 /* ── NAV ── */
 .site-nav {
-  position: absolute; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--white); border-bottom: 1px solid var(--cream-dark);
+  position: sticky; top: 0; z-index: 100;
   display: flex; justify-content: flex-start; align-items: center;
   gap: 2rem; padding: 0.85rem 2rem;
   overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
@@ -39,11 +40,11 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 .site-nav::-webkit-scrollbar { display: none; }
 .site-nav a {
   font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: rgba(255,254,247,0.7); text-decoration: none;
+  color: var(--ink-muted); text-decoration: none;
   transition: color 0.15s; white-space: nowrap; flex-shrink: 0;
 }
-.site-nav a:hover { color: var(--white); }
-.site-nav a.active { color: var(--white); border-bottom: 1px solid var(--blush); padding-bottom: 2px; }
+.site-nav a:hover { color: var(--ink); }
+.site-nav a.active { color: var(--blush-dark); border-bottom: 1px solid var(--blush); padding-bottom: 2px; }
 @media (min-width: 600px) { .site-nav { justify-content: center; } }
 
 /* ── HERO ── */
@@ -88,7 +89,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 .hero-divider-heart { color: var(--blush); font-size: 13px; }
 .hero-intro {
   font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: clamp(15px, 3.5vw, 20px); font-weight: 300;
+  font-size: clamp(20px, 4.5vw, 28px); font-weight: 300;
   color: rgba(255,254,247,0.8); line-height: 1.8;
   max-width: 480px; margin: 0 auto 1.8rem;
 }
@@ -119,17 +120,19 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 /* ── SHARED ── */
 .section { background: var(--cream); }
 .section-inner { max-width: 760px; margin: 0 auto; padding: 4rem 1.5rem; }
-.section-white { background: var(--white); }
 
 .section-label { text-align: center; margin-bottom: 2.5rem; }
 .section-label span {
-  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--ink); border-bottom: 1px solid var(--blush); padding-bottom: 4px;
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(26px, 5vw, 36px); color: var(--ink);
+  display: inline-block; padding-bottom: 10px;
+  border-bottom: 1px solid var(--blush);
 }
+.section-label.light span { color: var(--white); border-bottom-color: rgba(201,168,72,0.5); }
 
 .ornament-line {
   display: flex; align-items: center; justify-content: center;
-  gap: 14px; padding: 2.5rem 1.5rem; background: var(--cream);
+  gap: 14px; padding: 1.5rem 1.5rem;
 }
 .ornament-line::before, .ornament-line::after {
   content: ''; flex: 1; max-width: 120px; height: 1px;
@@ -138,7 +141,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 .ornament-line-heart { color: var(--blush); font-size: 12px; }
 
 /* ── INTRO ── */
-.intro-section { background: var(--white); }
+.intro-section { background: var(--cream); }
 .intro-inner {
   max-width: 600px; margin: 0 auto; padding: 4.5rem 1.5rem;
   text-align: center;
@@ -149,16 +152,16 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 }
 .intro-quote {
   font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: clamp(14px, 2.5vw, 16px); color: var(--ink);
-  line-height: 2; margin-bottom: 2.5rem;
+  font-size: clamp(20px, 4vw, 26px); color: var(--ink);
+  line-height: 1.9; margin-bottom: 2.5rem;
 }
 .intro-body {
-  font-size: clamp(13px, 2.5vw, 15px); font-weight: 300; color: var(--ink);
+  font-size: clamp(15px, 3vw, 18px); font-weight: 300; color: var(--ink);
   line-height: 2; margin-bottom: 0;
 }
 .intro-sign {
   font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: 22px; color: var(--blush-dark); margin-top: 2.5rem; display: block;
+  font-size: clamp(28px, 5vw, 36px); color: var(--blush-dark); margin-top: 2.5rem; display: block;
 }
 
 /* ── INFO BLOCKS ── */
@@ -180,13 +183,13 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   font-weight: 400; color: var(--ink); line-height: 1.3;
 }
 .info-detail {
-  font-size: 12px; font-weight: 300; color: var(--ink);
+  font-size: 14px; font-weight: 300; color: var(--ink);
   margin-top: 3px; line-height: 1.6;
 }
 .info-note {
   background: var(--blush-light); border: 1px solid var(--cream-dark);
   border-left: 3px solid var(--blush); padding: 1rem 1.2rem; margin-top: 1.5rem;
-  font-size: 13px; font-weight: 300; color: var(--ink-muted); line-height: 1.7;
+  font-size: 14px; font-weight: 300; color: var(--ink-muted); line-height: 1.7;
 }
 .info-note strong { color: var(--blush-dark); font-weight: 500; }
 
@@ -196,6 +199,33 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 }
 .map-wrap iframe { display: block; width: 100%; height: 300px; border: none; }
 @media (min-width: 600px) { .map-wrap iframe { height: 380px; } }
+
+/* ── COMO CHEGAR ── */
+.como-chegar-section { background: var(--white); }
+.como-chegar-inner {
+  max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 4rem;
+}
+.video-placeholder {
+  width: 100%; aspect-ratio: 16 / 9;
+  background: var(--ink); border: 1px solid var(--cream-dark);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1rem; margin-top: 2rem;
+}
+.video-placeholder-icon {
+  width: 56px; height: 56px; border-radius: 50%;
+  border: 2px solid rgba(201,168,72,0.4);
+  display: flex; align-items: center; justify-content: center;
+}
+.video-placeholder-icon::after {
+  content: ''; border-style: solid;
+  border-width: 10px 0 10px 18px;
+  border-color: transparent transparent transparent rgba(201,168,72,0.6);
+  margin-left: 4px;
+}
+.video-placeholder-text {
+  font-size: 13px; font-weight: 300; color: rgba(255,254,247,0.5);
+  letter-spacing: 0.05em; text-align: center; padding: 0 1.5rem;
+}
 
 /* ── ABOUT ── */
 .about-section { background: var(--white); }
@@ -210,26 +240,31 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 .about-body p + p { margin-top: 1.4rem; }
 
 /* ── PADRINHOS ── */
-.padrinhos-section { background: var(--cream); }
+.padrinhos-section { background: var(--ink); }
+.padrinhos-section .section-label span { color: var(--white); border-bottom-color: rgba(201,168,72,0.4); }
 .padrinhos-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1px;
-  background: var(--cream-dark);
-  border: 1px solid var(--cream-dark);
+  background: rgba(201,168,72,0.15);
+  border: 1px solid rgba(201,168,72,0.15);
   margin-top: 0;
 }
-@media (min-width: 600px) { .padrinhos-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 500px) { .padrinhos-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 900px) { .padrinhos-grid { grid-template-columns: repeat(7, 1fr); } }
 .padrinho-card {
-  background: var(--white); padding: 1.6rem 1rem;
+  background: rgba(42,32,23,0.6); padding: 1.6rem 1rem;
   text-align: center; display: flex; flex-direction: column; gap: 6px; align-items: center;
 }
 .padrinho-avatar {
   width: 52px; height: 52px; border-radius: 50%;
-  background: var(--cream-dark); border: 1px solid var(--blush-light);
+  background: rgba(255,254,247,0.08); border: 1px solid rgba(201,168,72,0.3);
   display: flex; align-items: center; justify-content: center; margin-bottom: 4px;
   font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: 18px; color: var(--ink-faint);
+  font-size: 18px; color: var(--blush);
+}
+.padrinho-foto {
+  object-fit: cover; object-position: center top;
 }
 .padrinho-role {
   font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
@@ -237,47 +272,36 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 }
 .padrinho-name {
   font-family: 'Cormorant Garamond', serif; font-size: 15px;
-  font-weight: 400; color: var(--ink); line-height: 1.3;
+  font-weight: 400; color: var(--white); line-height: 1.3;
 }
 
-/* ── MENU ── */
-.menu-section { background: var(--cream); padding: 0 0 4rem; }
-.menu-top-line { height: 1px; background: var(--cream-dark); }
-.menu-grid {
-  display: grid; grid-template-columns: 1fr;
-  max-width: 900px; margin: 0 auto;
+/* ── CTA SECTION ── */
+.cta-section { background: var(--ink); padding: 3.5rem 1.5rem; }
+.cta-inner { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+.cta-btn {
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 2rem 2rem; text-decoration: none;
+  border: 1px solid rgba(201,168,72,0.25);
+  background: transparent; transition: background 0.2s, border-color 0.2s;
+  -webkit-tap-highlight-color: transparent;
 }
-@media (min-width: 600px) { .menu-grid { grid-template-columns: repeat(2, 1fr); } }
-.menu-card {
-  background: transparent; text-decoration: none;
-  padding: 2.8rem 2rem; display: flex; flex-direction: column;
-  align-items: center; text-align: center;
-  border-bottom: 1px solid var(--cream-dark);
-  position: relative; transition: background 0.2s;
+.cta-btn::before {
+  content: attr(data-emoji);
+  position: absolute; right: 3.5rem; top: 50%; transform: translateY(-50%);
+  font-size: 72px; line-height: 1; opacity: 0.12; pointer-events: none;
+  user-select: none;
 }
-@media (min-width: 600px) {
-  .menu-card { border-bottom: none; border-right: 1px solid var(--cream-dark); }
-  .menu-card:last-child { border-right: none; }
+.cta-btn:hover { background: rgba(201,168,72,0.07); border-color: var(--blush); }
+.cta-btn-title {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 4.5vw, 30px);
+  font-weight: 300; color: var(--white); line-height: 1.1; position: relative;
 }
-.menu-card::after {
-  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  width: 0; height: 2px; background: var(--blush); transition: width 0.25s ease;
+.cta-btn-arrow {
+  font-size: 24px; color: var(--blush); flex-shrink: 0; margin-left: 1.5rem;
+  transition: transform 0.2s; position: relative;
 }
-.menu-card:hover::after { width: 40px; }
-.menu-card:hover { background: var(--white); }
-.menu-title {
-  font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 3vw, 26px);
-  font-weight: 400; color: var(--ink); line-height: 1.2; margin-bottom: 0.6rem;
-}
-.menu-desc {
-  font-size: 11px; font-weight: 300; color: var(--ink-muted);
-  line-height: 1.7; max-width: 200px;
-}
-.menu-link {
-  margin-top: 1.4rem; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
-  color: var(--ink-muted); transition: color 0.15s;
-}
-.menu-card:hover .menu-link { color: var(--blush-dark); }
+.cta-btn:hover .cta-btn-arrow { transform: translateX(4px); }
 
 /* ── FOOTER ── */
 .footer {
@@ -285,20 +309,39 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   font-size: 11px; color: var(--ink-faint); letter-spacing: 0.1em;
   border-top: 1px solid var(--cream-dark);
 }
+
+/* ── ANIMAÇÕES ── */
+.js-anim [data-anim] {
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transition-duration: 0.75s;
+  transition-delay: calc(var(--d, 0) * 120ms);
+}
+.js-anim [data-anim="up"]    { opacity: 0; transform: translateY(36px); }
+.js-anim [data-anim="left"]  { opacity: 0; transform: translateX(-48px); }
+.js-anim [data-anim="right"] { opacity: 0; transform: translateX(48px); }
+.js-anim [data-anim="scale"] { opacity: 0; transform: scale(0.93); }
+.js-anim [data-anim="fade"]  { opacity: 0; }
+
+.js-anim [data-anim].anim-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js-anim [data-anim] { transition: none; opacity: 1 !important; transform: none !important; }
+}
 </style>
 </head>
 <body>
+
+<nav class="site-nav">
+  <a href="index.html" class="active">Início</a>
+  <a href="presentes.html">Lista de Presentes</a>
+  <a href="rsvp.html">Confirmar Presença</a>
+</nav>
 
 <!-- HERO -->
 <section class="hero">
   <img class="hero-photo" src="img/noivos.png" alt="Rafaela e Gabriel">
   <div class="hero-overlay"></div>
-
-  <nav class="site-nav">
-    <a href="index.html" class="active">Início</a>
-    <a href="presentes.html">Lista de Presentes</a>
-    <a href="rsvp.html">Confirmar Presença</a>
-  </nav>
 
   <div class="hero-content">
     <h1 class="hero-names">Rafaela <em>&</em> Gabriel</h1>
@@ -332,38 +375,32 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 <!-- INTRO -->
 <section class="intro-section">
   <div class="intro-inner">
-    <p class="intro-quote">"Fazei brilhar sobre nós, Senhor, a luz de vossa face. Pusestes em nossos corações mais alegria, pois a segurança desta união vem de Vós, Senhor."</p>
-    <p class="intro-body">Que alegria saber que você está aqui. Preparamos este espaço com todo o carinho para compartilhar com você cada detalhe do nosso grande dia. Você faz parte dessa história — e será uma honra e uma alegria imensa ter você ao nosso lado nessa celebração. Seja muito bem-vindo.</p>
-    <span class="intro-sign">Rafaela & Gabriel</span>
+    <p class="intro-quote" data-anim="up" style="--d:0">"Fazei brilhar sobre nós, Senhor, a luz de vossa face. Pusestes em nossos corações mais alegria, pois a segurança desta união vem de Vós, Senhor."</p>
+    <p class="intro-body" data-anim="up" style="--d:1">Que alegria saber que você está aqui. Preparamos este espaço com todo o carinho para compartilhar com você cada detalhe do nosso grande dia. Você faz parte dessa história — e será uma honra e uma alegria imensa ter você ao nosso lado nessa celebração. Seja muito bem-vindo.</p>
+    <span class="intro-sign" data-anim="up" style="--d:2">Rafaela & Gabriel</span>
   </div>
 </section>
 
-<!-- MENU RÁPIDO (topo) -->
-<section class="menu-section" style="padding-bottom: 0;">
-  <div class="menu-top-line"></div>
-  <div class="menu-grid">
-    <a class="menu-card" href="presentes.html">
-      <div class="menu-title">Lista de Presentes</div>
-      <div class="menu-desc">Escolha um presente e envie com carinho via Pix</div>
-      <div class="menu-link">Ver lista</div>
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <a class="cta-btn" href="presentes.html" data-emoji="🎁" data-anim="left">
+      <div class="cta-btn-title">Lista de Presentes</div>
+      <span class="cta-btn-arrow">→</span>
     </a>
-    <a class="menu-card" href="rsvp.html">
-      <div class="menu-title">Confirmar Presença</div>
-      <div class="menu-desc">Confirme sua presença até 31 de julho de 2026</div>
-      <div class="menu-link">Confirmar</div>
+    <a class="cta-btn" href="rsvp.html" data-emoji="✅" data-anim="right">
+      <div class="cta-btn-title">Confirmar Presença</div>
+      <span class="cta-btn-arrow">→</span>
     </a>
   </div>
 </section>
-
-<!-- ORNAMENT -->
-<div class="ornament-line"><span class="ornament-line-heart">♡</span></div>
 
 <!-- INFORMAÇÕES -->
 <section class="section">
   <div class="section-inner" style="padding-top: 1rem;">
-    <div class="section-label"><span>O grande dia</span></div>
+    <div class="section-label" data-anim="up"><span>O grande dia</span></div>
     <div class="info-blocks">
-      <div class="info-block">
+      <div class="info-block" data-anim="left" style="--d:0">
         <div class="info-icon">💍</div>
         <div>
           <div class="info-label">Data</div>
@@ -371,7 +408,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
           <div class="info-detail">Sábado</div>
         </div>
       </div>
-      <div class="info-block">
+      <div class="info-block" data-anim="right" style="--d:1">
         <div class="info-icon">📍</div>
         <div>
           <div class="info-label">Local</div>
@@ -379,7 +416,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
           <div class="info-detail">Rod. Eng. Ronan Rocha, Franca – SP, 14415-000<br>Sentido Patrocínio Paulista</div>
         </div>
       </div>
-      <div class="info-block">
+      <div class="info-block" data-anim="left" style="--d:2">
         <div class="info-icon">🥂</div>
         <div>
           <div class="info-label">Recepção</div>
@@ -388,10 +425,10 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
         </div>
       </div>
     </div>
-    <div class="info-note">
+    <div class="info-note" data-anim="up">
       <strong>Atenção:</strong> Para garantir o início pontual da cerimônia, pedimos que todos cheguem <strong>antes das 17h00</strong>.
     </div>
-    <div class="map-wrap">
+    <div class="map-wrap" data-anim="scale">
       <iframe
         src="https://www.google.com/maps?q=Rodovia+Eng+Ronan+Rocha,+Franca,+SP,+14415-000&output=embed"
         loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
@@ -400,69 +437,95 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   </div>
 </section>
 
-<!-- ORNAMENT -->
-<div class="ornament-line"><span class="ornament-line-heart">♡</span></div>
-
-<!-- SOBRE OS NOIVOS -->
-<section class="about-section">
-  <div class="about-inner">
-    <div class="section-label"><span>Nossa história</span></div>
-    <div class="about-body">
-      <p>Nossa história começou de um jeito simples, verdadeiro e completamente inesperado — como toda grande história de amor. Ao longo desses anos, aprendemos juntos que amar é muito mais do que um sentimento; é uma escolha que se renova a cada manhã, em cada detalhe do dia a dia.</p>
-      <p>Escolhemos construir uma vida com leveza, cumplicidade e fé. E no dia 22 de agosto, diante de Deus e das pessoas que mais amamos, vamos selar para sempre essa escolha.</p>
-      <p>Obrigado por fazer parte dessa jornada com a gente.</p>
+<!-- COMO CHEGAR -->
+<section class="como-chegar-section">
+  <div class="como-chegar-inner">
+    <div class="section-label" data-anim="up"><span>Como chegar</span></div>
+    <p data-anim="up" style="--d:1; font-size:15px; font-weight:300; color:var(--ink-muted); line-height:1.8; text-align:center;">
+      Gravaremos um vídeo mostrando o caminho para o sítio.<br>Volte em breve para conferir!
+    </p>
+    <div class="video-placeholder" data-anim="scale" style="--d:2">
+      <div class="video-placeholder-icon"></div>
+      <div class="video-placeholder-text">Vídeo em breve</div>
     </div>
   </div>
 </section>
 
-<!-- ORNAMENT -->
-<div class="ornament-line" style="background: var(--white);"><span class="ornament-line-heart">♡</span></div>
-
 <!-- PADRINHOS -->
 <section class="padrinhos-section">
   <div class="section-inner">
-    <div class="section-label"><span>Padrinhos & Madrinhas</span></div>
+    <div class="section-label light" data-anim="up"><span>Padrinhos & Madrinhas</span></div>
     <div class="padrinhos-grid">
 
       <div class="padrinho-card">
         <div class="padrinho-avatar">♦</div>
         <div class="padrinho-role">Padrinho</div>
-        <div class="padrinho-name">Nome do Padrinho</div>
-      </div>
-      <div class="padrinho-card">
-        <div class="padrinho-avatar">♦</div>
-        <div class="padrinho-role">Madrinha</div>
-        <div class="padrinho-name">Nome da Madrinha</div>
+        <div class="padrinho-name">Eduardo</div>
       </div>
       <div class="padrinho-card">
         <div class="padrinho-avatar">♦</div>
         <div class="padrinho-role">Padrinho</div>
-        <div class="padrinho-name">Nome do Padrinho</div>
-      </div>
-      <div class="padrinho-card">
-        <div class="padrinho-avatar">♦</div>
-        <div class="padrinho-role">Madrinha</div>
-        <div class="padrinho-name">Nome da Madrinha</div>
+        <div class="padrinho-name">Ivan</div>
       </div>
       <div class="padrinho-card">
         <div class="padrinho-avatar">♦</div>
         <div class="padrinho-role">Padrinho</div>
-        <div class="padrinho-name">Nome do Padrinho</div>
-      </div>
-      <div class="padrinho-card">
-        <div class="padrinho-avatar">♦</div>
-        <div class="padrinho-role">Madrinha</div>
-        <div class="padrinho-name">Nome da Madrinha</div>
+        <div class="padrinho-name">Denis</div>
       </div>
       <div class="padrinho-card">
         <div class="padrinho-avatar">♦</div>
         <div class="padrinho-role">Padrinho</div>
-        <div class="padrinho-name">Nome do Padrinho</div>
+        <div class="padrinho-name">Igor</div>
+      </div>
+      <div class="padrinho-card">
+        <div class="padrinho-avatar">♦</div>
+        <div class="padrinho-role">Padrinho</div>
+        <div class="padrinho-name">Rafael</div>
+      </div>
+      <div class="padrinho-card">
+        <div class="padrinho-avatar">♦</div>
+        <div class="padrinho-role">Padrinho</div>
+        <div class="padrinho-name">Pedro</div>
       </div>
       <div class="padrinho-card">
         <div class="padrinho-avatar">♦</div>
         <div class="padrinho-role">Madrinha</div>
-        <div class="padrinho-name">Nome da Madrinha</div>
+        <div class="padrinho-name">Maria Laura</div>
+      </div>
+      <div class="padrinho-card">
+        <div class="padrinho-avatar">♦</div>
+        <div class="padrinho-role">Madrinha</div>
+        <div class="padrinho-name">Marcela</div>
+      </div>
+      <div class="padrinho-card">
+        <div class="padrinho-avatar">♦</div>
+        <div class="padrinho-role">Madrinha</div>
+        <div class="padrinho-name">Maria Eduarda</div>
+      </div>
+      <div class="padrinho-card">
+        <img class="padrinho-avatar padrinho-foto" src="img/ana laura.webp" alt="Ana Laura">
+        <div class="padrinho-role">Madrinha</div>
+        <div class="padrinho-name">Ana Laura</div>
+      </div>
+      <div class="padrinho-card">
+        <div class="padrinho-avatar">♦</div>
+        <div class="padrinho-role">Madrinha</div>
+        <div class="padrinho-name">Ana Eliza</div>
+      </div>
+      <div class="padrinho-card">
+        <div class="padrinho-avatar">♦</div>
+        <div class="padrinho-role">Madrinha</div>
+        <div class="padrinho-name">Isabela</div>
+      </div>
+      <div class="padrinho-card">
+        <div class="padrinho-avatar">♦</div>
+        <div class="padrinho-role">Madrinha</div>
+        <div class="padrinho-name">Maria Clara</div>
+      </div>
+      <div class="padrinho-card">
+        <div class="padrinho-avatar">♦</div>
+        <div class="padrinho-role">Madrinha</div>
+        <div class="padrinho-name">Paloma</div>
       </div>
 
     </div>
@@ -494,6 +557,30 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   }
   tick();
   setInterval(tick, 1000);
+
+  // ── SCROLL ANIMATIONS ──
+  if ('IntersectionObserver' in window) {
+    document.documentElement.classList.add('js-anim');
+
+    // Stagger padrinho cards antes de observar
+    document.querySelectorAll('.padrinho-card').forEach(function(el, i) {
+      el.setAttribute('data-anim', 'up');
+      el.style.setProperty('--d', i % 7);
+    });
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('anim-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+
+    document.querySelectorAll('[data-anim]').forEach(function(el) {
+      observer.observe(el);
+    });
+  }
 </script>
 </body>
 </html>
