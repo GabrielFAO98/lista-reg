@@ -107,11 +107,11 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 .cd-unit { text-align: center; }
 .cd-num {
   font-family: 'Cormorant Garamond', serif; font-weight: 300;
-  font-size: clamp(36px, 9vw, 72px); line-height: 1;
+  font-size: clamp(48px, 12vw, 96px); line-height: 1;
   color: var(--white); display: block; min-width: 2ch; text-align: center;
 }
 .cd-label {
-  font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+  font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
   color: var(--blush); margin-top: 4px; display: block;
 }
 .cd-sep {
@@ -487,12 +487,35 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   font-weight: 400; color: #3a1a2a; line-height: 1.2;
 }
 
+/* ── CTA BOTTOM ── */
+.cta-section-bottom { background: var(--cream); padding: 2.5rem 1.5rem; border-top: 1px solid var(--cream-dark); }
+.cta-bottom-inner { max-width: 600px; margin: 0 auto; display: flex; gap: 1rem; }
+.cta-btn-sm {
+  flex: 1; display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 1.4rem; border-radius: 4px; text-decoration: none;
+  transition: opacity 0.15s;
+}
+.cta-btn-sm--soon { background: var(--cream-dark); cursor: default; pointer-events: none; opacity: 0.65; }
+.cta-btn-sm--rsvp { background: var(--blush-dark); }
+.cta-btn-sm--rsvp:hover { opacity: 0.88; }
+.cta-btn-sm-title {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 3.5vw, 22px);
+  font-weight: 300; line-height: 1.1;
+}
+.cta-btn-sm--soon .cta-btn-sm-title { color: var(--ink-muted); }
+.cta-btn-sm--rsvp .cta-btn-sm-title { color: var(--white); }
+.cta-btn-sm-arrow { font-size: 20px; color: var(--white); flex-shrink: 0; margin-left: 0.75rem; }
+
 /* ── FOOTER ── */
 .footer {
-  background: var(--cream); text-align: center; padding: 1.5rem;
-  font-size: 11px; color: var(--ink-faint); letter-spacing: 0.1em;
-  border-top: 1px solid var(--cream-dark);
+  background: var(--ink); text-align: center; padding: 0.9rem 1.5rem;
+  font-size: 11px; color: var(--ink-faint); letter-spacing: 0.12em;
+  border-top: none;
 }
+.footer-names { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; color: rgba(255,254,247,0.55); letter-spacing: 0.05em; margin-bottom: 2px; }
+.footer-heart { color: var(--blush); }
+.footer-date { font-size: 9px; letter-spacing: 0.3em; color: var(--ink-faint); margin-bottom: 6px; }
+.footer-copy { font-size: 9px; letter-spacing: 0.15em; color: rgba(255,254,247,0.2); }
 
 /* ── ANIMAÇÕES ── */
 .js-anim [data-anim] {
@@ -572,7 +595,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       <span class="cta-btn-soon-label">em breve</span>
     </div>
     <a class="cta-btn" href="rsvp.html" data-emoji="✅" data-anim="right">
-      <div class="cta-btn-title">Presença</div>
+      <div class="cta-btn-title">Confirmar Presença</div>
       <span class="cta-btn-arrow">→</span>
     </a>
   </div>
@@ -841,7 +864,24 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 <section class="menu-section" style="display:none"><div class="menu-grid"></div>
 </section>
 
-<footer class="footer">Feito com amor · Rafaela & Gabriel</footer>
+<section class="cta-section-bottom">
+  <div class="cta-bottom-inner">
+    <div class="cta-btn-sm cta-btn-sm--soon">
+      <span class="cta-btn-sm-title">Lista de Presentes</span>
+      <span class="cta-btn-soon-label">em breve</span>
+    </div>
+    <a class="cta-btn-sm cta-btn-sm--rsvp" href="rsvp.html">
+      <span class="cta-btn-sm-title">Confirmar Presença</span>
+      <span class="cta-btn-sm-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-names">Rafaela <span class="footer-heart">♡</span> Gabriel</div>
+  <div class="footer-date">22 · 08 · 2026</div>
+  <div class="footer-copy">Feito com amor</div>
+</footer>
 
 <script>
   var target = new Date('2026-08-22T17:00:00-03:00');
