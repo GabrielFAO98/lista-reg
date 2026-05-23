@@ -45,6 +45,8 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 }
 .site-nav a:hover { color: var(--ink); }
 .site-nav a.active { color: var(--blush-dark); border-bottom: 1px solid var(--blush); padding-bottom: 2px; }
+.site-nav .nav-soon { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); cursor: default; white-space: nowrap; flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px; }
+.nav-soon-badge { font-size: 7px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--cream-dark); color: var(--ink-muted); padding: 2px 5px; border-radius: 2px; }
 @media (min-width: 600px) { .site-nav { justify-content: center; } }
 
 /* ── HERO ── */
@@ -353,6 +355,8 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   transition: transform 0.2s; position: relative;
 }
 .cta-btn:hover .cta-btn-arrow { transform: translateX(4px); }
+.cta-btn--soon { cursor: default; opacity: 0.55; pointer-events: none; }
+.cta-btn-soon-label { font-size: 7px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--cream-dark); color: var(--ink-muted); padding: 2px 5px; border-radius: 2px; margin-left: 1.5rem; }
 
 /* ── PAIS ── */
 .pais-section {
@@ -514,8 +518,8 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 
 <nav class="site-nav">
   <a href="index.html" class="active">Início</a>
-  <a href="presentes.html">Lista de Presentes</a>
-  <a href="rsvp.html">Confirmar Presença</a>
+  <span class="nav-soon">Lista de Presentes <span class="nav-soon-badge">em breve</span></span>
+  <a href="rsvp.html">Presença</a>
 </nav>
 
 <!-- HERO -->
@@ -563,12 +567,12 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-inner">
-    <a class="cta-btn" href="presentes.html" data-emoji="🎁" data-anim="left">
+    <div class="cta-btn cta-btn--soon" data-emoji="🎁" data-anim="left">
       <div class="cta-btn-title">Lista de Presentes</div>
-      <span class="cta-btn-arrow">→</span>
-    </a>
+      <span class="cta-btn-soon-label">em breve</span>
+    </div>
     <a class="cta-btn" href="rsvp.html" data-emoji="✅" data-anim="right">
-      <div class="cta-btn-title">Confirmar Presença</div>
+      <div class="cta-btn-title">Presença</div>
       <span class="cta-btn-arrow">→</span>
     </a>
   </div>
@@ -603,7 +607,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
           <div class="info-detail">A festa será realizada no próprio Sítio do Ipê, logo após a cerimônia.</div>
         </div>
       </div>
-    </div>
+    </div> 
     <div class="info-note" data-anim="up">
       <strong>Atenção:</strong> Para garantir o início pontual da cerimônia, pedimos que todos cheguem <strong>até às 17h00</strong>.
     </div>
@@ -637,7 +641,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     <div class="padrinhos-sub-label masc"><span>Padrinhos</span></div>
     <div class="padrinhos-grid-masc">
       <div class="padrinho-card masc">
-        <div class="padrinho-avatar">Ed</div>
+        <img class="padrinho-avatar padrinho-foto" src="img/eduardo.webp" alt="Eduardo">
         <div class="padrinho-role">Padrinho</div>
         <div class="padrinho-name">Eduardo</div>
       </div>
@@ -647,7 +651,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
         <div class="padrinho-name">Ivan</div>
       </div>
       <div class="padrinho-card masc">
-        <div class="padrinho-avatar">De</div>
+        <img class="padrinho-avatar padrinho-foto" src="img/denis.webp" alt="Denis">
         <div class="padrinho-role">Padrinho</div>
         <div class="padrinho-name">Denis</div>
       </div>
@@ -706,9 +710,9 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
         <div class="padrinho-name">Maria Luisa</div>
       </div>
       <div class="padrinho-card fem">
-        <img class="padrinho-avatar padrinho-foto" src="img/clara.webp" alt="Maria Clara">
+        <img class="padrinho-avatar padrinho-foto" src="img/clara.webp" alt="Clara">
         <div class="padrinho-role">Madrinha</div>
-        <div class="padrinho-name">Maria Clara</div>
+        <div class="padrinho-name">Clara</div>
       </div>
       <div class="padrinho-card fem">
         <img class="padrinho-avatar padrinho-foto" src="img/paloma.webp" alt="Paloma">
@@ -776,26 +780,26 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     <div class="casais-grid">
       <div class="casal-card" data-anim="left">
         <div class="pai-card">
-          <div class="pai-avatar">Cr</div>
+          <img class="pai-avatar pai-foto" src="img/cristina.webp" alt="Cristina">
           <div class="pai-role">Mãe da Noiva</div>
           <div class="pai-name">Cristina</div>
         </div>
         <div class="casal-e">&</div>
         <div class="pai-card">
-          <div class="pai-avatar">Lu</div>
+          <img class="pai-avatar pai-foto" src="img/lucas.webp" alt="Lucas">
           <div class="pai-role">Padrasto da Noiva</div>
           <div class="pai-name">Lucas</div>
         </div>
       </div>
       <div class="casal-card" data-anim="right">
         <div class="pai-card">
-          <div class="pai-avatar">Je</div>
+          <img class="pai-avatar pai-foto" src="img/jean.webp" alt="Jean">
           <div class="pai-role">Pai da Noiva</div>
           <div class="pai-name">Jean</div>
         </div>
         <div class="casal-e">&</div>
         <div class="pai-card">
-          <div class="pai-avatar">Da</div>
+          <img class="pai-avatar pai-foto" src="img/daniele.webp" alt="Daniele">
           <div class="pai-role">Madrasta da Noiva</div>
           <div class="pai-name">Daniele</div>
         </div>
@@ -806,26 +810,26 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     <div class="casais-grid">
       <div class="casal-card" data-anim="left">
         <div class="pai-card">
-          <div class="pai-avatar">Re</div>
+          <img class="pai-avatar pai-foto" src="img/regina.webp" alt="Regina">
           <div class="pai-role">Mãe do Noivo</div>
           <div class="pai-name">Regina</div>
         </div>
         <div class="casal-e">&</div>
         <div class="pai-card">
-          <div class="pai-avatar">Ma</div>
+          <img class="pai-avatar pai-foto" src="img/marcos.webp" alt="Marcos">
           <div class="pai-role">Padrasto do Noivo</div>
           <div class="pai-name">Marcos</div>
         </div>
       </div>
       <div class="casal-card" data-anim="right">
         <div class="pai-card">
-          <div class="pai-avatar">An</div>
+          <img class="pai-avatar pai-foto" src="img/antonio.webp" alt="Antônio">
           <div class="pai-role">Pai do Noivo</div>
           <div class="pai-name">Antônio</div>
         </div>
         <div class="casal-e">&</div>
         <div class="pai-card">
-          <div class="pai-avatar">De</div>
+          <img class="pai-avatar pai-foto" src="img/denise.webp" alt="Denise">
           <div class="pai-role">Madrasta do Noivo</div>
           <div class="pai-name">Denise</div>
         </div>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Confirmar Presença — Rafaela & Gabriel</title>
+<title>Presença — Rafaela & Gabriel</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -45,6 +45,8 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 }
 .site-nav a:hover { color: var(--ink); }
 .site-nav a.active { color: var(--blush-dark); border-bottom: 1px solid var(--blush); padding-bottom: 2px; }
+.site-nav .nav-soon { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); cursor: default; white-space: nowrap; flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px; }
+.nav-soon-badge { font-size: 7px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--cream-dark); color: var(--ink-muted); padding: 2px 5px; border-radius: 2px; }
 @media (min-width: 600px) { .site-nav { justify-content: center; } }
 
 /* HERO */
@@ -190,8 +192,8 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 
 <nav class="site-nav">
   <a href="index.html">Início</a>
-  <a href="presentes.html">Lista de Presentes</a>
-  <a href="rsvp.html" class="active">Confirmar Presença</a>
+  <span class="nav-soon">Lista de Presentes <span class="nav-soon-badge">em breve</span></span>
+  <a href="rsvp.html" class="active">Presença</a>
 </nav>
 
 <header class="hero">
