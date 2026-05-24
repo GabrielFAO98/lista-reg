@@ -25,7 +25,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   body::before {
     content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
     background-image: url("img/fundo-desktop.webp"); background-repeat: repeat;
-    opacity: 0.2;
+    opacity: 0.07; filter: blur(1px);
   }
 }
 
@@ -185,6 +185,18 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 .thankyou-text { font-size: 13px; font-weight: 300; color: var(--ink-muted); line-height: 1.9; }
 .thankyou-sign { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 19px; color: var(--blush-dark); margin-top: 20px; }
 
+@media (min-width: 900px) {
+  .hero-ornament { font-size: 14px; }
+  .hero-sub { font-size: 16px; }
+  .section-label span { font-size: 12px; }
+  .field label { font-size: 12px; }
+  .guests-label { font-size: 12px; }
+  .guest-num { font-size: 12px; }
+  .submit-btn { font-size: 13px; padding: 16px; }
+  .field input, .field select, .field textarea { font-size: 16px; }
+  .guest-field input { font-size: 16px; }
+}
+
 .footer { background: var(--ink); text-align: center; padding: 0.9rem 1.5rem; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.12em; }
 .footer-names { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; color: rgba(255,254,247,0.55); letter-spacing: 0.05em; margin-bottom: 2px; }
 .footer-heart { color: var(--blush); }
@@ -266,7 +278,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 </footer>
 
 <script>
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyS3QxcppGuap4-trVDqb8MotMiLLU43NNuwh6gNEGRNhpsWBMmxJwh-pFGEnk0XiePMQ/exec';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyuuMaJjq4T9iKUHPgxui9xa41_5UnDHE4pd8DnCvUg-O9P08_wKfOcnjLfcykMmtI7Cw/exec';
 
   var qty = 1;
 
