@@ -448,9 +448,21 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     <p class="hero-sub">Escolha um presente e envie o valor pelo Mercado Pago.<br>Cada item é um pedacinho do nosso novo lar.</p>
   </header>
 
-  <div class="section-label"><span>10 presentes</span></div>
+  <div class="section-label"><span>11 presentes</span></div>
 
   <div class="grid" id="grid">
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\lixeira-inox-5l-banheiro-.webp" alt="[TESTE] Presente Teste">
+      <div class="card-body">
+        <div class="card-name">[TESTE] Presente Teste</div>
+        <div class="card-desc">Item de teste — remover após validação.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;0,10</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
 
     <div class="card" onclick="openDetail(this)">
       <img class="card-img" src="img\lixeira-inox-5l-banheiro-.webp" alt="Lixeira Inox 5L Banheiro">
@@ -872,6 +884,12 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     btn.disabled = true;
     btn.textContent = 'Aguarde…';
 
+    // Abre janela agora (gesto do usuário) para não ser bloqueado como popup
+    var mpWindow = window.open('', '_blank');
+    if (mpWindow) {
+      mpWindow.document.write('<p style="font-family:sans-serif;padding:2rem;color:#555">Conectando ao Mercado Pago…</p>');
+    }
+
     var itens = checkoutItems.map(function(i) {
       return { nome: i.nome, valor: parsePrice(i.valor) };
     });
@@ -880,10 +898,12 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       btn.disabled = false;
       btn.textContent = 'Presentear via Mercado Pago →';
       if (!result.ok || !result.init_point) {
+        if (mpWindow) mpWindow.close();
         showToast('Erro ao conectar. Tente novamente.');
         return;
       }
-      window.open(result.init_point, '_blank');
+      if (mpWindow) mpWindow.location.href = result.init_point;
+      else window.open(result.init_point, '_blank');
       saveCart([]);
       updateBadge();
       closeCheckout();
@@ -898,6 +918,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     s.onerror = function() {
       btn.disabled = false;
       btn.textContent = 'Presentear via Mercado Pago →';
+      if (mpWindow) mpWindow.close();
       showToast('Erro ao conectar. Tente novamente.');
     };
     s.src = APPS_SCRIPT_URL
