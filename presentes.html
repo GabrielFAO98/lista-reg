@@ -674,24 +674,23 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   <div class="thankyou-page">
 
     <div id="check-question" class="thankyou-inner">
-      <span class="thankyou-ornament">🎁</span>
-      <h1 class="thankyou-title">O pagamento<br><em>deu certo?</em></h1>
+      <span class="thankyou-ornament">⏳</span>
+      <h1 class="thankyou-title">Processando<br><em>pagamento…</em></h1>
       <div class="thankyou-divider"></div>
-      <p class="thankyou-text">Você foi redirecionado ao Mercado Pago.<br>Conseguiu concluir o pagamento com sucesso?</p>
+      <p class="thankyou-text">Seu pagamento está sendo confirmado.<br>Assim que aprovado, você receberá a confirmação.</p>
       <div class="check-btns">
-        <button class="check-btn-yes" onclick="confirmYes()">Sim, deu tudo certo!</button>
-        <button class="check-btn-no"  onclick="confirmNo()">Não, tive um problema</button>
+        <button class="check-btn-back" onclick="goBackFromCheck()">Voltar à lista</button>
       </div>
     </div>
 
     <div id="check-problem" class="thankyou-inner" style="display:none">
       <span class="thankyou-ornament">💌</span>
-      <h1 class="thankyou-title">Sem<br><em>problema!</em></h1>
+      <h1 class="thankyou-title">Algo deu<br><em>errado?</em></h1>
       <div class="thankyou-divider"></div>
-      <p class="thankyou-text">Você pode tentar novamente pela lista<br>ou entrar em contato conosco diretamente.</p>
+      <p class="thankyou-text">Não se preocupe! Tente novamente ou<br>entre em contato conosco.</p>
       <div class="check-btns">
         <a class="check-btn-contact" href="https://wa.me/5516992048856?text=Oi%2C+tive+um+problema+ao+presentear+via+Mercado+Pago." target="_blank">Falar com os noivos</a>
-        <button class="check-btn-back" onclick="goBackFromCheck()">Voltar à lista</button>
+        <button class="check-btn-back" onclick="goBackFromCheck()">Tentar novamente</button>
       </div>
     </div>
 
@@ -884,41 +883,26 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     btn.disabled = true;
     btn.textContent = 'Aguarde…';
 
-    // Abre janela agora (gesto do usuário) para não ser bloqueado como popup
-    var mpWindow = window.open('', '_blank');
-    if (mpWindow) {
-      mpWindow.document.write('<p style="font-family:sans-serif;padding:2rem;color:#555">Conectando ao Mercado Pago…</p>');
-    }
-
     var itens = checkoutItems.map(function(i) {
       return { nome: i.nome, valor: parsePrice(i.valor) };
     });
 
     window._mpCb = function(result) {
-      btn.disabled = false;
-      btn.textContent = 'Presentear via Mercado Pago →';
       if (!result.ok || !result.init_point) {
-        if (mpWindow) mpWindow.close();
+        btn.disabled = false;
+        btn.textContent = 'Presentear via Mercado Pago →';
         showToast('Erro ao conectar. Tente novamente.');
         return;
       }
-      if (mpWindow) mpWindow.location.href = result.init_point;
-      else window.open(result.init_point, '_blank');
       saveCart([]);
       updateBadge();
-      closeCheckout();
-      document.getElementById('app').style.display = 'none';
-      document.getElementById('check-question').style.display = 'block';
-      document.getElementById('check-problem').style.display = 'none';
-      document.getElementById('check-screen').style.display = 'block';
-      window.scrollTo(0, 0);
+      window.location.href = result.init_point;
     };
 
     var s = document.createElement('script');
     s.onerror = function() {
       btn.disabled = false;
       btn.textContent = 'Presentear via Mercado Pago →';
-      if (mpWindow) mpWindow.close();
       showToast('Erro ao conectar. Tente novamente.');
     };
     s.src = APPS_SCRIPT_URL
@@ -928,17 +912,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       + '&mensagem=' + encodeURIComponent(guestMsg)
       + '&itens='    + encodeURIComponent(JSON.stringify(itens));
     document.head.appendChild(s);
-  }
-
-  function confirmYes() {
-    document.getElementById('check-screen').style.display = 'none';
-    document.getElementById('thankyou-screen').style.display = 'block';
-    window.scrollTo(0, 0);
-  }
-
-  function confirmNo() {
-    document.getElementById('check-question').style.display = 'none';
-    document.getElementById('check-problem').style.display = 'block';
   }
 
   function goBackFromCheck() {
@@ -1005,6 +978,27 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     s.src = APPS_SCRIPT_URL + '?callback=_handleMessages';
     document.head.appendChild(s);
   }
+
+  // Retorno do Mercado Pago via back_urls
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var paid = params.get('paid');
+    if (!paid) return;
+    history.replaceState(null, '', window.location.pathname);
+    document.getElementById('app').style.display = 'none';
+    if (paid === 'ok') {
+      document.getElementById('thankyou-screen').style.display = 'block';
+    } else if (paid === 'fail') {
+      document.getElementById('check-question').style.display = 'none';
+      document.getElementById('check-problem').style.display = 'block';
+      document.getElementById('check-screen').style.display = 'block';
+    } else {
+      document.getElementById('check-question').style.display = 'block';
+      document.getElementById('check-problem').style.display = 'none';
+      document.getElementById('check-screen').style.display = 'block';
+    }
+    window.scrollTo(0, 0);
+  })();
 
   updateBadge();
   loadMessages();
