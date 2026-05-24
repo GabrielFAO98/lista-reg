@@ -244,7 +244,8 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 /* ── PADRINHOS ── */
 .padrinhos-section {
   background: linear-gradient(135deg, #1e1508 0%, #2e2010 50%, #1a1206 100%);
-  padding: 4rem 1.5rem;
+  padding: 4rem 0;
+  overflow-x: hidden;
 }
 .padrinhos-section .section-label span { color: var(--white); border-bottom-color: rgba(201,168,72,0.4); }
 .padrinhos-sub-label {
@@ -263,23 +264,28 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 .padrinhos-sub-label:first-of-type { margin-top: 0; }
 
 .padrinhos-grid-masc {
-  display: grid; gap: 1rem;
-  grid-template-columns: repeat(3, 1fr);
+  display: grid; gap: 0.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .padrinhos-grid-masc .padrinho-card:last-child { grid-column: 2 / 3; }
 
 .padrinhos-grid-fem {
-  display: grid; gap: 1rem;
-  grid-template-columns: repeat(3, 1fr);
+  display: grid; gap: 0.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 480px) {
+  .padrinho-avatar { width: 56px; height: 56px; }
+  .padrinho-card { padding: 1.2rem 0.5rem 1rem; }
 }
 
 @media (min-width: 900px) {
   .padrinhos-section .section-inner { max-width: 1100px; }
 
-  .padrinhos-grid-masc { grid-template-columns: repeat(7, 1fr); }
+  .padrinhos-grid-masc { grid-template-columns: repeat(7, 1fr); gap: 1rem; }
   .padrinhos-grid-masc .padrinho-card:last-child { grid-column: auto; }
 
-  .padrinhos-grid-fem { grid-template-columns: repeat(9, 1fr); }
+  .padrinhos-grid-fem { grid-template-columns: repeat(9, 1fr); gap: 1rem; }
 }
 
 .padrinho-card {

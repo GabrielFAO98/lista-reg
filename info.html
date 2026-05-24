@@ -139,7 +139,11 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 }
 .info-note strong { color: var(--blush-dark); font-weight: 500; }
 
-.footer { text-align: center; padding: 2rem; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.1em; }
+.footer { background: var(--ink); text-align: center; padding: 0.9rem 1.5rem; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.12em; }
+.footer-names { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; color: rgba(255,254,247,0.55); letter-spacing: 0.05em; margin-bottom: 2px; }
+.footer-heart { color: var(--blush); }
+.footer-date { font-size: 9px; letter-spacing: 0.3em; color: var(--ink-faint); margin-bottom: 6px; }
+.footer-copy { font-size: 9px; letter-spacing: 0.15em; color: rgba(255,254,247,0.2); }
 </style>
 </head>
 <body>
@@ -213,7 +217,11 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 
 </div>
 
-<footer class="footer">Feito com amor · Rafaela & Gabriel</footer>
+<footer class="footer">
+  <div class="footer-names">Rafaela <span class="footer-heart">♡</span> Gabriel</div>
+  <div class="footer-date">22 · 08 · 2026</div>
+  <div class="footer-copy">Feito com amor</div>
+</footer>
 
 </body>
 </html>

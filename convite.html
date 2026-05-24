@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite — Rafaela & Gabriel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #1a1206; }
+
+/* ── INTRO ── */
+#intro {
+  position: fixed; inset: 0;
+  background: url('img/noivos%20convite.webp') center top / cover no-repeat;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  padding-top: clamp(3rem, 12vw, 7rem);
+  transition: opacity 0.7s ease;
+}
+#intro::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(26,18,6,0.45) 0%,
+    rgba(26,18,6,0.15) 40%,
+    rgba(26,18,6,0.55) 100%
+  );
+}
+.intro-text {
+  position: relative;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 5.5vw, 40px);
+  font-weight: 300; font-style: italic;
+  color: #FFFEF7; text-align: center;
+  padding: 0 2rem; line-height: 1.4;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.5);
+  margin-bottom: 2.2rem;
+}
+.open-btn {
+  position: relative;
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: #FFFEF7; background: transparent;
+  border: 1px solid rgba(255,254,247,0.55);
+  padding: 14px 44px; cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.open-btn:hover, .open-btn:active {
+  background: rgba(255,254,247,0.1); border-color: #FFFEF7;
+}
+
+/* ── VÍDEO ── */
+#video-wrap {
+  position: fixed; inset: 0;
+  background: #000;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+#video-wrap.visible { opacity: 1; pointer-events: auto; }
+#video-wrap video {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
+/* ── FINALE ── */
+#finale {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+#finale.visible { opacity: 1; pointer-events: auto; }
+.finale-frame {
+  position: relative;
+  display: flex; align-items: flex-end; justify-content: center;
+  max-width: 100vw; max-height: 100vh;
+  padding-bottom: clamp(2rem, 7%, 4rem);
+}
+.finale-img {
+  display: block;
+  max-width: 100vw; max-height: 100vh;
+  width: auto; height: auto;
+  object-fit: contain;
+}
+.site-btn {
+  position: absolute; bottom: clamp(2rem, 7%, 4rem); left: 50%;
+  transform: translateX(-50%); white-space: nowrap;
+  font-family: 'Jost', sans-serif; font-weight: 400;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: #1a1206; background: #C9A848;
+  border: 1px solid #C9A848;
+  padding: 11px 28px; text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.site-btn:hover, .site-btn:active {
+  background: #b8943a; border-color: #b8943a;
+}
+</style>
+</head>
+<body>
+
+<div id="intro">
+  <p class="intro-text">Temos um convite especial para você...</p>
+  <button class="open-btn" onclick="abrirConvite()">Abrir</button>
+</div>
+
+<div id="video-wrap">
+  <video id="video" src="img/noivos%20convite%20video.mp4" playsinline preload="auto"></video>
+</div>
+
+<div id="finale">
+  <div class="finale-frame">
+    <img class="finale-img" src="img/convite%20mobile.webp" alt="">
+    <a href="index.html" class="site-btn">Acessar site dos noivos</a>
+  </div>
+</div>
+
+<script>
+  var video = document.getElementById('video');
+
+  function abrirConvite() {
+    var intro     = document.getElementById('intro');
+    var videoWrap = document.getElementById('video-wrap');
+
+    intro.style.opacity = '0';
+    intro.style.pointerEvents = 'none';
+
+    setTimeout(function() {
+      intro.style.display = 'none';
+      videoWrap.classList.add('visible');
+      video.play();
+    }, 700);
+  }
+
+  video.addEventListener('ended', function() {
+    var videoWrap = document.getElementById('video-wrap');
+    var finale    = document.getElementById('finale');
+    videoWrap.classList.remove('visible');
+    finale.classList.add('visible');
+  });
+</script>
+</body>
+</html>

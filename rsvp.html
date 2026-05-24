@@ -185,7 +185,11 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 .thankyou-text { font-size: 13px; font-weight: 300; color: var(--ink-muted); line-height: 1.9; }
 .thankyou-sign { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 19px; color: var(--blush-dark); margin-top: 20px; }
 
-.footer { text-align: center; padding: 2rem; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.1em; }
+.footer { background: var(--ink); text-align: center; padding: 0.9rem 1.5rem; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.12em; }
+.footer-names { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; color: rgba(255,254,247,0.55); letter-spacing: 0.05em; margin-bottom: 2px; }
+.footer-heart { color: var(--blush); }
+.footer-date { font-size: 9px; letter-spacing: 0.3em; color: var(--ink-faint); margin-bottom: 6px; }
+.footer-copy { font-size: 9px; letter-spacing: 0.15em; color: rgba(255,254,247,0.2); }
 </style>
 </head>
 <body>
@@ -200,7 +204,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   <div class="hero-ornament">Confirmação de presença</div>
   <h1 class="hero-names">Rafaela <em>&</em> Gabriel</h1>
   <div class="hero-divider"><div class="hero-divider-heart">♡</div></div>
-  <p class="hero-sub">Sua presença é o nosso maior presente.<br>Confirme até <strong>31 de junho de 2026</strong>.</p>
+  <p class="hero-sub">Sua presença é o nosso maior presente.<br>Confirme até <strong>30 de junho de 2026</strong>.</p>
 </header>
 
 <div id="form-section">
@@ -255,10 +259,14 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   </div>
 </div>
 
-<footer class="footer">Feito com amor · Rafaela & Gabriel</footer>
+<footer class="footer">
+  <div class="footer-names">Rafaela <span class="footer-heart">♡</span> Gabriel</div>
+  <div class="footer-date">22 · 08 · 2026</div>
+  <div class="footer-copy">Feito com amor</div>
+</footer>
 
 <script>
-  const APPS_SCRIPT_URL = 'COLE_AQUI_A_URL_DO_APPS_SCRIPT';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyS3QxcppGuap4-trVDqb8MotMiLLU43NNuwh6gNEGRNhpsWBMmxJwh-pFGEnk0XiePMQ/exec';
 
   var qty = 1;
 
@@ -314,6 +322,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     btn.textContent = 'Enviando…';
 
     var payload = {
+      type: 'rsvp',
       responsavel: guestNames[0],
       telefone: respPhone,
       quantidade: qty,
