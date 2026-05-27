@@ -502,6 +502,8 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   transition: opacity 0.15s;
 }
 .cta-btn-sm--soon { background: var(--cream-dark); cursor: default; pointer-events: none; opacity: 0.65; }
+.cta-btn-sm--gift { background: var(--white); border: 1px solid var(--blush); }
+.cta-btn-sm--gift:hover { background: var(--blush-light); border-color: var(--blush-dark); }
 .cta-btn-sm--rsvp { background: var(--blush-dark); }
 .cta-btn-sm--rsvp:hover { opacity: 0.88; }
 .cta-btn-sm-title {
@@ -509,8 +511,12 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   font-weight: 300; line-height: 1.1;
 }
 .cta-btn-sm--soon .cta-btn-sm-title { color: var(--ink-muted); }
+.cta-btn-sm--gift .cta-btn-sm-title { color: var(--ink); }
 .cta-btn-sm--rsvp .cta-btn-sm-title { color: var(--white); }
-.cta-btn-sm-arrow { font-size: 20px; color: var(--white); flex-shrink: 0; margin-left: 0.75rem; }
+.cta-btn-sm-arrow { font-size: 20px; flex-shrink: 0; margin-left: 0.75rem; }
+.cta-btn-sm--gift .cta-btn-sm-arrow { color: var(--blush-dark); }
+.cta-btn-sm--rsvp .cta-btn-sm-arrow { color: var(--white); }
+.cta-btn-sm--soon .cta-btn-sm-arrow { color: var(--ink-muted); }
 
 /* ── FOOTER ── */
 .footer {
@@ -642,7 +648,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     </div>
     <div class="map-wrap" data-anim="scale">
       <iframe
-        src="https://www.google.com/maps?q=Rodovia+Eng+Ronan+Rocha,+Franca,+SP,+14415-000&output=embed"
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14937.067701257718!2d-47.27719738363648!3d-20.617974029957256!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b0b3e8199509e9%3A0xebf338df3a926fba!2zU2Fsw6NvIGRlIEZlc3RhcyBTw610aW8gZG8gSXDDqg!5e0!3m2!1spt-BR!2sus!4v1779844315496!5m2!1spt-BR!2sus"
         loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
       </iframe>
     </div>
@@ -872,7 +878,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 
 <section class="cta-section-bottom">
   <div class="cta-bottom-inner">
-    <a class="cta-btn-sm" href="presentes.html">
+    <a class="cta-btn-sm cta-btn-sm--gift" href="presentes.html">
       <span class="cta-btn-sm-title">Lista de Presentes</span>
       <span class="cta-btn-sm-arrow">→</span>
     </a>
