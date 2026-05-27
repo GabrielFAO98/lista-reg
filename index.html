@@ -202,6 +202,59 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 .map-wrap iframe { display: block; width: 100%; height: 300px; border: none; }
 @media (min-width: 600px) { .map-wrap iframe { height: 380px; } }
 
+/* ── INFO BOTANICAL ── */
+.info-botanical-section { background: var(--white); position: relative; overflow: hidden; }
+.botanical-bg { position: absolute; pointer-events: none; width: 260px; opacity: 0.055; }
+.botanical-bg--tl { top: -20px; left: -20px; transform: rotate(10deg); }
+.botanical-bg--br { bottom: -20px; right: -20px; transform: rotate(190deg); }
+.info-botanical-header { text-align: center; padding: 4.5rem 1.5rem 3rem; }
+.info-botanical-kicker {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin-bottom: 1.2rem;
+  font-size: 9px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--blush);
+}
+.info-botanical-kicker::before,
+.info-botanical-kicker::after { content: ''; width: 48px; height: 1px; background: var(--blush); opacity: 0.5; }
+.info-botanical-title {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+  font-size: clamp(44px, 9vw, 68px); color: var(--ink); line-height: 1; margin-bottom: 1.2rem;
+}
+.info-botanical-daterow { font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--blush-dark); }
+.info-botanical-cards { max-width: 620px; margin: 0 auto; padding: 0 1.5rem; }
+.info-botanical-card {
+  position: relative; display: flex; align-items: flex-start; gap: 1.4rem;
+  padding: 1.8rem 1.8rem 1.8rem 2.4rem;
+  background: var(--cream); border: 1px solid rgba(201,168,72,0.18);
+  margin-bottom: 2px;
+}
+.info-botanical-card:first-child { border-radius: 3px 3px 0 0; }
+.info-botanical-card:last-child  { border-radius: 0 0 3px 3px; margin-bottom: 0; }
+.info-botanical-card::before {
+  content: ''; position: absolute; left: 0; top: 20%; bottom: 20%; width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--blush) 30%, var(--blush) 70%, transparent);
+}
+.info-botanical-icon {
+  width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+  background: var(--white); border: 1px solid rgba(201,168,72,0.35);
+  display: flex; align-items: center; justify-content: center; color: var(--blush-dark);
+}
+.info-botanical-label { font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--blush); margin-bottom: 6px; }
+.info-botanical-value {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(22px, 5vw, 30px); color: var(--ink); line-height: 1.2;
+}
+.info-botanical-detail { font-size: 13px; font-weight: 300; color: var(--ink-muted); margin-top: 5px; line-height: 1.6; }
+.info-botanical-note { max-width: 620px; margin: 2rem auto 0; padding: 0 1.5rem; }
+.info-botanical-note-inner {
+  border: 1px solid rgba(201,168,72,0.28); border-left: 2px solid var(--blush);
+  padding: 1.4rem 2rem;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: clamp(16px, 3.5vw, 20px); color: var(--ink); line-height: 1.8; text-align: center;
+}
+.info-botanical-note-inner strong { color: var(--blush-dark); font-style: normal; font-weight: 500; }
+.info-botanical-map { max-width: 620px; margin: 2rem auto 4.5rem; padding: 0 1.5rem; }
+.info-botanical-map .map-wrap { border: 1px solid rgba(201,168,72,0.25); margin: 0; }
+
 /* ── COMO CHEGAR ── */
 .como-chegar-section { background: var(--white); }
 .como-chegar-inner {
@@ -614,39 +667,93 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 </section>
 
 <!-- INFORMAÇÕES -->
-<section class="section">
-  <div class="section-inner" style="padding-top: 1rem;">
-    <div class="section-label" data-anim="up"><span>O grande dia</span></div>
-    <div class="info-blocks">
-      <div class="info-block" data-anim="left" style="--d:0">
-        <div class="info-icon">📅</div>
-        <div>
-          <div class="info-label">Data</div>
-          <div class="info-value">22 de agosto de 2026 às 17h00</div>
-          <div class="info-detail">Sábado</div>
-        </div>
+<section class="info-botanical-section">
+  <svg class="botanical-bg botanical-bg--tl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 250" fill="none">
+    <path d="M90 245 C86 215 72 185 70 150 C68 115 78 85 82 55 C86 28 80 12 88 2" stroke="#6B4F00" stroke-width="1.8" stroke-linecap="round"/>
+    <ellipse cx="102" cy="222" rx="14" ry="7" transform="rotate(-40 102 222)" fill="#5a4200" opacity="0.72"/>
+    <ellipse cx="104" cy="192" rx="13" ry="6.5" transform="rotate(-45 104 192)" fill="#5a4200" opacity="0.68"/>
+    <ellipse cx="101" cy="163" rx="12" ry="6" transform="rotate(-50 101 163)" fill="#5a4200" opacity="0.63"/>
+    <ellipse cx="99" cy="134" rx="12" ry="5.5" transform="rotate(-48 99 134)" fill="#5a4200" opacity="0.58"/>
+    <ellipse cx="98" cy="106" rx="11" ry="5" transform="rotate(-52 98 106)" fill="#5a4200" opacity="0.54"/>
+    <ellipse cx="96" cy="78" rx="10" ry="4.5" transform="rotate(-50 96 78)" fill="#5a4200" opacity="0.5"/>
+    <ellipse cx="96" cy="52" rx="9" ry="4" transform="rotate(-46 96 52)" fill="#5a4200" opacity="0.45"/>
+    <ellipse cx="73" cy="210" rx="13" ry="6.5" transform="rotate(40 73 210)" fill="#5a4200" opacity="0.67"/>
+    <ellipse cx="70" cy="180" rx="12" ry="6" transform="rotate(45 70 180)" fill="#5a4200" opacity="0.63"/>
+    <ellipse cx="69" cy="150" rx="12" ry="5.5" transform="rotate(50 69 150)" fill="#5a4200" opacity="0.58"/>
+    <ellipse cx="70" cy="120" rx="11" ry="5" transform="rotate(47 70 120)" fill="#5a4200" opacity="0.54"/>
+    <ellipse cx="72" cy="92" rx="10" ry="4.5" transform="rotate(52 72 92)" fill="#5a4200" opacity="0.5"/>
+    <ellipse cx="75" cy="66" rx="9" ry="4" transform="rotate(48 75 66)" fill="#5a4200" opacity="0.45"/>
+  </svg>
+  <svg class="botanical-bg botanical-bg--br" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 250" fill="none">
+    <path d="M90 245 C86 215 72 185 70 150 C68 115 78 85 82 55 C86 28 80 12 88 2" stroke="#6B4F00" stroke-width="1.8" stroke-linecap="round"/>
+    <ellipse cx="102" cy="222" rx="14" ry="7" transform="rotate(-40 102 222)" fill="#5a4200" opacity="0.72"/>
+    <ellipse cx="104" cy="192" rx="13" ry="6.5" transform="rotate(-45 104 192)" fill="#5a4200" opacity="0.68"/>
+    <ellipse cx="101" cy="163" rx="12" ry="6" transform="rotate(-50 101 163)" fill="#5a4200" opacity="0.63"/>
+    <ellipse cx="99" cy="134" rx="12" ry="5.5" transform="rotate(-48 99 134)" fill="#5a4200" opacity="0.58"/>
+    <ellipse cx="98" cy="106" rx="11" ry="5" transform="rotate(-52 98 106)" fill="#5a4200" opacity="0.54"/>
+    <ellipse cx="96" cy="78" rx="10" ry="4.5" transform="rotate(-50 96 78)" fill="#5a4200" opacity="0.5"/>
+    <ellipse cx="96" cy="52" rx="9" ry="4" transform="rotate(-46 96 52)" fill="#5a4200" opacity="0.45"/>
+    <ellipse cx="73" cy="210" rx="13" ry="6.5" transform="rotate(40 73 210)" fill="#5a4200" opacity="0.67"/>
+    <ellipse cx="70" cy="180" rx="12" ry="6" transform="rotate(45 70 180)" fill="#5a4200" opacity="0.63"/>
+    <ellipse cx="69" cy="150" rx="12" ry="5.5" transform="rotate(50 69 150)" fill="#5a4200" opacity="0.58"/>
+    <ellipse cx="70" cy="120" rx="11" ry="5" transform="rotate(47 70 120)" fill="#5a4200" opacity="0.54"/>
+    <ellipse cx="72" cy="92" rx="10" ry="4.5" transform="rotate(52 72 92)" fill="#5a4200" opacity="0.5"/>
+    <ellipse cx="75" cy="66" rx="9" ry="4" transform="rotate(48 75 66)" fill="#5a4200" opacity="0.45"/>
+  </svg>
+
+  <div class="info-botanical-header" data-anim="fade">
+    <div class="info-botanical-kicker">Informações</div>
+    <h2 class="info-botanical-title">O Grande Dia</h2>
+    <div class="info-botanical-daterow">22 &nbsp;·&nbsp; 08 &nbsp;·&nbsp; 2026 &nbsp;·&nbsp; Sábado</div>
+  </div>
+
+  <div class="info-botanical-cards">
+    <div class="info-botanical-card" data-anim="up" style="--d:0">
+      <div class="info-botanical-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
       </div>
-      <div class="info-block" data-anim="right" style="--d:1">
-        <div class="info-icon">📍</div>
-        <div>
-          <div class="info-label">Local</div>
-          <div class="info-value">Sítio do Ipê</div>
-          <div class="info-detail">Rod. Eng. Ronan Rocha, Franca – SP, 14415-000<br>Sentido Patrocínio Paulista</div>
-        </div>
+      <div>
+        <div class="info-botanical-label">Data & Horário</div>
+        <div class="info-botanical-value">22 de agosto de 2026</div>
+        <div class="info-botanical-detail">Sábado · às 17h00</div>
       </div>
-      <div class="info-block" data-anim="left" style="--d:2">
-        <div class="info-icon">🥂</div>
-        <div>
-          <div class="info-label">Recepção</div>
-          <div class="info-value">Mesmo local</div>
-          <div class="info-detail">A festa será realizada no próprio Sítio do Ipê, logo após a cerimônia.</div>
-        </div>
-      </div>
-    </div> 
-    <div class="info-note" data-anim="up">
-      <strong>Atenção:</strong> Para garantir o início pontual da cerimônia, pedimos que todos cheguem <strong>até às 17h00</strong>.
     </div>
-    <div class="map-wrap" data-anim="scale">
+    <div class="info-botanical-card" data-anim="up" style="--d:1">
+      <div class="info-botanical-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+        </svg>
+      </div>
+      <div>
+        <div class="info-botanical-label">Local</div>
+        <div class="info-botanical-value">Sítio do Ipê</div>
+        <div class="info-botanical-detail">Rod. Eng. Ronan Rocha, Franca – SP, 14415-000<br>Sentido Patrocínio Paulista</div>
+      </div>
+    </div>
+    <div class="info-botanical-card" data-anim="up" style="--d:2">
+      <div class="info-botanical-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="info-botanical-label">Recepção</div>
+        <div class="info-botanical-value">Mesmo local</div>
+        <div class="info-botanical-detail">A festa será realizada no próprio Sítio do Ipê, logo após a cerimônia.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-botanical-note" data-anim="up">
+    <div class="info-botanical-note-inner">
+      Para garantir o início pontual da cerimônia,<br>pedimos que todos cheguem <strong>até às 17h00.</strong>
+    </div>
+  </div>
+
+  <div class="info-botanical-map" data-anim="scale">
+    <div class="map-wrap">
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14937.067701257718!2d-47.27719738363648!3d-20.617974029957256!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b0b3e8199509e9%3A0xebf338df3a926fba!2zU2Fsw6NvIGRlIEZlc3RhcyBTw610aW8gZG8gSXDDqg!5e0!3m2!1spt-BR!2sus!4v1779844315496!5m2!1spt-BR!2sus"
         loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
