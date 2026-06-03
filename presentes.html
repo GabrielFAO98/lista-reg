@@ -421,6 +421,35 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   .checkout-note { font-size: 12px; }
 }
 
+/* PRESENTEADO */
+.card--gifted {
+  position: relative;
+  cursor: default;
+  pointer-events: none;
+}
+.card--gifted .card-img,
+.card--gifted .card-body {
+  opacity: 0.45;
+}
+.card-gifted-tag {
+  position: absolute;
+  top: 34%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-7deg);
+  z-index: 5;
+  background: var(--ink);
+  color: var(--white);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 9px 22px;
+  font-family: 'Jost', sans-serif;
+  white-space: nowrap;
+}
+@media (min-width: 900px) {
+  .card-gifted-tag { font-size: 13px; padding: 10px 26px; }
+}
+
 .footer { background: var(--ink); text-align: center; padding: 0.9rem 1.5rem; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.12em; }
 .footer-names { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; color: rgba(255,254,247,0.55); letter-spacing: 0.05em; margin-bottom: 2px; }
 .footer-heart { color: var(--blush); }
@@ -448,21 +477,9 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     <p class="hero-sub">Escolha um presente e utilize a forma de pagamento que preferir.<br>Cada item é um pedacinho do nosso novo lar.</p>
   </header>
 
-  <div class="section-label"><span>39 presentes</span></div>
+  <div class="section-label"><span>50 presentes</span></div>
 
   <div class="grid" id="grid">
-
-    <div class="card" onclick="openDetail(this)">
-      <img class="card-img" src="img\lixeira-inox-5l-banheiro-.webp" alt="Lixeira Inox 5L Banheiro">
-      <div class="card-body">
-        <div class="card-name">Lixeira Inox 5L Banheiro</div>
-        <div class="card-desc">Lixeira de inox 5 litros com tampa, ideal para banheiro, com design elegante e fácil de limpar.</div>
-        <div class="card-footer">
-          <span class="card-price">R$&nbsp;70,00</span>
-          <span class="card-hint">Ver detalhes</span>
-        </div>
-      </div>
-    </div>
 
     <div class="card" onclick="openDetail(this)">
       <img class="card-img" src="img\cortina.webp" alt="Cortinas Para Sala">
@@ -560,6 +577,19 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
+    <div class="card card--gifted">
+      <div class="card-gifted-tag">Presenteado</div>
+      <img class="card-img" src="img\lixeira-inox-5l-banheiro-.webp" alt="Lixeira Inox 5L Banheiro">
+      <div class="card-body">
+        <div class="card-name">Lixeira Inox 5L Banheiro</div>
+        <div class="card-desc">Lixeira de inox 5 litros com tampa, ideal para banheiro, com design elegante e fácil de limpar.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;70,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
     <div class="card" onclick="openDetail(this)">
       <img class="card-img" src="img\caixas-organizadoras.webp" alt="Caixas organizadoras">
       <div class="card-body">
@@ -636,7 +666,8 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       </div>
     </div>
 
-    <div class="card" onclick="openDetail(this)">
+    <div class="card card--gifted">
+      <div class="card-gifted-tag">Presenteado</div>
       <img class="card-img" src="img\jogo-panelas.webp" alt="Jogo de Panelas">
       <div class="card-body">
         <div class="card-name">Jogo de Panelas</div>
@@ -849,6 +880,115 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
         <div class="card-name">Poltrona</div>
         <div class="card-desc">Poltrona estofada com design elegante e confortável, ideal para sala de estar ou quarto.</div>
         <div class="card-footer"><span class="card-price">R$&nbsp;900,00</span><span class="card-hint">Ver detalhes</span></div>
+      </div>
+    </div>
+
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\jogo-xicaras.webp" alt="Jogo de 6 Xícaras com Pires 200ml">
+      <div class="card-body">
+        <div class="card-name">Jogo de 6 Xícaras com Pires 200ml</div>
+        <div class="card-desc">Jogo de 6 xícaras grandes de 200ml com pires, em cerâmica, elegante para servir café e chá.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;180,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\conjunto-6-bowls.webp" alt="Conjunto 6 Bowls Stoneware 540ml">
+      <div class="card-body">
+        <div class="card-name">Conjunto 6 Bowls Stoneware 540ml</div>
+        <div class="card-desc">Conjunto de 6 bowls em cerâmica gres stoneware de 540ml, resistentes e versáteis para o dia a dia.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;170,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\sapateira.webp" alt="Sapateira de Bambu">
+      <div class="card-body">
+        <div class="card-name">Sapateira de Bambu</div>
+        <div class="card-desc">Sapateira de parede em bambu, compacta e sustentável, ideal para organizar o hall ou quarto.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;200,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\porta-pao.webp" alt="Porta Pão Bambu 38cm">
+      <div class="card-body">
+        <div class="card-name">Porta Pão Bambu 38cm</div>
+        <div class="card-desc">Porta pão em bambu com tampa de correr, mantém o pão fresco e organiza a bancada da cozinha.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;170,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\chaleira-inox.webp" alt="Chaleira Inox com Alça de Bambu">
+      <div class="card-body">
+        <div class="card-name">Chaleira Inox com Alça de Bambu</div>
+        <div class="card-desc">Chaleira de aço inox com alça de bambu, elegante e funcional para o preparo de chás e café.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;170,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\cesto-planta-alca.webp" alt="Cesto em Fibra Natural com Alça">
+      <div class="card-body">
+        <div class="card-name">Cesto em Fibra Natural com Alça</div>
+        <div class="card-desc">Cesto grande em fibra natural com alças de couro sintético, decorativo e funcional para sala ou varanda.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;110,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\cesto-planta.webp" alt="Cesto para Planta em Fibra Natural">
+      <div class="card-body">
+        <div class="card-name">Cesto para Planta em Fibra Natural</div>
+        <div class="card-desc">Cesto decorativo em fibra natural para vasos de plantas, traz um toque rústico e aconchegante ao ambiente.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;80,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\potes-com-medidor.webp" alt="Kit 4 Potes Herméticos com Copo Medidor 2,5L">
+      <div class="card-body">
+        <div class="card-name">Kit 4 Potes Herméticos com Copo Medidor 2,5L</div>
+        <div class="card-desc">Kit de 4 potes herméticos porta mantimento de 2,5 litros com copo medidor integrado, ideais para organizar a despensa.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;130,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\panela-pressao-eletrica.webp" alt="Panela de Pressão Elétrica Digital 6L">
+      <div class="card-body">
+        <div class="card-name">Panela de Pressão Elétrica Digital 6L</div>
+        <div class="card-desc">Panela de pressão elétrica digital de 6 litros com múltiplos programas automáticos, cozinha rápido e com segurança.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;390,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
       </div>
     </div>
 
