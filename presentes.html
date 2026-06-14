@@ -1327,7 +1327,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       if (mpTab) {
         mpTab.location.href = result.init_point;
         closeCheckout();
-        showToast('Pagamento aberto em nova aba. Esta página atualiza sozinha ao concluir.');
+        showCheckScreen();
       } else {
         sessionStorage.setItem('mp_pending', '1');
         window.location.href = result.init_point;
@@ -1350,6 +1350,13 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     document.head.appendChild(s);
   }
 
+  function showCheckScreen() {
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('check-question').style.display = 'block';
+    document.getElementById('check-problem').style.display = 'none';
+    document.getElementById('check-screen').style.display = 'block';
+    window.scrollTo(0, 0);
+  }
   function confirmYes() {
     document.getElementById('check-screen').style.display = 'none';
     document.getElementById('thankyou-screen').style.display = 'block';
@@ -1430,7 +1437,6 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     if (paid) {
       sessionStorage.removeItem('mp_pending');
       history.replaceState(null, '', window.location.pathname);
-      try { localStorage.setItem('mp_payment_result', JSON.stringify({ status: paid, ts: Date.now() })); } catch (e) {}
       document.getElementById('app').style.display = 'none';
       if (paid === 'ok') {
         document.getElementById('thankyou-screen').style.display = 'block';
@@ -1448,31 +1454,12 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     }
     if (sessionStorage.getItem('mp_pending')) {
       sessionStorage.removeItem('mp_pending');
-      document.getElementById('app').style.display = 'none';
-      document.getElementById('check-question').style.display = 'block';
-      document.getElementById('check-problem').style.display = 'none';
-      document.getElementById('check-screen').style.display = 'block';
-      window.scrollTo(0, 0);
+      showCheckScreen();
     }
   }
   // Detecta retorno via botão voltar no mobile (bfcache — iOS Safari)
   window.addEventListener('pageshow', function(e) { if (e.persisted) checkMpReturn(); });
   checkMpReturn();
-
-  // Atualiza esta aba quando o pagamento é concluído em outra aba (checkout no desktop)
-  window.addEventListener('storage', function(e) {
-    if (e.key !== 'mp_payment_result' || !e.newValue) return;
-    var info;
-    try { info = JSON.parse(e.newValue); } catch (ex) { return; }
-    if (info.status === 'ok') {
-      loadMessages();
-      showToast('Pagamento confirmado! Muito obrigado 💛');
-    } else if (info.status === 'pending') {
-      showToast('Pagamento em análise — assim que aprovado, aparece no mural!');
-    } else if (info.status === 'fail') {
-      showToast('O pagamento não foi concluído.');
-    }
-  });
 
   updateBadge();
   loadMessages();
