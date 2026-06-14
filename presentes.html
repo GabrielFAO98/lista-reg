@@ -1308,23 +1308,37 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       return { nome: i.nome, valor: parsePrice(i.valor) };
     });
 
+    // Desktop: abre o checkout numa nova aba (criada já no clique, para não ser bloqueada)
+    var isDesktop = window.innerWidth >= 900;
+    var mpTab = isDesktop ? window.open('', '_blank') : null;
+
     window._mpCb = function(result) {
+      btn.disabled = false;
+      btn.textContent = 'Presentear via Mercado Pago →';
+
       if (!result.ok || !result.init_point) {
-        btn.disabled = false;
-        btn.textContent = 'Presentear via Mercado Pago →';
+        if (mpTab) mpTab.close();
         showToast('Erro ao conectar. Tente novamente.');
         return;
       }
       saveCart([]);
       updateBadge();
-      sessionStorage.setItem('mp_pending', '1');
-      window.location.href = result.init_point;
+
+      if (mpTab) {
+        mpTab.location.href = result.init_point;
+        closeCheckout();
+        showToast('Pagamento aberto em nova aba. Esta página atualiza sozinha ao concluir.');
+      } else {
+        sessionStorage.setItem('mp_pending', '1');
+        window.location.href = result.init_point;
+      }
     };
 
     var s = document.createElement('script');
     s.onerror = function() {
       btn.disabled = false;
       btn.textContent = 'Presentear via Mercado Pago →';
+      if (mpTab) mpTab.close();
       showToast('Erro ao conectar. Tente novamente.');
     };
     s.src = APPS_SCRIPT_URL
@@ -1416,6 +1430,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     if (paid) {
       sessionStorage.removeItem('mp_pending');
       history.replaceState(null, '', window.location.pathname);
+      try { localStorage.setItem('mp_payment_result', JSON.stringify({ status: paid, ts: Date.now() })); } catch (e) {}
       document.getElementById('app').style.display = 'none';
       if (paid === 'ok') {
         document.getElementById('thankyou-screen').style.display = 'block';
@@ -1443,6 +1458,21 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   // Detecta retorno via botão voltar no mobile (bfcache — iOS Safari)
   window.addEventListener('pageshow', function(e) { if (e.persisted) checkMpReturn(); });
   checkMpReturn();
+
+  // Atualiza esta aba quando o pagamento é concluído em outra aba (checkout no desktop)
+  window.addEventListener('storage', function(e) {
+    if (e.key !== 'mp_payment_result' || !e.newValue) return;
+    var info;
+    try { info = JSON.parse(e.newValue); } catch (ex) { return; }
+    if (info.status === 'ok') {
+      loadMessages();
+      showToast('Pagamento confirmado! Muito obrigado 💛');
+    } else if (info.status === 'pending') {
+      showToast('Pagamento em análise — assim que aprovado, aparece no mural!');
+    } else if (info.status === 'fail') {
+      showToast('O pagamento não foi concluído.');
+    }
+  });
 
   updateBadge();
   loadMessages();
