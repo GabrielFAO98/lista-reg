@@ -88,6 +88,10 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 .hero.hero--photo {
   background: linear-gradient(rgba(42,32,23,0.55), rgba(42,32,23,0.8)), url("img/rsvp-hero.webp") center 30% / cover no-repeat;
   padding: 4.5rem 1.5rem;
+  min-height: 344px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .hero--photo::before { display: none; }
 .hero--photo .hero-ornament { color: var(--blush-light); }
@@ -97,12 +101,12 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 .hero--photo .hero-divider-heart { color: var(--blush-light); }
 .hero--photo .hero-divider::before, .hero--photo .hero-divider::after { background: linear-gradient(to right, transparent, rgba(253,243,192,0.45), transparent); }
 @media (min-width: 900px) {
-  .hero.hero--photo { background-position: center 24%; padding: 6rem 1.5rem; }
+  .hero.hero--photo { background-position: center 35%; padding: 6rem 1.5rem; min-height: 520px; }
 }
 
 /* FORM WRAP */
 .form-wrap {
-  max-width: 560px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem;
+  max-width: 560px; margin: 0 auto; padding: 1.8rem 1.5rem 4rem;
 }
 
 /* SECTION LABEL */
@@ -232,7 +236,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   <div class="hero-ornament">Confirmação de presença</div>
   <h1 class="hero-names">Rafaela <em>&</em> Gabriel</h1>
   <div class="hero-divider"><div class="hero-divider-heart">♡</div></div>
-  <p class="hero-sub">Sua presença é o nosso maior presente.<br>Confirme até <strong>30 de junho de 2026</strong>.</p>
+  <p class="hero-sub">Queremos celebrar esse dia ao seu lado.<br>Confirme sua presença até <strong>30 de junho de 2026</strong>.</p>
 </header>
 
 <div id="form-section">
