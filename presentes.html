@@ -125,6 +125,22 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   max-width: 360px; margin: 0 auto; line-height: 1.8; position: relative;
 }
 
+/* HERO — PHOTO VARIANT */
+.hero.hero--photo {
+  background: linear-gradient(rgba(42,32,23,0.55), rgba(42,32,23,0.8)), url("img/presentes-hero.webp") center 10% / cover no-repeat;
+  padding: 4.5rem 1.5rem;
+}
+.hero--photo::before { display: none; }
+.hero--photo .hero-ornament { color: var(--blush-light); }
+.hero--photo .hero-names { color: var(--cream); }
+.hero--photo .hero-names em { color: var(--blush-light); }
+.hero--photo .hero-sub { color: var(--cream-dark); }
+.hero--photo .hero-divider-heart { color: var(--blush-light); }
+.hero--photo .hero-divider::before, .hero--photo .hero-divider::after { background: linear-gradient(to right, transparent, rgba(253,243,192,0.45), transparent); }
+@media (min-width: 900px) {
+  .hero.hero--photo { background-position: center 35%; padding: 6rem 1.5rem; }
+}
+
 /* SECTION LABEL */
 .section-label { text-align: center; padding: 1.8rem 1rem 1.2rem; }
 .section-label span {
@@ -470,28 +486,16 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 
 <div id="app">
 
-  <header class="hero">
+  <header class="hero hero--photo">
     <div class="hero-ornament">Lista de presentes</div>
     <h1 class="hero-names">Rafaela <em>&</em> Gabriel</h1>
     <div class="hero-divider"><div class="hero-divider-heart">♡</div></div>
     <p class="hero-sub">Escolha um presente e utilize a forma de pagamento que preferir.<br>Cada item é um pedacinho do nosso novo lar.</p>
   </header>
 
-  <div class="section-label"><span>51 presentes</span></div>
+  <div class="section-label"><span>74 presentes</span></div>
 
   <div class="grid" id="grid">
-
-    <div class="card" onclick="openDetail(this)">
-      <img class="card-img" src="img\lixeira-inox-5l-banheiro-.webp" alt="[TESTE] Presente Teste">
-      <div class="card-body">
-        <div class="card-name">[TESTE] Presente Teste</div>
-        <div class="card-desc">Item de teste — remover após validação.</div>
-        <div class="card-footer">
-          <span class="card-price">R$&nbsp;1,00</span>
-          <span class="card-hint">Ver detalhes</span>
-        </div>
-      </div>
-    </div>
 
     <div class="card" onclick="openDetail(this)">
       <img class="card-img" src="img\cortina.webp" alt="Cortinas Para Sala">
@@ -738,7 +742,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       <div class="card-body">
         <div class="card-name">Piso Vinílico</div>
         <div class="card-desc">Piso vinílico clicado com visual de madeira, resistente, fácil de instalar e de limpar.</div>
-        <div class="card-footer"><span class="card-price">R$&nbsp;500,00</span><span class="card-hint">Ver detalhes</span></div>
+        <div class="card-footer"><span class="card-price">R$&nbsp;750,00</span><span class="card-hint">Ver detalhes</span></div>
       </div>
     </div>
 
@@ -756,7 +760,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       <div class="card-body">
         <div class="card-name">Chuveiro</div>
         <div class="card-desc">Chuveiro com ducha tipo chuveiro de teto, design elegante e pressão de água uniforme.</div>
-        <div class="card-footer"><span class="card-price">R$&nbsp;350,00</span><span class="card-hint">Ver detalhes</span></div>
+        <div class="card-footer"><span class="card-price">R$&nbsp;320,00</span><span class="card-hint">Ver detalhes</span></div>
       </div>
     </div>
 
@@ -999,6 +1003,294 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
         <div class="card-desc">Panela de pressão elétrica digital de 6 litros com múltiplos programas automáticos, cozinha rápido e com segurança.</div>
         <div class="card-footer">
           <span class="card-price">R$&nbsp;390,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\jogo-lencol-casal.webp" alt="Jogo de Lençol Casal 4 Peças">
+      <div class="card-body">
+        <div class="card-name">Jogo de Lençol Casal 4 Peças</div>
+        <div class="card-desc">Jogo de lençol casal 4 peças em algodão, conforto e maciez para uma boa noite de sono.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;150,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\edredom-casal.webp" alt="Edredom Casal">
+      <div class="card-body">
+        <div class="card-name">Edredom Casal</div>
+        <div class="card-desc">Edredom casal para os dias mais frios, traz aconchego e estilo para o quarto.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;250,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\travesseiros-pluma-ganso.webp" alt="Kit 2 Travesseiros de Pluma de Ganso">
+      <div class="card-body">
+        <div class="card-name">Kit 2 Travesseiros de Pluma de Ganso</div>
+        <div class="card-desc">Kit com 2 travesseiros de pluma de ganso, extremamente macios para noites tranquilas.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;250,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\protetor-colchao-casal.webp" alt="Protetor de Colchão Impermeável Casal">
+      <div class="card-body">
+        <div class="card-name">Protetor de Colchão Impermeável Casal</div>
+        <div class="card-desc">Protetor de colchão impermeável casal, protege contra líquidos e ácaros mantendo o colchão sempre novo.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;120,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\cortina-blackout-quarto.webp" alt="Cortina Blackout para Quarto">
+      <div class="card-body">
+        <div class="card-name">Cortina Blackout para Quarto</div>
+        <div class="card-desc">Cortina blackout para quarto, bloqueia a luz externa garantindo noites de sono tranquilas.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;180,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\comoda-quarto.webp" alt="Cômoda para Quarto">
+      <div class="card-body">
+        <div class="card-name">Cômoda para Quarto</div>
+        <div class="card-desc">Cômoda de madeira para o quarto, com gavetas espaçosas para organizar roupas e acessórios.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;550,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\jogo-toalhas-banho.webp" alt="Jogo de Toalhas de Banho 5 Peças">
+      <div class="card-body">
+        <div class="card-name">Jogo de Toalhas de Banho 5 Peças</div>
+        <div class="card-desc">Jogo de toalhas de banho com 5 peças em algodão felpudo, suave e absorvente.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;220,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\kit-tapetes-banheiro.webp" alt="Kit Tapetes para Banheiro 3 Peças">
+      <div class="card-body">
+        <div class="card-name">Kit Tapetes para Banheiro 3 Peças</div>
+        <div class="card-desc">Kit com 3 tapetes para banheiro, antiderrapantes e de fácil limpeza.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;130,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\batedeira-planetaria.webp" alt="Batedeira Planetária">
+      <div class="card-body">
+        <div class="card-name">Batedeira Planetária</div>
+        <div class="card-desc">Batedeira planetária com acessórios variados, ideal para preparar bolos, massas e doces.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;500,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\processador-alimentos.webp" alt="Processador de Alimentos Multifuncional">
+      <div class="card-body">
+        <div class="card-name">Processador de Alimentos Multifuncional</div>
+        <div class="card-desc">Processador de alimentos multifuncional, agiliza o preparo de receitas do dia a dia.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;300,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\tacas-cristal-vinho.webp" alt="Conjunto de Taças de Cristal para Vinho">
+      <div class="card-body">
+        <div class="card-name">Conjunto de Taças de Cristal para Vinho</div>
+        <div class="card-desc">Conjunto de taças de cristal para vinho, elegantes para receber a família e amigos.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;130,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\travessas-porcelana.webp" alt="Conjunto de Travessas de Porcelana">
+      <div class="card-body">
+        <div class="card-name">Conjunto de Travessas de Porcelana</div>
+        <div class="card-desc">Conjunto de travessas de porcelana, perfeito para servir refeições com estilo.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;180,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\espremedor-frutas.webp" alt="Espremedor de Frutas Profissional">
+      <div class="card-body">
+        <div class="card-name">Espremedor de Frutas Profissional</div>
+        <div class="card-desc">Espremedor de frutas profissional, prático para sucos naturais no café da manhã.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;200,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\luminaria-piso.webp" alt="Luminária de Piso">
+      <div class="card-body">
+        <div class="card-name">Luminária de Piso</div>
+        <div class="card-desc">Luminária de piso tipo coluna, traz charme e iluminação aconchegante para a sala.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;350,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\climatizador-ar.webp" alt="Climatizador de Ar Portátil">
+      <div class="card-body">
+        <div class="card-name">Climatizador de Ar Portátil</div>
+        <div class="card-desc">Climatizador de ar portátil, refresca o ambiente com praticidade nos dias mais quentes.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;300,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\quadros-decorativos.webp" alt="Quadros Decorativos Kit 3 Peças">
+      <div class="card-body">
+        <div class="card-name">Quadros Decorativos Kit 3 Peças</div>
+        <div class="card-desc">Kit com 3 quadros decorativos com moldura, ideal para compor a decoração da casa.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;150,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\almofadas-decorativas.webp" alt="Almofadas Decorativas Kit 4 Peças">
+      <div class="card-body">
+        <div class="card-name">Almofadas Decorativas Kit 4 Peças</div>
+        <div class="card-desc">Kit com 4 almofadas decorativas, dão um toque especial ao sofá ou à cama.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;130,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\estante-livros.webp" alt="Estante para Livros e Decoração">
+      <div class="card-body">
+        <div class="card-name">Estante para Livros e Decoração</div>
+        <div class="card-desc">Estante para livros e itens decorativos, organiza e valoriza qualquer ambiente.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;250,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\escrivaninha.webp" alt="Escrivaninha">
+      <div class="card-body">
+        <div class="card-name">Escrivaninha</div>
+        <div class="card-desc">Escrivaninha compacta, ideal para um cantinho de trabalho ou estudos em casa.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;450,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\aparador-entrada.webp" alt="Aparador para Entrada">
+      <div class="card-body">
+        <div class="card-name">Aparador para Entrada</div>
+        <div class="card-desc">Aparador para entrada, prático e decorativo para receber chaves, correspondências e enfeites.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;320,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\jarra-termica-eletrica.webp" alt="Jarra Térmica Elétrica">
+      <div class="card-body">
+        <div class="card-name">Jarra Térmica Elétrica</div>
+        <div class="card-desc">Jarra térmica elétrica, mantém bebidas na temperatura ideal por mais tempo.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;200,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\tapete-quarto.webp" alt="Tapete para Quarto">
+      <div class="card-body">
+        <div class="card-name">Tapete para Quarto</div>
+        <div class="card-desc">Tapete para quarto, traz conforto e aconchego ao pisar todos os dias.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;220,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\kit-organizador-closet.webp" alt="Kit Organizador em Bambu">
+      <div class="card-body">
+        <div class="card-name">Kit Organizador em Bambu</div>
+        <div class="card-desc">Kit organizador de 3 peças, mantém tudo no lugar certo.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;120,00</span>
+          <span class="card-hint">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openDetail(this)">
+      <img class="card-img" src="img\colchao-casal.webp" alt="Colchão de Casal">
+      <div class="card-body">
+        <div class="card-name">Colchão de Casal</div>
+        <div class="card-desc">Colchão de casal em espuma D33, firme e confortável, para uma boa noite de sono.</div>
+        <div class="card-footer">
+          <span class="card-price">R$&nbsp;900,00</span>
           <span class="card-hint">Ver detalhes</span>
         </div>
       </div>
