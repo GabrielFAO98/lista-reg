@@ -1671,9 +1671,12 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
           document.getElementById('brick-loading').style.display = 'none';
         },
         onSubmit: function(formData) {
+          console.log('[MP] onSubmit formData:', JSON.stringify(formData));
           return new Promise(function(resolve, reject) {
             window._paymentCb = function(result) {
+              console.log('[MP] _paymentCb result:', JSON.stringify(result));
               if (!result.ok) {
+                showToast('Erro GAS: ' + (result.error || '?'));
                 reject(result.error || 'Erro ao processar pagamento.');
                 return;
               }
@@ -1690,11 +1693,15 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
                 _renderStatusBrick(result.payment_id);
                 startPolling(result.payment_id);
               } else {
-                reject('Pagamento não aprovado. Verifique seus dados e tente novamente.');
+                showToast('Pagamento recusado: ' + (result.status || '?'));
+                reject('Pagamento não aprovado.');
               }
             };
             var s = document.createElement('script');
-            s.onerror = function() { reject(new Error('Erro de conexão. Tente novamente.')); };
+            s.onerror = function() {
+              showToast('Erro: script JSONP falhou (rede ou GAS)');
+              reject(new Error('Erro de conexão. Tente novamente.'));
+            };
             s.src = APPS_SCRIPT_URL
               + '?callback=_paymentCb'
               + '&action=create_payment'
