@@ -361,6 +361,18 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   text-align: center; margin-top: 10px; line-height: 1.6;
 }
 
+/* BRICK */
+#brick-container { min-height: 60px; }
+.brick-loading {
+  text-align: center; padding: 2rem 1rem; color: var(--ink-muted); font-size: 13px; font-weight: 300;
+}
+.brick-spinner {
+  width: 28px; height: 28px; margin: 0 auto 12px;
+  border: 2px solid var(--cream-dark); border-top-color: var(--blush);
+  border-radius: 50%; animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
 /* THANK YOU */
 .thankyou-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--white); padding: 3rem 1.5rem; }
 .thankyou-inner { text-align: center; max-width: 460px; animation: slideUp 0.4s ease; }
@@ -1379,47 +1391,32 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
         <span class="checkout-total-value" id="checkout-total-value"></span>
       </div>
       <div class="checkout-sep"></div>
-      <div class="checkout-field">
-        <label for="checkout-name">Seu nome e sobrenome *</label>
-        <input type="text" id="checkout-name" placeholder="Nome Sobrenome" autocomplete="name">
+      <!-- STEP 1: dados pessoais -->
+      <div id="checkout-step-1">
+        <div class="checkout-field">
+          <label for="checkout-name">Seu nome e sobrenome *</label>
+          <input type="text" id="checkout-name" placeholder="Nome Sobrenome" autocomplete="name">
+        </div>
+        <div class="checkout-field">
+          <label for="checkout-email">Seu e-mail *</label>
+          <input type="email" id="checkout-email" placeholder="email@exemplo.com" autocomplete="email">
+        </div>
+        <div class="checkout-field">
+          <label for="checkout-msg">Mensagem para os noivos (opcional)</label>
+          <textarea id="checkout-msg" placeholder="Deixe um recado carinhoso…"></textarea>
+        </div>
+        <button class="presentear-btn" id="proceed-btn" onclick="proceedToPayment()">Continuar para pagamento →</button>
       </div>
-      <div class="checkout-field">
-        <label for="checkout-msg">Mensagem para os noivos (opcional)</label>
-        <textarea id="checkout-msg" placeholder="Deixe um recado carinhoso…"></textarea>
-      </div>
-      <button class="presentear-btn" id="confirm-btn" onclick="confirmGift()">Presentear via Mercado Pago →</button>
-      <a id="mp-link-btn" class="presentear-btn" href="#" target="_blank" style="display:none;text-align:center;text-decoration:none" onclick="closeCheckout();showCheckScreen()">Abrir Mercado Pago →</a>
-      <p class="checkout-note">Você será direcionado ao Mercado Pago para concluir o pagamento.</p>
-    </div>
-  </div>
-</div>
 
-<!-- TELA DE VERIFICAÇÃO -->
-<div id="check-screen" style="display:none">
-  <div class="thankyou-page">
-
-    <div id="check-question" class="thankyou-inner">
-      <span class="thankyou-ornament">🎁</span>
-      <h1 class="thankyou-title">Pagamento<br><em>concluído?</em></h1>
-      <div class="thankyou-divider"></div>
-      <p class="thankyou-text">Se já finalizou o pagamento no Mercado Pago,<br>confirme aqui para registrarmos seu presente.</p>
-      <div class="check-btns">
-        <button class="check-btn-yes" onclick="confirmYes()">Sim, já paguei! ✓</button>
-        <button class="check-btn-no"  onclick="confirmNo()">Tive um problema</button>
+      <!-- STEP 2: Brick de pagamento -->
+      <div id="checkout-step-2" style="display:none">
+        <div id="brick-loading" class="brick-loading">
+          <div class="brick-spinner"></div>
+          <p>Carregando forma de pagamento…</p>
+        </div>
+        <div id="brick-container"></div>
       </div>
     </div>
-
-    <div id="check-problem" class="thankyou-inner" style="display:none">
-      <span class="thankyou-ornament">💌</span>
-      <h1 class="thankyou-title">Algo deu<br><em>errado?</em></h1>
-      <div class="thankyou-divider"></div>
-      <p class="thankyou-text">Não se preocupe! Tente novamente ou<br>entre em contato conosco.</p>
-      <div class="check-btns">
-        <a class="check-btn-contact" href="https://wa.me/5516992048856?text=Oi%2C+tive+um+problema+ao+presentear+via+Mercado+Pago." target="_blank">Falar com os noivos</a>
-        <button class="check-btn-back" onclick="goBackFromCheck()">Tentar novamente</button>
-      </div>
-    </div>
-
   </div>
 </div>
 
@@ -1438,13 +1435,21 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   </div>
 </div>
 
+<script src="https://sdk.mercadopago.com/js/v2"></script>
 <script>
-  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyuuMaJjq4T9iKUHPgxui9xa41_5UnDHE4pd8DnCvUg-O9P08_wKfOcnjLfcykMmtI7Cw/exec';
-  var MP_LINK = 'https://link.mercadopago.com.br/gabrielrafa';
+  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwjUcs7xO_AzBfq-vM_Ow22Q48xvBZQBR8iGv05rZ1L2ysODJPAjvIlByxM_SveM_3nrA/exec';
+  var MP_PUBLIC_KEY   = 'APP_USR-561e99e7-42c6-42bd-a6de-649b5dea0bca';
 
-  var currentDetail = null;
-  var checkoutItems = [];
+  var currentDetail  = null;
+  var checkoutItems  = [];
   var spotlightTimer = null;
+  var _mpInstance    = null;
+  var _paymentBrick  = null;
+  var _statusBrick   = null;
+  var _pollTimer     = null;
+  var _guestName     = '';
+  var _guestEmail    = '';
+  var _guestMsg      = '';
 
   // ── CART ──
   function loadCart() {
@@ -1458,7 +1463,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     return 'R$ ' + val.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   }
   function updateBadge(animate) {
-    var cart = loadCart();
+    var cart  = loadCart();
     var badge = document.getElementById('cart-badge');
     var btn   = document.getElementById('nav-cart');
     if (cart.length > 0) {
@@ -1467,7 +1472,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       btn.classList.add('has-items');
       if (animate) {
         btn.classList.remove('cart-pop');
-        void btn.offsetWidth; // reflow para reiniciar animação
+        void btn.offsetWidth;
         btn.classList.add('cart-pop');
       }
     } else {
@@ -1539,7 +1544,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     if (e.target === document.getElementById('cart-overlay')) closeCart();
   }
   function renderCartItems() {
-    var cart = loadCart();
+    var cart      = loadCart();
     var container = document.getElementById('cart-items');
     var footer    = document.getElementById('cart-footer');
     var emptyMsg  = document.getElementById('cart-empty-msg');
@@ -1577,7 +1582,20 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   function openCheckout() {
     document.getElementById('checkout-name').value = '';
     document.getElementById('checkout-name').classList.remove('error');
+    document.getElementById('checkout-email').value = '';
+    document.getElementById('checkout-email').classList.remove('error');
     document.getElementById('checkout-msg').value  = '';
+    var proceedBtn = document.getElementById('proceed-btn');
+    proceedBtn.disabled = false;
+    proceedBtn.textContent = 'Continuar para pagamento →';
+
+    document.getElementById('checkout-step-1').style.display = 'block';
+    document.getElementById('checkout-step-2').style.display = 'none';
+    document.getElementById('brick-container').innerHTML = '';
+    document.getElementById('brick-loading').style.display = 'block';
+
+    _destroyBricks();
+
     var itemsEl = document.getElementById('checkout-items');
     itemsEl.innerHTML = checkoutItems.map(function(item) {
       return '<div class="checkout-item">'
@@ -1588,101 +1606,166 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     }).join('');
     var total = checkoutItems.reduce(function(s, i) { return s + parsePrice(i.valor); }, 0);
     document.getElementById('checkout-total-value').textContent = formatPrice(total);
-    document.getElementById('confirm-btn').style.display = 'block';
-    document.getElementById('mp-link-btn').style.display = 'none';
+
     document.getElementById('checkout-overlay').style.display = 'flex';
     document.body.style.overflow = 'hidden';
   }
   function closeCheckout() {
     document.getElementById('checkout-overlay').style.display = 'none';
     document.body.style.overflow = '';
+    stopPolling();
+    _destroyBricks();
   }
   function checkoutOverlayClick(e) {
     if (e.target === document.getElementById('checkout-overlay')) closeCheckout();
   }
-  function confirmGift() {
-    var nameEl = document.getElementById('checkout-name');
-    var guestName = nameEl.value.trim();
-    if (!guestName) { nameEl.classList.add('error'); nameEl.focus(); return; }
-    nameEl.classList.remove('error');
-
-    var guestMsg = document.getElementById('checkout-msg').value.trim();
-    var btn = document.getElementById('confirm-btn');
-    btn.disabled = true;
-    btn.textContent = 'Aguarde…';
-
-    var itens = checkoutItems.map(function(i) {
-      return { nome: i.nome, valor: parsePrice(i.valor) };
-    });
-
-    // Abre nova aba no clique (gesto do usuário — evita bloqueio de popup)
-    var mpTab = window.open('about:blank', '_blank');
-
-    window._mpCb = function(result) {
-      btn.disabled = false;
-      btn.textContent = 'Presentear via Mercado Pago →';
-
-      if (!result.ok || !result.init_point) {
-        if (mpTab && !mpTab.closed) mpTab.close();
-        showToast('Erro ao conectar. Tente novamente.');
-        return;
-      }
-      saveCart([]);
-      updateBadge();
-
-      if (mpTab && !mpTab.closed) {
-        // Nova aba abriu — navega para o MP e mostra tela de espera
-        mpTab.location.href = result.init_point;
-        closeCheckout();
-        showCheckScreen();
-      } else {
-        // Popup bloqueado — transforma botão em link (nova aba, nunca bloqueado)
-        var linkBtn = document.getElementById('mp-link-btn');
-        linkBtn.href = result.init_point;
-        btn.style.display = 'none';
-        linkBtn.style.display = 'block';
-      }
-    };
-
-    var s = document.createElement('script');
-    s.onerror = function() {
-      btn.disabled = false;
-      btn.textContent = 'Presentear via Mercado Pago →';
-      if (mpTab && !mpTab.closed) mpTab.close();
-      showToast('Erro ao conectar. Tente novamente.');
-    };
-    s.src = APPS_SCRIPT_URL
-      + '?callback=_mpCb'
-      + '&action=create_preference'
-      + '&nome='     + encodeURIComponent(guestName)
-      + '&mensagem=' + encodeURIComponent(guestMsg)
-      + '&itens='    + encodeURIComponent(JSON.stringify(itens));
-    document.head.appendChild(s);
+  function _destroyBricks() {
+    if (_paymentBrick) { try { _paymentBrick.unmount(); } catch(ex){} _paymentBrick = null; }
+    if (_statusBrick)  { try { _statusBrick.unmount();  } catch(ex){} _statusBrick  = null; }
   }
 
-  function showCheckScreen() {
+  function proceedToPayment() {
+    var nameEl  = document.getElementById('checkout-name');
+    var emailEl = document.getElementById('checkout-email');
+    var nameOk  = nameEl.value.trim().length > 0;
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim());
+
+    nameEl.classList.toggle('error', !nameOk);
+    emailEl.classList.toggle('error', !emailOk);
+    if (!nameOk)  { nameEl.focus();  return; }
+    if (!emailOk) { emailEl.focus(); return; }
+
+    _guestName  = nameEl.value.trim();
+    _guestEmail = emailEl.value.trim();
+    _guestMsg   = document.getElementById('checkout-msg').value.trim();
+
+    var total = checkoutItems.reduce(function(s, i) { return s + parsePrice(i.valor); }, 0);
+    var itens = checkoutItems.map(function(i) { return { nome: i.nome, valor: parsePrice(i.valor) }; });
+
+    document.getElementById('checkout-step-1').style.display = 'none';
+    document.getElementById('checkout-step-2').style.display = 'block';
+    document.getElementById('brick-loading').style.display = 'block';
+    document.getElementById('brick-container').innerHTML = '';
+
+    _renderPaymentBrick(total, itens);
+  }
+
+  function _renderPaymentBrick(total, itens) {
+    if (!_mpInstance) { showToast('Erro ao inicializar pagamento. Recarregue a página.'); return; }
+
+    _mpInstance.bricks().create('payment', 'brick-container', {
+      initialization: {
+        amount: total,
+        payer: {
+          email:     _guestEmail,
+          firstName: _guestName.split(' ')[0] || '',
+          lastName:  _guestName.split(' ').slice(1).join(' ') || ''
+        }
+      },
+      customization: {
+        paymentMethods: {
+          creditCard:      'all',
+          debitCard:       'all',
+          bankTransfer:    'all',
+          ticket:          'none',
+          wallet_purchase: 'none',
+          maxInstallments: 1
+        },
+        visual: { style: { theme: 'flat' } }
+      },
+      callbacks: {
+        onReady: function() {
+          document.getElementById('brick-loading').style.display = 'none';
+        },
+        onSubmit: function(formData) {
+          return new Promise(function(resolve, reject) {
+            window._paymentCb = function(result) {
+              if (!result.ok) {
+                reject(result.error || 'Erro ao processar pagamento.');
+                return;
+              }
+              if (result.status === 'approved') {
+                resolve({ status: 'approved', id: result.payment_id });
+                _destroyBricks();
+                saveCart([]); updateBadge();
+                closeCheckout();
+                showThankyou();
+              } else if (result.status === 'pending' || result.status === 'in_process') {
+                resolve({ status: 'pending', id: result.payment_id });
+                if (_paymentBrick) { try { _paymentBrick.unmount(); } catch(ex){} _paymentBrick = null; }
+                saveCart([]); updateBadge();
+                _renderStatusBrick(result.payment_id);
+                startPolling(result.payment_id);
+              } else {
+                reject('Pagamento não aprovado. Verifique seus dados e tente novamente.');
+              }
+            };
+            var s = document.createElement('script');
+            s.onerror = function() { reject(new Error('Erro de conexão. Tente novamente.')); };
+            s.src = APPS_SCRIPT_URL
+              + '?callback=_paymentCb'
+              + '&action=create_payment'
+              + '&nome='     + encodeURIComponent(_guestName)
+              + '&email='    + encodeURIComponent(_guestEmail)
+              + '&mensagem=' + encodeURIComponent(_guestMsg)
+              + '&itens='    + encodeURIComponent(JSON.stringify(itens))
+              + '&formData=' + encodeURIComponent(JSON.stringify(formData));
+            document.head.appendChild(s);
+          });
+        },
+        onError: function(error) {
+          console.error('Brick error:', error);
+          showToast('Erro no formulário de pagamento.');
+        }
+      }
+    }).then(function(ctrl) { _paymentBrick = ctrl; })
+      .catch(function(err) {
+        console.error(err);
+        showToast('Não foi possível carregar o formulário de pagamento.');
+      });
+  }
+
+  function _renderStatusBrick(paymentId) {
+    if (!_mpInstance) return;
+    document.getElementById('brick-loading').style.display = 'block';
+    document.getElementById('brick-container').innerHTML = '';
+    _mpInstance.bricks().create('statusScreen', 'brick-container', {
+      initialization: { paymentId: paymentId },
+      callbacks: {
+        onReady: function() { document.getElementById('brick-loading').style.display = 'none'; },
+        onError: function(err) { console.error('StatusScreen brick error:', err); }
+      }
+    }).then(function(ctrl) { _statusBrick = ctrl; });
+  }
+
+  function startPolling(paymentId) {
+    stopPolling();
+    var count = 0;
+    _pollTimer = setInterval(function() {
+      if (++count > 60) { stopPolling(); return; }
+      window._checkCb = function(result) {
+        if (result.ok && result.status === 'approved') {
+          stopPolling();
+          _destroyBricks();
+          closeCheckout();
+          showThankyou();
+        }
+      };
+      var s = document.createElement('script');
+      s.src = APPS_SCRIPT_URL + '?callback=_checkCb&action=check_payment&payment_id=' + encodeURIComponent(paymentId);
+      document.head.appendChild(s);
+    }, 3000);
+  }
+  function stopPolling() {
+    if (_pollTimer) { clearInterval(_pollTimer); _pollTimer = null; }
+  }
+
+  function showThankyou() {
     document.getElementById('app').style.display = 'none';
-    document.getElementById('check-question').style.display = 'block';
-    document.getElementById('check-problem').style.display = 'none';
-    document.getElementById('check-screen').style.display = 'block';
-    window.scrollTo(0, 0);
-  }
-  function confirmYes() {
-    document.getElementById('check-screen').style.display = 'none';
     document.getElementById('thankyou-screen').style.display = 'block';
-    window.scrollTo(0, 0);
-  }
-  function confirmNo() {
-    document.getElementById('check-question').style.display = 'none';
-    document.getElementById('check-problem').style.display = 'block';
-  }
-  function goBackFromCheck() {
-    document.getElementById('check-screen').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
     window.scrollTo(0, 0);
     loadMessages();
   }
-
   function goBack() {
     document.getElementById('thankyou-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
@@ -1728,7 +1811,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   function loadMessages() {
     document.getElementById('messages-section-label').style.display = '';
     window._handleMessages = function(msgs) {
-      var wall = document.getElementById('messages-wall');
+      var wall    = document.getElementById('messages-wall');
       var withMsg = (msgs || []).filter(function(m) { return m.mensagem; });
       if (!withMsg.length) { wall.innerHTML = '<p class="messages-empty">Seja o primeiro a deixar uma mensagem!</p>'; return; }
       wall.innerHTML = withMsg.map(function(m) {
@@ -1741,55 +1824,10 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     document.head.appendChild(s);
   }
 
-  function checkMpReturn() {
-    var params = new URLSearchParams(window.location.search);
-    var paid = params.get('paid');
-    if (paid) {
-      history.replaceState(null, '', window.location.pathname);
-      // Sinaliza a aba original via localStorage e fecha esta aba de pagamento
-      try { localStorage.setItem('mp_result', paid + ':' + Date.now()); } catch(e) {}
-      window.close();
-      // Fallback: se window.close() foi bloqueado, mostra o resultado aqui mesmo
-      setTimeout(function() {
-        document.getElementById('app').style.display = 'none';
-        if (paid === 'ok') {
-          document.getElementById('thankyou-screen').style.display = 'block';
-        } else if (paid === 'fail') {
-          document.getElementById('check-question').style.display = 'none';
-          document.getElementById('check-problem').style.display = 'block';
-          document.getElementById('check-screen').style.display = 'block';
-        } else {
-          document.getElementById('check-question').style.display = 'block';
-          document.getElementById('check-problem').style.display = 'none';
-          document.getElementById('check-screen').style.display = 'block';
-        }
-        window.scrollTo(0, 0);
-      }, 600);
-      return;
-    }
+  // Init
+  if (typeof MercadoPago !== 'undefined') {
+    _mpInstance = new MercadoPago(MP_PUBLIC_KEY, { locale: 'pt-BR' });
   }
-  // Aba original: escuta resultado do pagamento vindo da aba do MP via localStorage
-  window.addEventListener('storage', function(e) {
-    if (e.key !== 'mp_result' || !e.newValue) return;
-    var paid = e.newValue.split(':')[0];
-    try { localStorage.removeItem('mp_result'); } catch(e2) {}
-    document.getElementById('check-screen').style.display = 'none';
-    document.getElementById('app').style.display = 'none';
-    if (paid === 'ok') {
-      document.getElementById('thankyou-screen').style.display = 'block';
-    } else if (paid === 'fail') {
-      document.getElementById('check-question').style.display = 'none';
-      document.getElementById('check-problem').style.display = 'block';
-      document.getElementById('check-screen').style.display = 'block';
-    } else {
-      document.getElementById('check-question').style.display = 'block';
-      document.getElementById('check-problem').style.display = 'none';
-      document.getElementById('check-screen').style.display = 'block';
-    }
-    window.scrollTo(0, 0);
-  });
-  checkMpReturn();
-
   updateBadge();
   loadMessages();
 </script>
