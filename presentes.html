@@ -1375,7 +1375,8 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
         <label for="checkout-msg">Mensagem para os noivos (opcional)</label>
         <textarea id="checkout-msg" placeholder="Deixe um recado carinhoso…"></textarea>
       </div>
-      <button class="presentear-btn" onclick="confirmGift()">Presentear via Mercado Pago →</button>
+      <button class="presentear-btn" id="confirm-btn" onclick="confirmGift()">Presentear via Mercado Pago →</button>
+      <a id="mp-link-btn" class="presentear-btn" href="#" target="_blank" rel="noopener noreferrer" style="display:none;text-align:center;text-decoration:none" onclick="closeCheckout();showCheckScreen()">Abrir Mercado Pago →</a>
       <p class="checkout-note">Você será direcionado ao Mercado Pago para concluir o pagamento.</p>
     </div>
   </div>
@@ -1575,6 +1576,8 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     }).join('');
     var total = checkoutItems.reduce(function(s, i) { return s + parsePrice(i.valor); }, 0);
     document.getElementById('checkout-total-value').textContent = formatPrice(total);
+    document.getElementById('confirm-btn').style.display = 'block';
+    document.getElementById('mp-link-btn').style.display = 'none';
     document.getElementById('checkout-overlay').style.display = 'flex';
     document.body.style.overflow = 'hidden';
   }
@@ -1600,26 +1603,33 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       return { nome: i.nome, valor: parsePrice(i.valor) };
     });
 
-    // Desktop: abre o checkout numa nova aba (criada já no clique, para não ser bloqueada)
+    // Desktop: tenta abrir nova aba no clique (evita bloqueio de popup)
     var isDesktop = window.innerWidth >= 900;
-    var mpTab = isDesktop ? window.open('', '_blank') : null;
+    var mpTab = isDesktop ? window.open('about:blank', '_blank') : null;
 
     window._mpCb = function(result) {
       btn.disabled = false;
       btn.textContent = 'Presentear via Mercado Pago →';
 
       if (!result.ok || !result.init_point) {
-        if (mpTab) mpTab.close();
+        if (mpTab && !mpTab.closed) mpTab.close();
         showToast('Erro ao conectar. Tente novamente.');
         return;
       }
       saveCart([]);
       updateBadge();
 
-      if (mpTab) {
+      if (mpTab && !mpTab.closed) {
+        // Nova aba abriu com sucesso — navega direto para o MP
         mpTab.location.href = result.init_point;
         closeCheckout();
         showCheckScreen();
+      } else if (isDesktop) {
+        // Popup bloqueado — transforma o botão em link clicável (nova aba)
+        var linkBtn = document.getElementById('mp-link-btn');
+        linkBtn.href = result.init_point;
+        btn.style.display = 'none';
+        linkBtn.style.display = 'block';
       } else {
         sessionStorage.setItem('mp_pending', '1');
         window.location.href = result.init_point;
@@ -1630,7 +1640,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     s.onerror = function() {
       btn.disabled = false;
       btn.textContent = 'Presentear via Mercado Pago →';
-      if (mpTab) mpTab.close();
+      if (mpTab && !mpTab.closed) mpTab.close();
       showToast('Erro ao conectar. Tente novamente.');
     };
     s.src = APPS_SCRIPT_URL
