@@ -1376,7 +1376,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
         <textarea id="checkout-msg" placeholder="Deixe um recado carinhoso…"></textarea>
       </div>
       <button class="presentear-btn" id="confirm-btn" onclick="confirmGift()">Presentear via Mercado Pago →</button>
-      <a id="mp-link-btn" class="presentear-btn" href="#" target="_blank" rel="noopener noreferrer" style="display:none;text-align:center;text-decoration:none" onclick="closeCheckout();showCheckScreen()">Abrir Mercado Pago →</a>
+      <a id="mp-link-btn" class="presentear-btn" href="#" target="_blank" style="display:none;text-align:center;text-decoration:none" onclick="closeCheckout();showCheckScreen()">Abrir Mercado Pago →</a>
       <p class="checkout-note">Você será direcionado ao Mercado Pago para concluir o pagamento.</p>
     </div>
   </div>
@@ -1595,7 +1595,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     nameEl.classList.remove('error');
 
     var guestMsg = document.getElementById('checkout-msg').value.trim();
-    var btn = document.querySelector('.presentear-btn');
+    var btn = document.getElementById('confirm-btn');
     btn.disabled = true;
     btn.textContent = 'Aguarde…';
 
@@ -1603,9 +1603,8 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       return { nome: i.nome, valor: parsePrice(i.valor) };
     });
 
-    // Desktop: tenta abrir nova aba no clique (evita bloqueio de popup)
-    var isDesktop = window.innerWidth >= 900;
-    var mpTab = isDesktop ? window.open('about:blank', '_blank') : null;
+    // Abre nova aba no clique (gesto do usuário — evita bloqueio de popup)
+    var mpTab = window.open('about:blank', '_blank');
 
     window._mpCb = function(result) {
       btn.disabled = false;
@@ -1620,19 +1619,16 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
       updateBadge();
 
       if (mpTab && !mpTab.closed) {
-        // Nova aba abriu com sucesso — navega direto para o MP
+        // Nova aba abriu — navega para o MP e mostra tela de espera
         mpTab.location.href = result.init_point;
         closeCheckout();
         showCheckScreen();
-      } else if (isDesktop) {
-        // Popup bloqueado — transforma o botão em link clicável (nova aba)
+      } else {
+        // Popup bloqueado — transforma botão em link (nova aba, nunca bloqueado)
         var linkBtn = document.getElementById('mp-link-btn');
         linkBtn.href = result.init_point;
         btn.style.display = 'none';
         linkBtn.style.display = 'block';
-      } else {
-        sessionStorage.setItem('mp_pending', '1');
-        window.location.href = result.init_point;
       }
     };
 
@@ -1737,30 +1733,49 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     var params = new URLSearchParams(window.location.search);
     var paid = params.get('paid');
     if (paid) {
-      sessionStorage.removeItem('mp_pending');
       history.replaceState(null, '', window.location.pathname);
-      document.getElementById('app').style.display = 'none';
-      if (paid === 'ok') {
-        document.getElementById('thankyou-screen').style.display = 'block';
-      } else if (paid === 'fail') {
-        document.getElementById('check-question').style.display = 'none';
-        document.getElementById('check-problem').style.display = 'block';
-        document.getElementById('check-screen').style.display = 'block';
-      } else {
-        document.getElementById('check-question').style.display = 'block';
-        document.getElementById('check-problem').style.display = 'none';
-        document.getElementById('check-screen').style.display = 'block';
-      }
-      window.scrollTo(0, 0);
+      // Sinaliza a aba original via localStorage e fecha esta aba de pagamento
+      try { localStorage.setItem('mp_result', paid + ':' + Date.now()); } catch(e) {}
+      window.close();
+      // Fallback: se window.close() foi bloqueado, mostra o resultado aqui mesmo
+      setTimeout(function() {
+        document.getElementById('app').style.display = 'none';
+        if (paid === 'ok') {
+          document.getElementById('thankyou-screen').style.display = 'block';
+        } else if (paid === 'fail') {
+          document.getElementById('check-question').style.display = 'none';
+          document.getElementById('check-problem').style.display = 'block';
+          document.getElementById('check-screen').style.display = 'block';
+        } else {
+          document.getElementById('check-question').style.display = 'block';
+          document.getElementById('check-problem').style.display = 'none';
+          document.getElementById('check-screen').style.display = 'block';
+        }
+        window.scrollTo(0, 0);
+      }, 600);
       return;
     }
-    if (sessionStorage.getItem('mp_pending')) {
-      sessionStorage.removeItem('mp_pending');
-      showCheckScreen();
-    }
   }
-  // Detecta retorno via botão voltar no mobile (bfcache — iOS Safari)
-  window.addEventListener('pageshow', function(e) { if (e.persisted) checkMpReturn(); });
+  // Aba original: escuta resultado do pagamento vindo da aba do MP via localStorage
+  window.addEventListener('storage', function(e) {
+    if (e.key !== 'mp_result' || !e.newValue) return;
+    var paid = e.newValue.split(':')[0];
+    try { localStorage.removeItem('mp_result'); } catch(e2) {}
+    document.getElementById('check-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'none';
+    if (paid === 'ok') {
+      document.getElementById('thankyou-screen').style.display = 'block';
+    } else if (paid === 'fail') {
+      document.getElementById('check-question').style.display = 'none';
+      document.getElementById('check-problem').style.display = 'block';
+      document.getElementById('check-screen').style.display = 'block';
+    } else {
+      document.getElementById('check-question').style.display = 'block';
+      document.getElementById('check-problem').style.display = 'none';
+      document.getElementById('check-screen').style.display = 'block';
+    }
+    window.scrollTo(0, 0);
+  });
   checkMpReturn();
 
   updateBadge();
