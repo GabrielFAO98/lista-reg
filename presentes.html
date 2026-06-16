@@ -374,22 +374,31 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* THANK YOU */
-.thankyou-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--white); padding: 3rem 1.5rem; }
-.thankyou-inner { text-align: center; max-width: 460px; animation: slideUp 0.4s ease; }
-.thankyou-ornament { font-size: 44px; margin-bottom: 1.4rem; display: block; animation: beat 1.2s ease-in-out infinite; }
-@keyframes beat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
-.thankyou-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 8vw, 60px); font-weight: 300; color: var(--ink); line-height: 1.1; margin-bottom: 14px; }
-.thankyou-title em { font-style: italic; color: var(--blush-dark); }
-.thankyou-divider { width: 50px; height: 1px; background: var(--blush-light); margin: 14px auto; }
-.thankyou-text { font-size: 13px; font-weight: 300; color: var(--ink-muted); line-height: 1.9; margin-bottom: 6px; }
-.thankyou-sign { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 19px; color: var(--blush-dark); margin-top: 20px; }
-.back-btn {
-  margin-top: 22px; padding: 10px 22px; border: 1px solid var(--cream-dark);
-  background: transparent; cursor: pointer; font-family: 'Jost', sans-serif;
-  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--ink-faint); display: inline-block; transition: border-color 0.15s, color 0.15s;
+.thankyou-page {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(rgba(20,14,8,0.50), rgba(20,14,8,0.66)),
+              url('img/agradecimento.webp') center / cover no-repeat;
+  padding: 3rem 1.5rem;
 }
-.back-btn:hover { border-color: var(--blush-light); color: var(--ink-muted); }
+.thankyou-inner { text-align: center; max-width: 520px; animation: slideUp 0.4s ease; }
+.thankyou-ornament { font-size: 22px; letter-spacing: 0.3em; color: var(--blush-light); margin-bottom: 1.6rem; display: block; opacity: 0.7; }
+.thankyou-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 10vw, 72px); font-weight: 300; color: var(--white); line-height: 1.05; margin-bottom: 16px; }
+.thankyou-title em { font-style: italic; color: var(--blush-light); }
+.thankyou-divider { width: 40px; height: 1px; background: var(--blush); margin: 16px auto; opacity: 0.6; }
+.thankyou-text { font-size: 14px; font-weight: 300; color: rgba(255,255,240,0.82); line-height: 1.95; margin-bottom: 6px; }
+.thankyou-sign { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; color: var(--blush-light); margin-top: 22px; }
+.thankyou-btns { display: flex; gap: 12px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
+.thankyou-btn {
+  padding: 12px 28px; font-family: 'Jost', sans-serif; font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none;
+  cursor: pointer; border: 1px solid rgba(255,255,240,0.35); color: rgba(255,255,240,0.75);
+  background: transparent; transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.thankyou-btn:hover { border-color: var(--blush-light); color: var(--white); }
+.thankyou-btn-primary {
+  background: var(--blush-dark); border-color: var(--blush-dark); color: var(--white);
+}
+.thankyou-btn-primary:hover { background: var(--blush); border-color: var(--blush); }
 
 /* MURAL */
 .messages-section { max-width: 760px; margin: 0 auto 3rem; padding: 0 1.2rem; }
@@ -482,7 +491,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 .footer-names { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; color: rgba(255,254,247,0.55); letter-spacing: 0.05em; margin-bottom: 2px; }
 .footer-heart { color: var(--blush); }
 .footer-date { font-size: 9px; letter-spacing: 0.3em; color: var(--ink-faint); margin-bottom: 6px; }
-.footer-copy { font-size: 9px; letter-spacing: 0.15em; color: rgba(255,254,247,0.2); }
+.footer-copy { font-size: 11px; letter-spacing: 0.12em; color: rgba(255,254,247,0.3); }
 </style>
 </head>
 <body>
@@ -1328,7 +1337,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   <footer class="footer">
     <div class="footer-names">Rafaela <span class="footer-heart">♡</span> Gabriel</div>
     <div class="footer-date">22 · 08 · 2026</div>
-    <div class="footer-copy">Feito com amor</div>
+    <div class="footer-copy">Desenvolvido por Gabriel</div>
   </footer>
 
 </div><!-- /app -->
@@ -1424,13 +1433,15 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 <div id="thankyou-screen" style="display:none">
   <div class="thankyou-page">
     <div class="thankyou-inner">
-      <span class="thankyou-ornament">💕</span>
-      <h1 class="thankyou-title">Que presente<br><em>lindo!</em></h1>
+      <span class="thankyou-ornament">✦ ✦ ✦</span>
+      <h1 class="thankyou-title">Do fundo<br>do <em>coração,</em><br>obrigados.</h1>
       <div class="thankyou-divider"></div>
-      <p class="thankyou-text">Obrigado de coração pelo carinho e pela generosidade.<br>Seu presente vai fazer parte da nossa nova vida juntos<br>e guardaremos essa lembrança para sempre.</p>
-      <p class="thankyou-text">Não vemos a hora de celebrar com você! ✨</p>
-      <div class="thankyou-sign">Rafaela & Gabriel</div><br>
-      <button class="back-btn" onclick="goBack()">← Voltar à lista</button>
+      <p class="thankyou-text">Seu gesto chega antes mesmo do grande dia<br>e já nos aquece o coração.<br>Não vemos a hora de celebrar esse momento com você.</p>
+      <div class="thankyou-sign">Rafaela & Gabriel</div>
+      <div class="thankyou-btns">
+        <a href="index.html" class="thankyou-btn">Início</a>
+        <a href="rsvp.html" class="thankyou-btn thankyou-btn-primary">Confirmar presença</a>
+      </div>
     </div>
   </div>
 </div>
