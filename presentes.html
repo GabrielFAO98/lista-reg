@@ -1656,11 +1656,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
     _mpInstance.bricks().create('payment', 'brick-container', {
       initialization: {
         amount: total,
-        payer: {
-          email:     _guestEmail,
-          firstName: _guestName.split(' ')[0] || '',
-          lastName:  _guestName.split(' ').slice(1).join(' ') || ''
-        }
+        payer: { email: _guestEmail }
       },
       customization: {
         paymentMethods: {
