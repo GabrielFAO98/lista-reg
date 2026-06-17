@@ -23,6 +23,7 @@ html, body { width: 100%; height: 100%; overflow: hidden; background: #1a1206; }
   position: fixed; inset: 0;
   display: flex; align-items: center; justify-content: center;
   transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 .intro-frame {
   position: relative;
@@ -35,24 +36,6 @@ html, body { width: 100%; height: 100%; overflow: hidden; background: #1a1206; }
   max-width: 100vw;
   max-height: 100vh;
   width: auto; height: auto;
-}
-/* botão invisível — posição em % da imagem */
-.intro-inv-btn {
-  position: absolute;
-  width: 18%; padding-top: 18%;
-  border-radius: 50%;
-  top: calc(58% - 120px); left: calc(50% + 40px);
-  transform: translate(-50%, -50%);
-  background: transparent;
-  border: none; outline: none;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-@media (min-width: 768px) {
-  .intro-inv-btn {
-    top: 40%; left: 60%;
-    width: 6%; padding-top: 6%;
-  }
 }
 
 /* ── FINALE ── */
@@ -115,13 +98,12 @@ html, body { width: 100%; height: 100%; overflow: hidden; background: #1a1206; }
 </head>
 <body>
 
-<div id="intro">
+<div id="intro" onclick="abrirConvite()" role="button" aria-label="Abrir convite" tabindex="0">
   <div class="intro-frame">
     <picture>
       <source media="(min-width: 768px)" srcset="img/convite-desktop-cover.webp">
       <img class="intro-img" src="img/convite.webp" alt="Convite de Rafaela & Gabriel">
     </picture>
-    <button class="intro-inv-btn" onclick="abrirConvite()"></button>
   </div>
 </div>
 
