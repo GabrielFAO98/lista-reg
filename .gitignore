@@ -1,1 +1,5 @@
 img/IMG_*.jpg
+node_modules/
+screenshots/
+test-convite-buttons.js
+test-responsive.js
