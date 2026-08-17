@@ -269,27 +269,12 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 .como-chegar-inner {
   max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 4rem;
 }
-.video-placeholder {
-  width: 100%; aspect-ratio: 16 / 9;
-  background: var(--ink); border: 1px solid var(--cream-dark);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 1rem; margin-top: 2rem;
+.video-embed {
+  width: 100%; aspect-ratio: 16 / 9; margin-top: 2rem;
+  border: 1px solid var(--cream-dark); background: var(--ink);
 }
-.video-placeholder-icon {
-  width: 56px; height: 56px; border-radius: 50%;
-  border: 2px solid rgba(201,168,72,0.4);
-  display: flex; align-items: center; justify-content: center;
-}
-.video-placeholder-icon::after {
-  content: ''; border-style: solid;
-  border-width: 10px 0 10px 18px;
-  border-color: transparent transparent transparent rgba(201,168,72,0.6);
-  margin-left: 4px;
-}
-.video-placeholder-text {
-  font-size: 13px; font-weight: 300; color: rgba(255,254,247,0.5);
-  letter-spacing: 0.05em; text-align: center; padding: 0 1.5rem;
-}
+.video-embed iframe { display: block; width: 100%; height: 100%; border: 0; }
+.video-embed > div { display: none; }
 
 /* ── ABOUT ── */
 .about-section { background: var(--white); }
@@ -773,9 +758,20 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
   <div class="como-chegar-inner">
     <div class="section-label" data-anim="up"><span>Como chegar</span></div>
     <p data-anim="up" style="--d:1; font-size:15px; font-weight:300; color:var(--ink-muted); line-height:1.8; text-align:center;">
+      Confira o caminho para o s&iacute;tio no v&iacute;deo abaixo.
+    </p>
+    <p hidden>
       Gravaremos um vídeo mostrando o caminho para o sítio.<br>Volte em breve para conferir!
     </p>
-    <div class="video-placeholder" data-anim="scale" style="--d:2">
+    <div class="video-embed" data-anim="scale" style="--d:2">
+      <iframe
+        src="https://www.youtube.com/embed/BVxOKs7GdI8"
+        title="Como chegar ao Sítio do Ipê"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
       <div class="video-placeholder-icon"></div>
       <div class="video-placeholder-text">Vídeo em breve</div>
     </div>
